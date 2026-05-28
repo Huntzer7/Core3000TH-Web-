@@ -1,0 +1,613 @@
+# Oxford 3000 Web App
+
+## index.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3000 Word Oxford</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- HOME PAGE -->
+  <section id="homePage" class="page active fade">
+    <div class="card">
+      <h1>3000 Word Oxford</h1>
+
+      <p id="learnedCount">Learned: 0 words</p>
+      <p id="remainingCount">Remaining: 0 words</p>
+
+      <button id="startBtn">Start Learning!</button>
+    </div>
+  </section>
+
+  <!-- LEARNING PAGE -->
+  <section id="learningPage" class="page fade">
+
+    <div class="topBar">
+      <div>
+        <p id="wordProgress">Word 1 / 3000</p>
+        <p id="remainingWords">Remaining: 0</p>
+      </div>
+
+      <button id="modeBtn">Mode</button>
+    </div>
+
+    <div class="wordContainer">
+      <h2 id="word">Word</h2>
+      <p id="wordType">type</p>
+
+      <button id="meaningBtn">Show Meaning</button>
+
+      <div id="meaningBox" class="meaningBox hidden">
+        <h3>Meaning</h3>
+        <p id="meaning">Meaning</p>
+      </div>
+    </div>
+
+    <div class="bottomButtons">
+      <button id="backBtn">Back</button>
+      <button id="nextBtn">Next</button>
+    </div>
+  </section>
+
+  <!-- QUIZ PAGE -->
+  <section id="quizPage" class="page fade">
+    <div class="quizContainer">
+      <h2 id="quizWord">Word</h2>
+
+      <div id="quizChoices" class="choices"></div>
+
+      <p id="quizResult"></p>
+    </div>
+  </section>
+
+  <!-- RESULT PAGE -->
+  <section id="resultPage" class="page fade">
+    <div class="card">
+      <h1>Quiz Result</h1>
+
+      <p id="correctCount">Correct: 0</p>
+      <p id="incorrectCount">Incorrect: 0</p>
+      <p id="scorePercent">Score: 0%</p>
+
+      <button id="restartBtn">Restart</button>
+      <button id="newWordBtn">New Word</button>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
+```
+
+---
+
+## style.css
+
+```css
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #fff;
+  color: #000;
+  min-height: 100vh;
+}
+
+.page {
+  display: none;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  position: relative;
+}
+
+.page.active {
+  display: flex;
+}
+
+.card,
+.wordContainer,
+.quizContainer {
+  width: 100%;
+  max-width: 500px;
+  border: 2px solid #000;
+  border-radius: 24px;
+  padding: 30px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+  text-align: center;
+  background: white;
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-size: 36px;
+}
+
+button {
+  border: none;
+  background: black;
+  color: white;
+  padding: 16px 20px;
+  border-radius: 14px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.2s ease;
+}
+
+button:hover {
+  transform: scale(1.03);
+}
+
+button:disabled {
+  opacity: 0.5;
+}
+
+#startBtn {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.topBar {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.wordContainer h2,
+.quizContainer h2 {
+  font-size: 52px;
+  margin-bottom: 10px;
+}
+
+#wordType {
+  margin-bottom: 25px;
+  font-size: 20px;
+}
+
+.meaningBox {
+  margin-top: 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+.hidden {
+  display: none;
+}
+
+.bottomButtons {
+  position: absolute;
+  bottom: 30px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.bottomButtons button {
+  flex: 1;
+}
+
+.choices {
+  display: grid;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.choiceBtn {
+  width: 100%;
+}
+
+#quizResult {
+  margin-top: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.fade {
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .wordContainer h2,
+  .quizContainer h2 {
+    font-size: 38px;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+}
+```
+
+---
+
+## script.js
+
+```javascript
+// =========================
+// GLOBAL VARIABLES
+// =========================
+
+let words = [];
+
+let currentIndex = Number(localStorage.getItem("currentIndex")) || 0;
+let learnedWords = JSON.parse(localStorage.getItem("learnedWords")) || [];
+
+let quizWords = [];
+let quizIndex = 0;
+let correct = 0;
+let incorrect = 0;
+
+// =========================
+// PAGE ELEMENTS
+// =========================
+
+const homePage = document.getElementById("homePage");
+const learningPage = document.getElementById("learningPage");
+const quizPage = document.getElementById("quizPage");
+const resultPage = document.getElementById("resultPage");
+
+// HOME
+const learnedCount = document.getElementById("learnedCount");
+const remainingCount = document.getElementById("remainingCount");
+
+// LEARNING
+const wordText = document.getElementById("word");
+const wordType = document.getElementById("wordType");
+const meaning = document.getElementById("meaning");
+const meaningBtn = document.getElementById("meaningBtn");
+const meaningBox = document.getElementById("meaningBox");
+const wordProgress = document.getElementById("wordProgress");
+const remainingWords = document.getElementById("remainingWords");
+
+// QUIZ
+const quizWord = document.getElementById("quizWord");
+const quizChoices = document.getElementById("quizChoices");
+const quizResult = document.getElementById("quizResult");
+
+// RESULT
+const correctCount = document.getElementById("correctCount");
+const incorrectCount = document.getElementById("incorrectCount");
+const scorePercent = document.getElementById("scorePercent");
+
+// =========================
+// BUTTONS
+// =========================
+
+const startBtn = document.getElementById("startBtn");
+const nextBtn = document.getElementById("nextBtn");
+const backBtn = document.getElementById("backBtn");
+const modeBtn = document.getElementById("modeBtn");
+const restartBtn = document.getElementById("restartBtn");
+const newWordBtn = document.getElementById("newWordBtn");
+
+// =========================
+// FETCH WORD DATA
+// =========================
+
+fetch("words.json")
+  .then((response) => response.json())
+  .then((data) => {
+    words = data;
+
+    updateHome();
+    showWord();
+  });
+
+// =========================
+// PAGE SWITCHING
+// =========================
+
+function showPage(page) {
+  [homePage, learningPage, quizPage, resultPage].forEach((p) => {
+    p.classList.remove("active");
+  });
+
+  page.classList.add("active");
+}
+
+// =========================
+// HOME UPDATE
+// =========================
+
+function updateHome() {
+  learnedCount.textContent = `Learned: ${learnedWords.length} words`;
+  remainingCount.textContent = `Remaining: ${words.length - learnedWords.length} words`;
+}
+
+// =========================
+// SHOW CURRENT WORD
+// =========================
+
+function showWord() {
+  const currentWord = words[currentIndex];
+
+  wordText.textContent = currentWord.word;
+  wordType.textContent = currentWord.type;
+  meaning.textContent = currentWord.meaning;
+
+  wordProgress.textContent = `Word ${currentIndex + 1} / ${words.length}`;
+  remainingWords.textContent = `Remaining: ${words.length - learnedWords.length}`;
+
+  meaningBox.classList.add("hidden");
+  meaningBtn.textContent = "Show Meaning";
+}
+
+// =========================
+// SHOW/HIDE MEANING
+// =========================
+
+meaningBtn.addEventListener("click", () => {
+  meaningBox.classList.toggle("hidden");
+
+  if (meaningBox.classList.contains("hidden")) {
+    meaningBtn.textContent = "Show Meaning";
+  } else {
+    meaningBtn.textContent = "Hide Meaning";
+  }
+});
+
+// =========================
+// START LEARNING
+// =========================
+
+startBtn.addEventListener("click", () => {
+  showPage(learningPage);
+  showWord();
+});
+
+// =========================
+// NEXT WORD
+// =========================
+
+nextBtn.addEventListener("click", () => {
+
+  if (!learnedWords.includes(currentIndex)) {
+    learnedWords.push(currentIndex);
+  }
+
+  localStorage.setItem("learnedWords", JSON.stringify(learnedWords));
+
+  if (currentIndex < words.length - 1) {
+    currentIndex++;
+  }
+
+  localStorage.setItem("currentIndex", currentIndex);
+
+  showWord();
+  updateHome();
+});
+
+// =========================
+// PREVIOUS WORD
+// =========================
+
+backBtn.addEventListener("click", () => {
+  if (currentIndex > 0) {
+    currentIndex--;
+    localStorage.setItem("currentIndex", currentIndex);
+    showWord();
+  }
+});
+
+// =========================
+// QUIZ MODE
+// =========================
+
+modeBtn.addEventListener("click", () => {
+
+  if (learnedWords.length === 0) {
+    alert("Learn some words first!");
+    return;
+  }
+
+  quizWords = learnedWords.map(index => words[index]);
+
+  quizIndex = 0;
+  correct = 0;
+  incorrect = 0;
+
+  showPage(quizPage);
+  showQuiz();
+});
+
+// =========================
+// SHOW QUIZ QUESTION
+// =========================
+
+function showQuiz() {
+
+  quizResult.textContent = "";
+
+  const currentQuiz = quizWords[quizIndex];
+
+  quizWord.textContent = currentQuiz.word;
+
+  let choices = [currentQuiz.meaning];
+
+  while (choices.length < 4) {
+    const randomWord = words[Math.floor(Math.random() * words.length)];
+
+    if (!choices.includes(randomWord.meaning)) {
+      choices.push(randomWord.meaning);
+    }
+  }
+
+  choices = choices.sort(() => Math.random() - 0.5);
+
+  quizChoices.innerHTML = "";
+
+  choices.forEach(choice => {
+
+    const button = document.createElement("button");
+    button.classList.add("choiceBtn");
+    button.textContent = choice;
+
+    button.addEventListener("click", () => {
+      checkAnswer(choice, currentQuiz.meaning);
+    });
+
+    quizChoices.appendChild(button);
+  });
+}
+
+// =========================
+// CHECK ANSWER
+// =========================
+
+function checkAnswer(selected, correctAnswer) {
+
+  const buttons = document.querySelectorAll(".choiceBtn");
+  buttons.forEach(btn => btn.disabled = true);
+
+  if (selected === correctAnswer) {
+    quizResult.textContent = "Correct";
+    correct++;
+  } else {
+    quizResult.textContent = `Incorrect | Correct Answer: ${correctAnswer}`;
+    incorrect++;
+  }
+
+  setTimeout(() => {
+
+    quizIndex++;
+
+    if (quizIndex >= quizWords.length) {
+      showResult();
+    } else {
+      showQuiz();
+    }
+
+  }, 3000);
+}
+
+// =========================
+// RESULT PAGE
+// =========================
+
+function showResult() {
+
+  showPage(resultPage);
+
+  const total = correct + incorrect;
+  const score = Math.round((correct / total) * 100);
+
+  correctCount.textContent = `Correct: ${correct}`;
+  incorrectCount.textContent = `Incorrect: ${incorrect}`;
+  scorePercent.textContent = `Score: ${score}%`;
+}
+
+// =========================
+// RESTART QUIZ
+// =========================
+
+restartBtn.addEventListener("click", () => {
+
+  quizIndex = 0;
+  correct = 0;
+  incorrect = 0;
+
+  showPage(quizPage);
+  showQuiz();
+});
+
+// =========================
+// RETURN TO LEARNING
+// =========================
+
+newWordBtn.addEventListener("click", () => {
+  showPage(learningPage);
+  showWord();
+});
+```
+
+---
+
+## words.json
+
+```json
+[
+  {
+    "word": "abandon",
+    "type": "verb",
+    "meaning": "ละทิ้ง"
+  },
+  {
+    "word": "ability",
+    "type": "noun",
+    "meaning": "ความสามารถ"
+  },
+  {
+    "word": "accept",
+    "type": "verb",
+    "meaning": "ยอมรับ"
+  },
+  {
+    "word": "account",
+    "type": "noun",
+    "meaning": "บัญชี"
+  },
+  {
+    "word": "achieve",
+    "type": "verb",
+    "meaning": "บรรลุ"
+  }
+]
+```
+
+---
+
+# HOW TO RUN
+
+1. Create a folder
+
+2. Put these 4 files inside:
+
+   * index.html
+   * style.css
+   * script.js
+   * words.json
+
+3. Open index.html in browser
+
+---
+
+# HOW TO DEPLOY TO GITHUB PAGES
+
+1. Create repository on GitHub
+2. Upload all files
+3. Go to:
+   Settings → Pages
+4. Select:
+   Deploy from branch
+5. Choose:
+   main branch
+6. Save
+
+GitHub will generate your website URL.
