@@ -1,1072 +1,4707 @@
 [
-  {"word":"abandon","type":"verb","meaning":"ละทิ้ง"},
-  {"word":"ability","type":"noun","meaning":"ความสามารถ"},
-  {"word":"accept","type":"verb","meaning":"ยอมรับ"},
-  {"word":"account","type":"noun","meaning":"บัญชี"},
-  {"word":"achieve","type":"verb","meaning":"บรรลุ"},
-  {"word":"across","type":"prep./adv.","meaning":"ข้าม"},
-  {"word":"action","type":"noun","meaning":"การกระทำ"},
-  {"word":"active","type":"adj.","meaning":"กระตือรือร้น"},
-  {"word":"activity","type":"noun","meaning":"กิจกรรม"},
-  {"word":"add","type":"verb","meaning":"เพิ่ม"},
-  {"word":"address","type":"noun","meaning":"ที่อยู่"},
-  {"word":"admire","type":"verb","meaning":"ชื่นชม"},
-  {"word":"admit","type":"verb","meaning":"ยอมรับผิด"},
-  {"word":"adopt","type":"verb","meaning":"รับเลี้ยง"},
-  {"word":"adult","type":"noun","meaning":"ผู้ใหญ่"},
-  {"word":"advance","type":"noun/verb","meaning":"ก้าวหน้า"},
-  {"word":"advantage","type":"noun","meaning":"ข้อได้เปรียบ"},
-  {"word":"affect","type":"verb","meaning":"ส่งผลกระทบ"},
-  {"word":"afford","type":"verb","meaning":"มีเงินพอซื้อ"},
-  {"word":"afraid","type":"adj.","meaning":"กลัว"},
-  {"word":"agree","type":"verb","meaning":"เห็นด้วย"},
-  {"word":"aim","type":"noun/verb","meaning":"เป้าหมาย"},
-  {"word":"allow","type":"verb","meaning":"อนุญาต"},
-  {"word":"almost","type":"adv.","meaning":"เกือบ"},
-  {"word":"alone","type":"adj./adv.","meaning":"ตามลำพัง"},
-  {"word":"already","type":"adv.","meaning":"เรียบร้อยแล้ว"},
-  {"word":"although","type":"conj.","meaning":"แม้ว่า"},
-  {"word":"always","type":"adv.","meaning":"เสมอ"},
-  {"word":"amazing","type":"adj.","meaning":"น่าอัศจรรย์"},
-  {"word":"angry","type":"adj.","meaning":"โกรธ"},
-  {"word":"announce","type":"verb","meaning":"ประกาศ"},
-  {"word":"answer","type":"noun/verb","meaning":"ตอบ"},
-  {"word":"appear","type":"verb","meaning":"ปรากฏ"},
-  {"word":"apply","type":"verb","meaning":"สมัคร"},
-  {"word":"area","type":"noun","meaning":"พื้นที่"},
-  {"word":"argue","type":"verb","meaning":"โต้เถียง"},
-  {"word":"arrive","type":"verb","meaning":"มาถึง"},
-  {"word":"ask","type":"verb","meaning":"ถาม"},
-  {"word":"attempt","type":"noun/verb","meaning":"พยายาม"},
-  {"word":"attend","type":"verb","meaning":"เข้าร่วม"},
-  {"word":"attention","type":"noun","meaning":"ความสนใจ"},
-  {"word":"attract","type":"verb","meaning":"ดึงดูด"},
-  {"word":"avoid","type":"verb","meaning":"หลีกเลี่ยง"},
-  {"word":"awful","type":"adj.","meaning":"แย่มาก"},
-  {"word":"basic","type":"adj.","meaning":"พื้นฐาน"},
-  {"word":"beautiful","type":"adj.","meaning":"สวย"},
-  {"word":"become","type":"verb","meaning":"กลายเป็น"},
-  {"word":"begin","type":"verb","meaning":"เริ่ม"},
-  {"word":"behave","type":"verb","meaning":"ประพฤติ"},
-  {"word":"believe","type":"verb","meaning":"เชื่อ"},
-  {"word":"benefit","type":"noun","meaning":"ประโยชน์"},
-  {"word":"blame","type":"verb","meaning":"โทษ"},
-  {"word":"borrow","type":"verb","meaning":"ยืม"},
-  {"word":"brave","type":"adj.","meaning":"กล้าหาญ"},
-  {"word":"break","type":"verb/noun","meaning":"พัก / หยุดพัก"},
-  {"word":"bright","type":"adj.","meaning":"สดใส"},
-  {"word":"build","type":"verb","meaning":"สร้าง"},
-  {"word":"busy","type":"adj.","meaning":"ยุ่ง"},
-  {"word":"calm","type":"adj.","meaning":"สงบ"},
-  {"word":"cancel","type":"verb","meaning":"ยกเลิก"},
-  {"word":"capture","type":"verb","meaning":"จับ"},
-  {"word":"careful","type":"adj.","meaning":"ระมัดระวัง"},
-  {"word":"cause","type":"noun/verb","meaning":"สาเหตุ"},
-  {"word":"certain","type":"adj.","meaning":"แน่ใจ"},
-  {"word":"change","type":"verb/noun","meaning":"เปลี่ยน"},
-  {"word":"character","type":"noun","meaning":"ตัวละคร"},
-  {"word":"charge","type":"noun/verb","meaning":"ค่าธรรมเนียม"},
-  {"word":"check","type":"verb","meaning":"ตรวจสอบ"},
-  {"word":"choose","type":"verb","meaning":"เลือก"},
-  {"word":"clear","type":"adj.","meaning":"ชัดเจน"},
-  {"word":"climb","type":"verb","meaning":"ปีน"},
-  {"word":"close","type":"verb","meaning":"ปิด"},
-  {"word":"collect","type":"verb","meaning":"สะสม"},
-  {"word":"comfortable","type":"adj.","meaning":"สะดวกสบาย"},
-  {"word":"common","type":"adj.","meaning":"ธรรมดา"},
-  {"word":"compare","type":"verb","meaning":"เปรียบเทียบ"},
-  {"word":"complete","type":"adj./verb","meaning":"สมบูรณ์"},
-  {"word":"concern","type":"noun/verb","meaning":"กังวล"},
-  {"word":"connect","type":"verb","meaning":"เชื่อมต่อ"},
-  {"word":"consider","type":"verb","meaning":"พิจารณา"},
-  {"word":"continue","type":"verb","meaning":"ต่อเนื่อง"},
-  {"word":"control","type":"noun/verb","meaning":"ควบคุม"},
-  {"word":"correct","type":"adj./verb","meaning":"ถูกต้อง"},
-  {"word":"create","type":"verb","meaning":"สร้าง"},
-  {"word":"curious","type":"adj.","meaning":"อยากรู้"},
-  {"word":"danger","type":"noun","meaning":"อันตราย"},
-  {"word":"decide","type":"verb","meaning":"ตัดสินใจ"},
-  {"word":"define","type":"verb","meaning":"กำหนด"},
-  {"word":"deliver","type":"verb","meaning":"ส่ง"},
-  {"word":"depend","type":"verb","meaning":"ขึ้นอยู่กับ"},
-  {"word":"describe","type":"verb","meaning":"อธิบาย"},
-  {"word":"develop","type":"verb","meaning":"พัฒนา"},
-  {"word":"difference","type":"noun","meaning":"ความแตกต่าง"},
-  {"word":"different","type":"adj.","meaning":"แตกต่าง"},
-  {"word":"difficult","type":"adj.","meaning":"ยาก"},
-  {"word":"discover","type":"verb","meaning":"ค้นพบ"},
-  {"word":"discuss","type":"verb","meaning":"อภิปราย"},
-  {"word":"distance","type":"noun","meaning":"ระยะทาง"},
-  {"word":"divide","type":"verb","meaning":"แบ่ง"},
-  {"word":"doubt","type":"noun/verb","meaning":"สงสัย"},
-  {"word":"dream","type":"noun/verb","meaning":"ความฝัน"},
-  {"word":"drive","type":"verb","meaning":"ขับรถ"},
-  {"word":"earn","type":"verb","meaning":"หาเงิน"},
-  {"word":"easy","type":"adj.","meaning":"ง่าย"},
-  {"word":"effect","type":"noun","meaning":"ผล"},
-  {"word":"effort","type":"noun","meaning":"ความพยายาม"},
-  {"word":"encourage","type":"verb","meaning":"สนับสนุน"},
-  {"word":"enjoy","type":"verb","meaning":"สนุกกับ"},
-  {"word":"enter","type":"verb","meaning":"เข้า"},
-  {"word":"environment","type":"noun","meaning":"สิ่งแวดล้อม"},
-  {"word":"escape","type":"verb","meaning":"หนี"},
-  {"word":"especially","type":"adv.","meaning":"โดยเฉพาะ"},
-  {"word":"event","type":"noun","meaning":"เหตุการณ์"},
-  {"word":"exact","type":"adj.","meaning":"แม่นยำ"},
-  {"word":"examine","type":"verb","meaning":"ตรวจสอบ"},
-  {"word":"example","type":"noun","meaning":"ตัวอย่าง"},
-  {"word":"excellent","type":"adj.","meaning":"ยอดเยี่ยม"},
-  {"word":"expect","type":"verb","meaning":"คาดหวัง"},
-  {"word":"experience","type":"noun","meaning":"ประสบการณ์"},
-  {"word":"explain","type":"verb","meaning":"อธิบาย"},
-  {"word":"explore","type":"verb","meaning":"สำรวจ"},
-  {"word":"express","type":"verb","meaning":"แสดงออก"},
-  {"word":"extra","type":"adj.","meaning":"พิเศษ"},
-  {"word":"fail","type":"verb","meaning":"ล้มเหลว"},
-  {"word":"fair","type":"adj.","meaning":"ยุติธรรม"},
-  {"word":"familiar","type":"adj.","meaning":"คุ้นเคย"},
-  {"word":"famous","type":"adj.","meaning":"มีชื่อเสียง"},
-  {"word":"fear","type":"noun/verb","meaning":"กลัว"},
-  {"word":"feature","type":"noun","meaning":"คุณลักษณะ"},
-  {"word":"feel","type":"verb","meaning":"รู้สึก"},
-  {"word":"fight","type":"noun/verb","meaning":"ต่อสู้"},
-  {"word":"find","type":"verb","meaning":"หา"},
-  {"word":"focus","type":"noun/verb","meaning":"มุ่งเน้น"},
-  {"word":"follow","type":"verb","meaning":"ติดตาม"},
-  {"word":"force","type":"noun/verb","meaning":"บังคับ"},
-  {"word":"forget","type":"verb","meaning":"ลืม"},
-  {"word":"forward","type":"adv./adj.","meaning":"ข้างหน้า"},
-  {"word":"freedom","type":"noun","meaning":"เสรีภาพ"},
-  {"word":"frequent","type":"adj.","meaning":"บ่อยครั้ง"},
-  {"word":"friendly","type":"adj.","meaning":"เป็นมิตร"},
-  {"word":"future","type":"noun","meaning":"อนาคต"},
-  {"word":"gain","type":"verb","meaning":"ได้รับ"},
-  {"word":"gentle","type":"adj.","meaning":"อ่อนโยน"},
-  {"word":"give","type":"verb","meaning":"ให้"},
-  {"word":"goal","type":"noun","meaning":"เป้าหมาย"},
-  {"word":"grow","type":"verb","meaning":"เติบโต"},
-  {"word":"guess","type":"verb/noun","meaning":"เดา"},
-  {"word":"handle","type":"verb","meaning":"จัดการ"},
-  {"word":"happen","type":"verb","meaning":"เกิดขึ้น"},
-  {"word":"happy","type":"adj.","meaning":"มีความสุข"},
-  {"word":"hard","type":"adj./adv.","meaning":"แข็ง / ยาก"},
-  {"word":"harm","type":"noun/verb","meaning":"อันตราย"},
-  {"word":"hate","type":"verb","meaning":"เกลียด"},
-  {"word":"heavy","type":"adj.","meaning":"หนัก"},
-  {"word":"help","type":"verb/noun","meaning":"ช่วย"},
-  {"word":"hide","type":"verb","meaning":"ซ่อน"},
-  {"word":"hope","type":"verb","meaning":"หวัง"},
-  {"word":"hurry","type":"verb","meaning":"รีบ"},
-  {"word":"ignore","type":"verb","meaning":"เพิกเฉย"},
-  {"word":"imagine","type":"verb","meaning":"จินตนาการ"},
-  {"word":"improve","type":"verb","meaning":"ปรับปรุง"},
-  {"word":"include","type":"verb","meaning":"รวม"},
-  {"word":"increase","type":"verb","meaning":"เพิ่มขึ้น"},
-  {"word":"inform","type":"verb","meaning":"แจ้ง"},
-  {"word":"information","type":"noun","meaning":"ข้อมูล"},
-  {"word":"interest","type":"noun/verb","meaning":"ความสนใจ"},
-  {"word":"introduce","type":"verb","meaning":"แนะนำ"},
-  {"word":"invent","type":"verb","meaning":"ประดิษฐ์"},
-  {"word":"involve","type":"verb","meaning":"เกี่ยวข้อง"},
-  {"word":"join","type":"verb","meaning":"เข้าร่วม"},
-  {"word":"judge","type":"verb/noun","meaning":"ตัดสิน"},
-  {"word":"keep","type":"verb","meaning":"เก็บ / รักษา"},
-  {"word":"kind","type":"noun/adj.","meaning":"ประเภท / ใจดี"},
-  {"word":"knowledge","type":"noun","meaning":"ความรู้"},
-  {"word":"language","type":"noun","meaning":"ภาษา"},
-  {"word":"large","type":"adj.","meaning":"ใหญ่"},
-  {"word":"laugh","type":"verb/noun","meaning":"หัวเราะ"},
-  {"word":"lead","type":"verb","meaning":"นำ"},
-  {"word":"learn","type":"verb","meaning":"เรียน"},
-  {"word":"leave","type":"verb","meaning":"จากไป"},
-  {"word":"level","type":"noun","meaning":"ระดับ"},
-  {"word":"limit","type":"noun/verb","meaning":"จำกัด"},
-  {"word":"listen","type":"verb","meaning":"ฟัง"},
-  {"word":"list","type":"noun/verb","meaning":"รายการ"},
-  {"word":"local","type":"adj.","meaning":"ท้องถิ่น"},
-  {"word":"look","type":"verb","meaning":"มอง"},
-  {"word":"lose","type":"verb","meaning":"แพ้ / สูญเสีย"},
-  {"word":"love","type":"noun/verb","meaning":"รัก"},
-  {"word":"maintain","type":"verb","meaning":"รักษา"},
-  {"word":"manage","type":"verb","meaning":"จัดการ"},
-  {"word":"match","type":"noun/verb","meaning":"จับคู่"},
-  {"word":"mean","type":"verb","meaning":"หมายถึง"},
-  {"word":"measure","type":"verb","meaning":"วัด"},
-  {"word":"memory","type":"noun","meaning":"ความทรงจำ"},
-  {"word":"mention","type":"verb","meaning":"กล่าวถึง"},
-  {"word":"mind","type":"noun/verb","meaning":"จิตใจ"},
-  {"word":"miss","type":"verb","meaning":"คิดถึง"},
-  {"word":"mistake","type":"noun","meaning":"ความผิดพลาด"},
-  {"word":"model","type":"noun","meaning":"แบบจำลอง"},
-  {"word":"modern","type":"adj.","meaning":"ทันสมัย"},
-  {"word":"moment","type":"noun","meaning":"ช่วงเวลา"},
-  {"word":"move","type":"verb","meaning":"เคลื่อนที่"},
-  {"word":"national","type":"adj.","meaning":"แห่งชาติ"},
-  {"word":"nature","type":"noun","meaning":"ธรรมชาติ"},
-  {"word":"necessary","type":"adj.","meaning":"จำเป็น"},
-  {"word":"need","type":"verb","meaning":"ต้องการ"},
-  {"word":"notice","type":"verb","meaning":"สังเกต"},
-  {"word":"offer","type":"verb","meaning":"เสนอ"},
-  {"word":"often","type":"adv.","meaning":"บ่อยๆ"},
-  {"word":"open","type":"adj./verb","meaning":"เปิด"},
-  {"word":"opinion","type":"noun","meaning":"ความคิดเห็น"},
-  {"word":"organize","type":"verb","meaning":"จัดระเบียบ"},
-  {"word":"own","type":"adj./pron.","meaning":"เป็นเจ้าของ"},
-  {"word":"particular","type":"adj.","meaning":"เฉพาะ"},
-  {"word":"patient","type":"adj.","meaning":"อดทน"},
-  {"word":"perform","type":"verb","meaning":"แสดง"},
-  {"word":"plan","type":"noun/verb","meaning":"วางแผน"},
-  {"word":"polite","type":"adj.","meaning":"สุภาพ"},
-  {"word":"popular","type":"adj.","meaning":"นิยม"},
-  {"word":"possible","type":"adj.","meaning":"เป็นไปได้"},
-  {"word":"prepare","type":"verb","meaning":"เตรียม"},
-  {"word":"present","type":"noun/verb","meaning":"ของขวัญ / นำเสนอ"},
-  {"word":"prevent","type":"verb","meaning":"ป้องกัน"},
-  {"word":"produce","type":"verb","meaning":"ผลิต"},
-  {"word":"protect","type":"verb","meaning":"ปกป้อง"},
-  {"word":"provide","type":"verb","meaning":"จัดหา"},
-  {"word":"public","type":"adj.","meaning":"สาธารณะ"},
-  {"word":"purpose","type":"noun","meaning":"จุดประสงค์"},
-  {"word":"quality","type":"noun","meaning":"คุณภาพ"},
-  {"word":"question","type":"noun","meaning":"คำถาม"},
-  {"word":"quick","type":"adj.","meaning":"เร็ว"},
-  {"word":"reach","type":"verb","meaning":"ไปถึง"},
-  {"word":"ready","type":"adj.","meaning":"พร้อม"},
-  {"word":"realize","type":"verb","meaning":"ตระหนัก"},
-  {"word":"receive","type":"verb","meaning":"ได้รับ"},
-  {"word":"record","type":"noun/verb","meaning":"บันทึก"},
-  {"word":"reduce","type":"verb","meaning":"ลด"},
-  {"word":"refuse","type":"verb","meaning":"ปฏิเสธ"},
-  {"word":"remember","type":"verb","meaning":"จำ"},
-  {"word":"report","type":"noun/verb","meaning":"รายงาน"},
-  {"word":"require","type":"verb","meaning":"ต้องการ"},
-  {"word":"respect","type":"noun/verb","meaning":"เคารพ"},
-  {"word":"result","type":"noun","meaning":"ผลลัพธ์"},
-  {"word":"return","type":"verb","meaning":"กลับมา"},
-  {"word":"reveal","type":"verb","meaning":"เปิดเผย"},
-  {"word":"safe","type":"adj.","meaning":"ปลอดภัย"},
-  {"word":"save","type":"verb","meaning":"บันทึก / ช่วยเหลือ"},
-  {"word":"search","type":"verb","meaning":"ค้นหา"},
-  {"word":"seem","type":"verb","meaning":"ดูเหมือน"},
-  {"word":"send","type":"verb","meaning":"ส่ง"},
-  {"word":"serious","type":"adj.","meaning":"จริงจัง"},
-  {"word":"share","type":"verb","meaning":"แบ่งปัน"},
-  {"word":"show","type":"verb/noun","meaning":"แสดง"},
-  {"word":"simple","type":"adj.","meaning":"ง่าย"},
-  {"word":"skill","type":"noun","meaning":"ทักษะ"},
-  {"word":"solve","type":"verb","meaning":"แก้ปัญหา"},
-  {"word":"special","type":"adj.","meaning":"พิเศษ"},
-  {"word":"spend","type":"verb","meaning":"ใช้จ่าย"},
-  {"word":"start","type":"verb","meaning":"เริ่ม"},
-  {"word":"stay","type":"verb","meaning":"อยู่"},
-  {"word":"strange","type":"adj.","meaning":"แปลก"},
-  {"word":"strong","type":"adj.","meaning":"แข็งแกร่ง"},
-  {"word":"study","type":"noun/verb","meaning":"ศึกษา"},
-  {"word":"succeed","type":"verb","meaning":"ประสบความสำเร็จ"},
-  {"word":"success","type":"noun","meaning":"ความสำเร็จ"},
-  {"word":"suggest","type":"verb","meaning":"แนะนำ"},
-  {"word":"support","type":"noun/verb","meaning":"สนับสนุน"},
-  {"word":"surprise","type":"noun/verb","meaning":"เซอร์ไพรส์"},
-  {"word":"take","type":"verb","meaning":"เอา"},
-  {"word":"teach","type":"verb","meaning":"สอน"},
-  {"word":"tell","type":"verb","meaning":"บอก"},
-  {"word":"think","type":"verb","meaning":"คิด"},
-  {"word":"topic","type":"noun","meaning":"หัวข้อ"},
-  {"word":"trust","type":"noun/verb","meaning":"ไว้วางใจ"},
-  {"word":"try","type":"verb","meaning":"พยายาม"},
-  {"word":"turn","type":"verb/noun","meaning":"หมุน / เปลี่ยน"},
-  {"word":"understand","type":"verb","meaning":"เข้าใจ"},
-  {"word":"use","type":"verb","meaning":"ใช้"},
-  {"word":"value","type":"noun","meaning":"คุณค่า"},
-  {"word":"view","type":"noun","meaning":"มุมมอง"},
-  {"word":"visit","type":"verb/noun","meaning":"เยี่ยมชม"},
-  {"word":"wait","type":"verb","meaning":"รอ"},
-  {"word":"want","type":"verb","meaning":"ต้องการ"},
-  {"word":"warn","type":"verb","meaning":"เตือน"},
-  {"word":"waste","type":"noun/verb","meaning":"สิ้นเปลือง"},
-  {"word":"weak","type":"adj.","meaning":"อ่อนแอ"},
-  {"word":"win","type":"verb","meaning":"ชนะ"},
-  {"word":"wise","type":"adj.","meaning":"ฉลาด"},
-  {"word":"wonder","type":"verb","meaning":"สงสัย"},
-  {"word":"work","type":"verb/noun","meaning":"งาน"},
-  {"word":"worry","type":"verb","meaning":"กังวล"},
-  {"word":"worth","type":"adj.","meaning":"คุ้มค่า"},
-  {"word":"advice","type":"noun","meaning":"คำแนะนำ"},
-  {"word":"age","type":"noun","meaning":"อายุ"},
-  {"word":"ahead","type":"adv.","meaning":"ข้างหน้า"},
-  {"word":"amount","type":"noun","meaning":"จำนวน"},
-  {"word":"ancient","type":"adj.","meaning":"โบราณ"},
-  {"word":"apart","type":"adv.","meaning":"แยกจากกัน"},
-  {"word":"attitude","type":"noun","meaning":"ทัศนคติ"},
-  {"word":"audience","type":"noun","meaning":"ผู้ชม"},
-  {"word":"balance","type":"noun","meaning":"สมดุล"},
-  {"word":"belong","type":"verb","meaning":"เป็นของ"},
-  {"word":"bottom","type":"noun","meaning":"ด้านล่าง"},
-  {"word":"broad","type":"adj.","meaning":"กว้าง"},
-  {"word":"budget","type":"noun","meaning":"งบประมาณ"},
-  {"word":"chain","type":"noun","meaning":"โซ่"},
-  {"word":"challenge","type":"noun","meaning":"ความท้าทาย"},
-  {"word":"chance","type":"noun","meaning":"โอกาส"},
-  {"word":"choice","type":"noun","meaning":"ทางเลือก"},
-  {"word":"citizen","type":"noun","meaning":"พลเมือง"},
-  {"word":"claim","type":"verb","meaning":"อ้างสิทธิ์"},
-  {"word":"class","type":"noun","meaning":"ชั้นเรียน"},
-  {"word":"clean","type":"adj./verb","meaning":"สะอาด"},
-  {"word":"clever","type":"adj.","meaning":"ฉลาด"},
-  {"word":"complex","type":"adj.","meaning":"ซับซ้อน"},
-  {"word":"confirm","type":"verb","meaning":"ยืนยัน"},
-  {"word":"conflict","type":"noun","meaning":"ความขัดแย้ง"},
-  {"word":"cost","type":"noun/verb","meaning":"ค่าใช้จ่าย"},
-  {"word":"courage","type":"noun","meaning":"ความกล้าหาญ"},
-  {"word":"culture","type":"noun","meaning":"วัฒนธรรม"},
-  {"word":"current","type":"adj.","meaning":"ปัจจุบัน"},
-  {"word":"daily","type":"adj.","meaning":"ประจำวัน"},
-  {"word":"damage","type":"noun/verb","meaning":"ความเสียหาย"},
-  {"word":"data","type":"noun","meaning":"ข้อมูล"},
-  {"word":"deal","type":"noun/verb","meaning":"ข้อตกลง"},
-  {"word":"debate","type":"noun/verb","meaning":"โต้วาที"},
-  {"word":"design","type":"noun/verb","meaning":"ออกแบบ"},
-  {"word":"detail","type":"noun","meaning":"รายละเอียด"},
-  {"word":"direction","type":"noun","meaning":"ทิศทาง"},
-  {"word":"discipline","type":"noun","meaning":"วินัย"},
-  {"word":"element","type":"noun","meaning":"องค์ประกอบ"},
-  {"word":"emotional","type":"adj.","meaning":"อารมณ์"},
-  {"word":"empty","type":"adj.","meaning":"ว่าง"},
-  {"word":"energy","type":"noun","meaning":"พลังงาน"},
-  {"word":"equal","type":"adj.","meaning":"เท่าเทียม"},
-  {"word":"essential","type":"adj.","meaning":"จำเป็น"},
-  {"word":"eventually","type":"adv.","meaning":"ในที่สุด"},
-  {"word":"evidence","type":"noun","meaning":"หลักฐาน"},
-  {"word":"exercise","type":"noun/verb","meaning":"ออกกำลังกาย"},
-  {"word":"expand","type":"verb","meaning":"ขยาย"},
-  {"word":"experiment","type":"noun","meaning":"การทดลอง"},
-  {"word":"extreme","type":"adj.","meaning":"สุดโต่ง"},
-  {"word":"factor","type":"noun","meaning":"ปัจจัย"},
-  {"word":"flow","type":"noun/verb","meaning":"ไหล"},
-  {"word":"form","type":"noun/verb","meaning":"รูปแบบ"},
-  {"word":"found","type":"verb","meaning":"ก่อตั้ง"},
-  {"word":"fresh","type":"adj.","meaning":"สด"},
-  {"word":"general","type":"adj.","meaning":"ทั่วไป"},
-  {"word":"global","type":"adj.","meaning":"ทั่วโลก"},
-  {"word":"huge","type":"adj.","meaning":"ใหญ่มาก"},
-  {"word":"ideal","type":"adj.","meaning":"สมบูรณ์แบบ"},
-  {"word":"identify","type":"verb","meaning":"ระบุ"},
-  {"word":"impact","type":"noun","meaning":"ผลกระทบ"},
-  {"word":"important","type":"adj.","meaning":"สำคัญ"},
-  {"word":"income","type":"noun","meaning":"รายได้"},
-  {"word":"indicate","type":"verb","meaning":"บ่งชี้"},
-  {"word":"individual","type":"adj./noun","meaning":"บุคคล"},
-  {"word":"influence","type":"noun/verb","meaning":"อิทธิพล"},
-  {"word":"inside","type":"prep./adv.","meaning":"ข้างใน"},
-  {"word":"inspire","type":"verb","meaning":"สร้างแรงบันดาลใจ"},
-  {"word":"intention","type":"noun","meaning":"ความตั้งใจ"},
-  {"word":"issue","type":"noun","meaning":"ปัญหา"},
-  {"word":"journey","type":"noun","meaning":"การเดินทาง"},
-  {"word":"justice","type":"noun","meaning":"ความยุติธรรม"},
-  {"word":"lack","type":"noun/verb","meaning":"ขาดแคลน"},
-  {"word":"likely","type":"adj.","meaning":"น่าจะ"},
-  {"word":"link","type":"noun/verb","meaning":"เชื่อมโยง"},
-  {"word":"long","type":"adj./adv.","meaning":"ยาว"},
-  {"word":"major","type":"adj.","meaning":"สำคัญ"},
-  {"word":"matter","type":"noun/verb","meaning":"สำคัญ"},
-  {"word":"method","type":"noun","meaning":"วิธีการ"},
-  {"word":"minor","type":"adj.","meaning":"เล็กน้อย"},
-  {"word":"mission","type":"noun","meaning":"ภารกิจ"},
-  {"word":"mix","type":"verb","meaning":"ผสม"},
-  {"word":"natural","type":"adj.","meaning":"เป็นธรรมชาติ"},
-  {"word":"object","type":"noun","meaning":"วัตถุ"},
-  {"word":"obtain","type":"verb","meaning":"ได้มา"},
-  {"word":"original","type":"adj.","meaning":"ต้นฉบับ"},
-  {"word":"output","type":"noun","meaning":"ผลผลิต"},
-  {"word":"overcome","type":"verb","meaning":"เอาชนะ"},
-  {"word":"participate","type":"verb","meaning":"มีส่วนร่วม"},
-  {"word":"partner","type":"noun","meaning":"คู่หู"},
-  {"word":"position","type":"noun","meaning":"ตำแหน่ง"},
-  {"word":"positive","type":"adj.","meaning":"บวก"},
-  {"word":"power","type":"noun","meaning":"อำนาจ"},
-  {"word":"practice","type":"noun/verb","meaning":"ฝึกฝน"},
-  {"word":"predict","type":"verb","meaning":"ทำนาย"},
-  {"word":"pressure","type":"noun","meaning":"ความกดดัน"},
-  {"word":"priority","type":"noun","meaning":"ลำดับความสำคัญ"},
-  {"word":"problem","type":"noun","meaning":"ปัญหา"},
-  {"word":"process","type":"noun","meaning":"กระบวนการ"},
-  {"word":"progress","type":"noun","meaning":"ความก้าวหน้า"},
-  {"word":"project","type":"noun","meaning":"โครงการ"},
-  {"word":"promote","type":"verb","meaning":"ส่งเสริม"},
-  {"word":"prove","type":"verb","meaning":"พิสูจน์"},
-  {"word":"raise","type":"verb","meaning":"ยก"},
-  {"word":"range","type":"noun","meaning":"ช่วง"},
-  {"word":"rapid","type":"adj.","meaning":"รวดเร็ว"},
-  {"word":"reason","type":"noun","meaning":"เหตุผล"},
-  {"word":"recommend","type":"verb","meaning":"แนะนำ"},
-  {"word":"reflect","type":"verb","meaning":"สะท้อน"},
-  {"word":"region","type":"noun","meaning":"ภูมิภาค"},
-  {"word":"relate","type":"verb","meaning":"เกี่ยวข้อง"},
-  {"word":"reliable","type":"adj.","meaning":"น่าเชื่อถือ"},
-  {"word":"remove","type":"verb","meaning":"ลบออก"},
-  {"word":"replace","type":"verb","meaning":"แทนที่"},
-  {"word":"represent","type":"verb","meaning":"เป็นตัวแทน"},
-  {"word":"research","type":"noun","meaning":"การวิจัย"},
-  {"word":"resource","type":"noun","meaning":"ทรัพยากร"},
-  {"word":"response","type":"noun","meaning":"การตอบสนอง"},
-  {"word":"responsibility","type":"noun","meaning":"ความรับผิดชอบ"},
-  {"word":"review","type":"noun/verb","meaning":"ตรวจสอบ"},
-  {"word":"risk","type":"noun","meaning":"ความเสี่ยง"},
-  {"word":"role","type":"noun","meaning":"บทบาท"},
-  {"word":"rule","type":"noun","meaning":"กฎ"},
-  {"word":"section","type":"noun","meaning":"ส่วน"},
-  {"word":"service","type":"noun","meaning":"บริการ"},
-  {"word":"significant","type":"adj.","meaning":"สำคัญ"},
-  {"word":"situation","type":"noun","meaning":"สถานการณ์"},
-  {"word":"solution","type":"noun","meaning":"วิธีแก้ปัญหา"},
-  {"word":"source","type":"noun","meaning":"แหล่งที่มา"},
-  {"word":"spread","type":"verb","meaning":"แพร่กระจาย"},
-  {"word":"standard","type":"noun","meaning":"มาตรฐาน"},
-  {"word":"strategy","type":"noun","meaning":"กลยุทธ์"},
-  {"word":"structure","type":"noun","meaning":"โครงสร้าง"},
-  {"word":"subject","type":"noun","meaning":"วิชา"},
-  {"word":"system","type":"noun","meaning":"ระบบ"},
-  {"word":"target","type":"noun","meaning":"เป้าหมาย"},
-  {"word":"task","type":"noun","meaning":"งาน"},
-  {"word":"technology","type":"noun","meaning":"เทคโนโลยี"},
-  {"word":"theory","type":"noun","meaning":"ทฤษฎี"},
-  {"word":"tool","type":"noun","meaning":"เครื่องมือ"},
-  {"word":"transfer","type":"verb","meaning":"โอน"},
-  {"word":"transform","type":"verb","meaning":"เปลี่ยนแปลง"},
-  {"word":"trend","type":"noun","meaning":"แนวโน้ม"},
-  {"word":"type","type":"noun","meaning":"ประเภท"},
-  {"word":"typical","type":"adj.","meaning":"ทั่วไป"},
-  {"word":"update","type":"verb","meaning":"อัปเดต"},
-  {"word":"various","type":"adj.","meaning":"หลากหลาย"},
-  {"word":"vision","type":"noun","meaning":"วิสัยทัศน์"},
-  {"word":"whole","type":"adj.","meaning":"ทั้งหมด"},
-  {"word":"wide","type":"adj.","meaning":"กว้าง"},
-  {"word":"willing","type":"adj.","meaning":"เต็มใจ"},
-  {"word":"withdraw","type":"verb","meaning":"ถอน"},
-  {"word":"about","type":"prep./adv.","meaning":"เกี่ยวกับ"},
-  {"word":"above","type":"prep./adv.","meaning":"ข้างบน"},
-  {"word":"actor","type":"noun","meaning":"นักแสดงชาย"},
-  {"word":"actress","type":"noun","meaning":"นักแสดงหญิง"},
-  {"word":"afternoon","type":"noun","meaning":"ตอนบ่าย"},
-  {"word":"ago","type":"adv.","meaning":"ที่ผ่านมา"},
-  {"word":"air","type":"noun","meaning":"อากาศ"},
-  {"word":"airport","type":"noun","meaning":"สนามบิน"},
-  {"word":"all","type":"det./pron.","meaning":"ทั้งหมด"},
-  {"word":"also","type":"adv.","meaning":"ด้วย"},
-  {"word":"and","type":"conj.","meaning":"และ"},
-  {"word":"animal","type":"noun","meaning":"สัตว์"},
-  {"word":"another","type":"det./pron.","meaning":"อีก"},
-  {"word":"any","type":"det./pron.","meaning":"ใดๆ"},
-  {"word":"anyone","type":"pron.","meaning":"ใครก็ได้"},
-  {"word":"anything","type":"pron.","meaning":"อะไรก็ตาม"},
-  {"word":"apartment","type":"noun","meaning":"อพาร์ทเมนต์"},
-  {"word":"apple","type":"noun","meaning":"แอปเปิล"},
-  {"word":"April","type":"noun","meaning":"เมษายน"},
-  {"word":"arm","type":"noun","meaning":"แขน"},
-  {"word":"art","type":"noun","meaning":"ศิลปะ"},
-  {"word":"article","type":"noun","meaning":"บทความ"},
-  {"word":"artist","type":"noun","meaning":"ศิลปิน"},
-  {"word":"as","type":"prep.","meaning":"เป็น / ในฐานะ"},
-  {"word":"at","type":"prep.","meaning":"ที่"},
-  {"word":"August","type":"noun","meaning":"สิงหาคม"},
-  {"word":"aunt","type":"noun","meaning":"ป้า / น้า / อา"},
-  {"word":"autumn","type":"noun","meaning":"ฤดูใบไม้ร่วง"},
-  {"word":"away","type":"adv.","meaning":"ห่างออกไป"},
-  {"word":"baby","type":"noun","meaning":"ทารก"},
-  {"word":"back","type":"noun/adv.","meaning":"หลัง"},
-  {"word":"bad","type":"adj.","meaning":"แย่"},
-  {"word":"bag","type":"noun","meaning":"กระเป๋า"},
-  {"word":"ball","type":"noun","meaning":"ลูกบอล"},
-  {"word":"banana","type":"noun","meaning":"กล้วย"},
-  {"word":"band","type":"noun","meaning":"วงดนตรี"},
-  {"word":"bank","type":"noun","meaning":"ธนาคาร"},
-  {"word":"bath","type":"noun","meaning":"อ่างอาบน้ำ"},
-  {"word":"bathroom","type":"noun","meaning":"ห้องน้ำ"},
-  {"word":"be","type":"verb","meaning":"เป็น"},
-  {"word":"beach","type":"noun","meaning":"ชายหาด"},
-  {"word":"because","type":"conj.","meaning":"เพราะ"},
-  {"word":"bed","type":"noun","meaning":"เตียง"},
-  {"word":"bedroom","type":"noun","meaning":"ห้องนอน"},
-  {"word":"beer","type":"noun","meaning":"เบียร์"},
-  {"word":"before","type":"prep.","meaning":"ก่อน"},
-  {"word":"beginning","type":"noun","meaning":"จุดเริ่มต้น"},
-  {"word":"behind","type":"prep./adv.","meaning":"ข้างหลัง"},
-  {"word":"below","type":"adv./prep.","meaning":"ข้างล่าง"},
-  {"word":"best","type":"adj.","meaning":"ดีที่สุด"},
-  {"word":"better","type":"adj.","meaning":"ดีกว่า"},
-  {"word":"between","type":"prep.","meaning":"ระหว่าง"},
-  {"word":"bicycle","type":"noun","meaning":"จักรยาน"},
-  {"word":"big","type":"adj.","meaning":"ใหญ่"},
-  {"word":"bike","type":"noun","meaning":"จักรยาน"},
-  {"word":"bill","type":"noun","meaning":"ใบแจ้งหนี้"},
-  {"word":"bird","type":"noun","meaning":"นก"},
-  {"word":"birthday","type":"noun","meaning":"วันเกิด"},
-  {"word":"black","type":"adj./noun","meaning":"สีดำ"},
-  {"word":"blog","type":"noun","meaning":"บล็อก"},
-  {"word":"blonde","type":"adj.","meaning":"สีบลอนด์"},
-  {"word":"blue","type":"adj./noun","meaning":"สีน้ำเงิน"},
-  {"word":"boat","type":"noun","meaning":"เรือ"},
-  {"word":"body","type":"noun","meaning":"ร่างกาย"},
-  {"word":"book","type":"noun","meaning":"หนังสือ"},
-  {"word":"boot","type":"noun","meaning":"รองเท้าบู๊ต"},
-  {"word":"bored","type":"adj.","meaning":"เบื่อ"},
-  {"word":"boring","type":"adj.","meaning":"น่าเบื่อ"},
-  {"word":"born","type":"verb","meaning":"เกิด"},
-  {"word":"both","type":"det./pron.","meaning":"ทั้งคู่"},
-  {"word":"bottle","type":"noun","meaning":"ขวด"},
-  {"word":"box","type":"noun","meaning":"กล่อง"},
-  {"word":"boy","type":"noun","meaning":"เด็กชาย"},
-  {"word":"boyfriend","type":"noun","meaning":"แฟน (ผู้ชาย)"},
-  {"word":"bread","type":"noun","meaning":"ขนมปัง"},
-  {"word":"breakfast","type":"noun","meaning":"อาหารเช้า"},
-  {"word":"bring","type":"verb","meaning":"นำมา"},
-  {"word":"brother","type":"noun","meaning":"พี่ชาย / น้องชาย"},
-  {"word":"brown","type":"adj./noun","meaning":"สีน้ำตาล"},
-  {"word":"building","type":"noun","meaning":"อาคาร"},
-  {"word":"bus","type":"noun","meaning":"รถบัส"},
-  {"word":"but","type":"conj.","meaning":"แต่"},
-  {"word":"butter","type":"noun","meaning":"เนย"},
-  {"word":"buy","type":"verb","meaning":"ซื้อ"},
-  {"word":"by","type":"prep.","meaning":"โดย"},
-  {"word":"bye","type":"exclam.","meaning":"ลาก่อน"},
-  {"word":"cafe","type":"noun","meaning":"คาเฟ่"},
-  {"word":"cake","type":"noun","meaning":"เค้ก"},
-  {"word":"call","type":"verb/noun","meaning":"โทร / เรียก"},
-  {"word":"camera","type":"noun","meaning":"กล้องถ่ายรูป"},
-  {"word":"capital","type":"noun/adj.","meaning":"เมืองหลวง"},
-  {"word":"car","type":"noun","meaning":"รถยนต์"},
-  {"word":"card","type":"noun","meaning":"การ์ด"},
-  {"word":"career","type":"noun","meaning":"อาชีพ"},
-  {"word":"carrot","type":"noun","meaning":"แครอท"},
-  {"word":"carry","type":"verb","meaning":"พกพา"},
-  {"word":"cat","type":"noun","meaning":"แมว"},
-  {"word":"cent","type":"noun","meaning":"เซนต์"},
-  {"word":"centre","type":"noun","meaning":"ศูนย์กลาง"},
-  {"word":"century","type":"noun","meaning":"ศตวรรษ"},
-  {"word":"chair","type":"noun","meaning":"เก้าอี้"},
-  {"word":"chart","type":"noun","meaning":"แผนภูมิ"},
-  {"word":"cheap","type":"adj.","meaning":"ราคาถูก"},
-  {"word":"cheese","type":"noun","meaning":"ชีส"},
-  {"word":"chicken","type":"noun","meaning":"ไก่"},
-  {"word":"child","type":"noun","meaning":"เด็ก"},
-  {"word":"chocolate","type":"noun","meaning":"ช็อกโกแลต"},
-  {"word":"cinema","type":"noun","meaning":"โรงหนัง"},
-  {"word":"city","type":"noun","meaning":"เมือง"},
-  {"word":"classroom","type":"noun","meaning":"ห้องเรียน"},
-  {"word":"clock","type":"noun","meaning":"นาฬิกา"},
-  {"word":"clothes","type":"noun","meaning":"เสื้อผ้า"},
-  {"word":"club","type":"noun","meaning":"สโมสร"},
-  {"word":"coat","type":"noun","meaning":"เสื้อโค้ท"},
-  {"word":"coffee","type":"noun","meaning":"กาแฟ"},
-  {"word":"cold","type":"adj./noun","meaning":"หนาว / เย็น"},
-  {"word":"college","type":"noun","meaning":"วิทยาลัย"},
-  {"word":"colour","type":"noun","meaning":"สี"},
-  {"word":"come","type":"verb","meaning":"มา"},
-  {"word":"company","type":"noun","meaning":"บริษัท"},
-  {"word":"computer","type":"noun","meaning":"คอมพิวเตอร์"},
-  {"word":"concert","type":"noun","meaning":"คอนเสิร์ต"},
-  {"word":"conversation","type":"noun","meaning":"การสนทนา"},
-  {"word":"cook","type":"verb","meaning":"ทำอาหาร"},
-  {"word":"cooking","type":"noun","meaning":"การทำอาหาร"},
-  {"word":"cool","type":"adj.","meaning":"เย็น / เท่"},
-  {"word":"country","type":"noun","meaning":"ประเทศ"},
-  {"word":"course","type":"noun","meaning":"หลักสูตร"},
-  {"word":"cousin","type":"noun","meaning":"ลูกพี่ลูกน้อง"},
-  {"word":"cow","type":"noun","meaning":"วัว"},
-  {"word":"cream","type":"noun","meaning":"ครีม"},
-  {"word":"cup","type":"noun","meaning":"ถ้วย"},
-  {"word":"customer","type":"noun","meaning":"ลูกค้า"},
-  {"word":"cut","type":"verb","meaning":"ตัด"},
-  {"word":"dad","type":"noun","meaning":"พ่อ"},
-  {"word":"dance","type":"noun/verb","meaning":"เต้นรำ"},
-  {"word":"dancer","type":"noun","meaning":"นักเต้นรำ"},
-  {"word":"dancing","type":"noun","meaning":"การเต้นรำ"},
-  {"word":"dark","type":"adj.","meaning":"มืด"},
-  {"word":"date","type":"noun","meaning":"วันที่"},
-  {"word":"daughter","type":"noun","meaning":"ลูกสาว"},
-  {"word":"day","type":"noun","meaning":"วัน"},
-  {"word":"dear","type":"adj.","meaning":"รัก"},
-  {"word":"December","type":"noun","meaning":"ธันวาคม"},
-  {"word":"delicious","type":"adj.","meaning":"อร่อย"},
-  {"word":"description","type":"noun","meaning":"คำอธิบาย"},
-  {"word":"desk","type":"noun","meaning":"โต๊ะ"},
-  {"word":"dialogue","type":"noun","meaning":"บทสนทนา"},
-  {"word":"dictionary","type":"noun","meaning":"พจนานุกรม"},
-  {"word":"die","type":"verb","meaning":"ตาย"},
-  {"word":"diet","type":"noun","meaning":"อาหาร"},
-  {"word":"dinner","type":"noun","meaning":"อาหารเย็น"},
-  {"word":"dirty","type":"adj.","meaning":"สกปรก"},
-  {"word":"dish","type":"noun","meaning":"จาน"},
-  {"word":"do","type":"verb","meaning":"ทำ"},
-  {"word":"doctor","type":"noun","meaning":"หมอ"},
-  {"word":"dog","type":"noun","meaning":"สุนัข"},
-  {"word":"dollar","type":"noun","meaning":"ดอลลาร์"},
-  {"word":"door","type":"noun","meaning":"ประตู"},
-  {"word":"down","type":"adv./prep.","meaning":"ลง"},
-  {"word":"downstairs","type":"adv.","meaning":"ชั้นล่าง"},
-  {"word":"draw","type":"verb","meaning":"วาด"},
-  {"word":"dress","type":"noun/verb","meaning":"ชุดเดรส"},
-  {"word":"drink","type":"noun/verb","meaning":"ดื่ม"},
-  {"word":"driver","type":"noun","meaning":"คนขับรถ"},
-  {"word":"during","type":"prep.","meaning":"ในระหว่าง"},
-  {"word":"each","type":"det./pron.","meaning":"แต่ละ"},
-  {"word":"ear","type":"noun","meaning":"หู"},
-  {"word":"early","type":"adj./adv.","meaning":"แต่เช้า"},
-  {"word":"east","type":"noun/adj./adv.","meaning":"ทิศตะวันออก"},
-  {"word":"eat","type":"verb","meaning":"กิน"},
-  {"word":"egg","type":"noun","meaning":"ไข่"},
-  {"word":"eight","type":"number","meaning":"แปด"},
-  {"word":"eighteen","type":"number","meaning":"สิบแปด"},
-  {"word":"eighty","type":"number","meaning":"แปดสิบ"},
-  {"word":"elephant","type":"noun","meaning":"ช้าง"},
-  {"word":"eleven","type":"number","meaning":"สิบเอ็ด"},
-  {"word":"else","type":"adv.","meaning":"อื่น"},
-  {"word":"email","type":"noun/verb","meaning":"อีเมล"},
-  {"word":"end","type":"noun/verb","meaning":"จบสิ้น"},
-  {"word":"enough","type":"det./pron./adv.","meaning":"เพียงพอ"},
-  {"word":"euro","type":"noun","meaning":"ยูโร"},
-  {"word":"front","type":"noun/adj.","meaning":"ด้านหน้า"},
-  {"word":"fruit","type":"noun","meaning":"ผลไม้"},
-  {"word":"full","type":"adj.","meaning":"เต็ม"},
-  {"word":"fun","type":"noun","meaning":"ความสนุก"},
-  {"word":"funny","type":"adj.","meaning":"ตลก"},
-  {"word":"game","type":"noun","meaning":"เกม"},
-  {"word":"garden","type":"noun","meaning":"สวน"},
-  {"word":"geography","type":"noun","meaning":"ภูมิศาสตร์"},
-  {"word":"get","type":"verb","meaning":"ได้รับ"},
-  {"word":"girl","type":"noun","meaning":"เด็กผู้หญิง"},
-  {"word":"girlfriend","type":"noun","meaning":"แฟน (ผู้หญิง)"},
-  {"word":"glass","type":"noun","meaning":"แก้ว / กระจก"},
-  {"word":"go","type":"verb","meaning":"ไป"},
-  {"word":"good","type":"adj.","meaning":"ดี"},
-  {"word":"goodbye","type":"exclam.","meaning":"ลาก่อน"},
-  {"word":"grandfather","type":"noun","meaning":"ปู่ / ตา"},
-  {"word":"grandmother","type":"noun","meaning":"ย่า / ยาย"},
-  {"word":"grandparent","type":"noun","meaning":"ปู่ย่าตายาย"},
-  {"word":"great","type":"adj.","meaning":"ยอดเยี่ยม"},
-  {"word":"green","type":"adj./noun","meaning":"สีเขียว"},
-  {"word":"grey","type":"adj./noun","meaning":"สีเทา"},
-  {"word":"group","type":"noun","meaning":"กลุ่ม"},
-  {"word":"guitar","type":"noun","meaning":"กีตาร์"},
-  {"word":"gym","type":"noun","meaning":"โรงยิม"},
-  {"word":"hair","type":"noun","meaning":"ผม"},
-  {"word":"half","type":"noun/det.","meaning":"ครึ่ง"},
-  {"word":"hand","type":"noun","meaning":"มือ"},
-  {"word":"hat","type":"noun","meaning":"หมวก"},
-  {"word":"have","type":"verb","meaning":"มี"},
-  {"word":"he","type":"pron.","meaning":"เขา"},
-  {"word":"head","type":"noun","meaning":"หัว"},
-  {"word":"health","type":"noun","meaning":"สุขภาพ"},
-  {"word":"healthy","type":"adj.","meaning":"มีสุขภาพดี"},
-  {"word":"hear","type":"verb","meaning":"ได้ยิน"},
-  {"word":"hello","type":"exclam.","meaning":"สวัสดี"},
-  {"word":"her","type":"pron./det.","meaning":"เธอ / ของเธอ"},
-  {"word":"here","type":"adv.","meaning":"ที่นี่"},
-  {"word":"hey","type":"exclam.","meaning":"เฮ้"},
-  {"word":"hi","type":"exclam.","meaning":"สวัสดี"},
-  {"word":"high","type":"adj.","meaning":"สูง"},
-  {"word":"him","type":"pron.","meaning":"เขา"},
-  {"word":"his","type":"det.","meaning":"ของเขา"},
-  {"word":"history","type":"noun","meaning":"ประวัติศาสตร์"},
-  {"word":"hobby","type":"noun","meaning":"งานอดิเรก"},
-  {"word":"holiday","type":"noun","meaning":"วันหยุด"},
-  {"word":"home","type":"noun/adv.","meaning":"บ้าน"},
-  {"word":"homework","type":"noun","meaning":"การบ้าน"},
-  {"word":"horse","type":"noun","meaning":"ม้า"},
-  {"word":"hospital","type":"noun","meaning":"โรงพยาบาล"},
-  {"word":"hot","type":"adj.","meaning":"ร้อน"},
-  {"word":"hotel","type":"noun","meaning":"โรงแรม"},
-  {"word":"hour","type":"noun","meaning":"ชั่วโมง"},
-  {"word":"house","type":"noun","meaning":"บ้าน"},
-  {"word":"how","type":"adv.","meaning":"อย่างไร"},
-  {"word":"however","type":"adv.","meaning":"อย่างไรก็ตาม"},
-  {"word":"hundred","type":"number","meaning":"ร้อย"},
-  {"word":"hungry","type":"adj.","meaning":"หิว"},
-  {"word":"husband","type":"noun","meaning":"สามี"},
-  {"word":"I","type":"pron.","meaning":"ฉัน"},
-  {"word":"ice","type":"noun","meaning":"น้ำแข็ง"},
-  {"word":"idea","type":"noun","meaning":"ความคิด"},
-  {"word":"if","type":"conj.","meaning":"ถ้า"},
-  {"word":"in","type":"prep./adv.","meaning":"ใน"},
-  {"word":"interested","type":"adj.","meaning":"สนใจ"},
-  {"word":"interesting","type":"adj.","meaning":"น่าสนใจ"},
-  {"word":"internet","type":"noun","meaning":"อินเทอร์เน็ต"},
-  {"word":"interview","type":"noun/verb","meaning":"สัมภาษณ์"},
-  {"word":"into","type":"prep.","meaning":"เข้าไปใน"},
-  {"word":"island","type":"noun","meaning":"เกาะ"},
-  {"word":"it","type":"pron.","meaning":"มัน"},
-  {"word":"its","type":"det.","meaning":"ของมัน"},
-  {"word":"jacket","type":"noun","meaning":"เสื้อแจ็คเกต"},
-  {"word":"January","type":"noun","meaning":"มกราคม"},
-  {"word":"jeans","type":"noun","meaning":"กางเกงยีนส์"},
-  {"word":"job","type":"noun","meaning":"งาน"},
-  {"word":"juice","type":"noun","meaning":"น้ำผลไม้"},
-  {"word":"July","type":"noun","meaning":"กรกฎาคม"},
-  {"word":"June","type":"noun","meaning":"มิถุนายน"},
-  {"word":"just","type":"adv.","meaning":"แค่เพียง"},
-  {"word":"key","type":"noun/adj.","meaning":"กุญแจ"},
-  {"word":"kilometre","type":"noun","meaning":"กิโลเมตร"},
-  {"word":"kitchen","type":"noun","meaning":"ครัว"},
-  {"word":"know","type":"verb","meaning":"รู้ / ทราบ"},
-  {"word":"land","type":"noun","meaning":"แผ่นดิน"},
-  {"word":"last","type":"det.","meaning":"สุดท้าย"},
-  {"word":"late","type":"adj./adv.","meaning":"สาย"},
-  {"word":"later","type":"adv.","meaning":"ภายหลัง"},
-  {"word":"left","type":"adj./adv./noun","meaning":"ซ้าย"},
-  {"word":"leg","type":"noun","meaning":"ขา"},
-  {"word":"lesson","type":"noun","meaning":"บทเรียน"},
-  {"word":"let","type":"verb","meaning":"อนุญาต"},
-  {"word":"letter","type":"noun","meaning":"จดหมาย"},
-  {"word":"library","type":"noun","meaning":"ห้องสมุด"},
-  {"word":"lie","type":"verb","meaning":"โกหก"},
-  {"word":"life","type":"noun","meaning":"ชีวิต"},
-  {"word":"light","type":"noun","meaning":"แสงสว่าง"},
-  {"word":"like","type":"verb/prep.","meaning":"ชอบ"},
-  {"word":"line","type":"noun","meaning":"เส้น"},
-  {"word":"lion","type":"noun","meaning":"สิงโต"},
-  {"word":"little","type":"adj.","meaning":"เล็กน้อย"},
-  {"word":"live","type":"verb","meaning":"อาศัยอยู่"},
-  {"word":"lot","type":"pron./det.","meaning":"มาก"},
-  {"word":"lunch","type":"noun","meaning":"อาหารกลางวัน"},
-  {"word":"machine","type":"noun","meaning":"เครื่องจักร"},
-  {"word":"magazine","type":"noun","meaning":"นิตยสาร"},
-  {"word":"main","type":"adj.","meaning":"หลัก"},
-  {"word":"make","type":"verb","meaning":"ทำ"},
-  {"word":"man","type":"noun","meaning":"ผู้ชาย"},
-  {"word":"many","type":"det./pron.","meaning":"มากมาย"},
-  {"word":"map","type":"noun","meaning":"แผนที่"},
-  {"word":"March","type":"noun","meaning":"มีนาคม"},
-  {"word":"market","type":"noun","meaning":"ตลาด"},
-  {"word":"married","type":"adj.","meaning":"แต่งงานแล้ว"},
-  {"word":"May","type":"noun","meaning":"พฤษภาคม"},
-  {"word":"maybe","type":"adv.","meaning":"อาจจะ"},
-  {"word":"me","type":"pron.","meaning":"ฉัน"},
-  {"word":"meal","type":"noun","meaning":"มื้ออาหาร"},
-  {"word":"meaning","type":"noun","meaning":"ความหมาย"},
-  {"word":"meat","type":"noun","meaning":"เนื้อ"},
-  {"word":"meet","type":"verb","meaning":"พบปะ"},
-  {"word":"meeting","type":"noun","meaning":"การประชุม"},
-  {"word":"member","type":"noun","meaning":"สมาชิก"},
-  {"word":"menu","type":"noun","meaning":"เมนู"},
-  {"word":"message","type":"noun","meaning":"ข้อความ"},
-  {"word":"metre","type":"noun","meaning":"เมตร"},
-  {"word":"midnight","type":"noun","meaning":"เที่ยงคืน"},
-  {"word":"mile","type":"noun","meaning":"ไมล์"},
-  {"word":"milk","type":"noun","meaning":"นม"},
-  {"word":"million","type":"number","meaning":"ล้าน"},
-  {"word":"minute","type":"noun","meaning":"นาที"},
-  {"word":"Monday","type":"noun","meaning":"วันจันทร์"},
-  {"word":"money","type":"noun","meaning":"เงิน"},
-  {"word":"month","type":"noun","meaning":"เดือน"},
-  {"word":"more","type":"det./adv.","meaning":"มากกว่า"},
-  {"word":"morning","type":"noun","meaning":"ตอนเช้า"},
-  {"word":"most","type":"det./adv.","meaning":"มากที่สุด"},
-  {"word":"mother","type":"noun","meaning":"แม่"},
-  {"word":"mountain","type":"noun","meaning":"ภูเขา"},
-  {"word":"mouse","type":"noun","meaning":"หนู"},
-  {"word":"mouth","type":"noun","meaning":"ปาก"},
-  {"word":"movie","type":"noun","meaning":"ภาพยนตร์"},
-  {"word":"much","type":"det./adv.","meaning":"มาก"},
-  {"word":"mum","type":"noun","meaning":"แม่"},
-  {"word":"museum","type":"noun","meaning":"พิพิธภัณฑ์"},
-  {"word":"music","type":"noun","meaning":"ดนตรี"},
-  {"word":"my","type":"det.","meaning":"ของฉัน"},
-  {"word":"name","type":"noun/verb","meaning":"ชื่อ"},
-  {"word":"near","type":"prep./adj./adv.","meaning":"ใกล้"},
-  {"word":"negative","type":"adj.","meaning":"เชิงลบ"},
-  {"word":"neighbour","type":"noun","meaning":"เพื่อนบ้าน"},
-  {"word":"never","type":"adv.","meaning":"ไม่เคย"},
-  {"word":"new","type":"adj.","meaning":"ใหม่"},
-  {"word":"news","type":"noun","meaning":"ข่าว"},
-  {"word":"newspaper","type":"noun","meaning":"หนังสือพิมพ์"},
-  {"word":"next","type":"adj./adv.","meaning":"ต่อไป"},
-  {"word":"nice","type":"adj.","meaning":"น่ารัก / ดี"},
-  {"word":"night","type":"noun","meaning":"กลางคืน"},
-  {"word":"nine","type":"number","meaning":"เก้า"},
-  {"word":"nineteen","type":"number","meaning":"สิบเก้า"},
-  {"word":"ninety","type":"number","meaning":"เก้าสิบ"},
-  {"word":"nobody","type":"pron.","meaning":"ไม่มีใคร"},
-  {"word":"north","type":"noun/adj.","meaning":"ทิศเหนือ"},
-  {"word":"nose","type":"noun","meaning":"จมูก"},
-  {"word":"not","type":"adv.","meaning":"ไม่"},
-  {"word":"note","type":"noun","meaning":"บันทึก"},
-  {"word":"nothing","type":"pron.","meaning":"ไม่มีอะไร"},
-  {"word":"November","type":"noun","meaning":"พฤศจิกายน"},
-  {"word":"now","type":"adv.","meaning":"ตอนนี้"},
-  {"word":"number","type":"noun","meaning":"ตัวเลข"},
-  {"word":"nurse","type":"noun","meaning":"พยาบาล"},
-  {"word":"o'clock","type":"adv.","meaning":"โมง"},
-  {"word":"October","type":"noun","meaning":"ตุลาคม"},
-  {"word":"of","type":"prep.","meaning":"ของ"},
-  {"word":"off","type":"adv./prep.","meaning":"ปิด / ออก"},
-  {"word":"office","type":"noun","meaning":"สำนักงาน"},
-  {"word":"oh","type":"exclam.","meaning":"โอ้"},
-  {"word":"OK","type":"exclam./adj.","meaning":"โอเค"},
-  {"word":"old","type":"adj.","meaning":"เก่า"},
-  {"word":"on","type":"prep./adv.","meaning":"บน"},
-  {"word":"once","type":"adv.","meaning":"ครั้งหนึ่ง"},
-  {"word":"one","type":"number","meaning":"หนึ่ง"},
-  {"word":"onion","type":"noun","meaning":"หัวหอม"},
-  {"word":"online","type":"adj./adv.","meaning":"ออนไลน์"},
-  {"word":"only","type":"adj./adv.","meaning":"เท่านั้น"},
-  {"word":"opposite","type":"adj./prep.","meaning":"ตรงข้าม"},
-  {"word":"or","type":"conj.","meaning":"หรือ"},
-  {"word":"orange","type":"noun/adj.","meaning":"ส้ม"},
-  {"word":"order","type":"noun/verb","meaning":"สั่ง"},
-  {"word":"other","type":"adj./pron.","meaning":"อื่น"},
-  {"word":"our","type":"det.","meaning":"ของเรา"},
-  {"word":"out","type":"adv./prep.","meaning":"ออก"},
-  {"word":"outside","type":"adv.","meaning":"ข้างนอก"},
-  {"word":"over","type":"prep./adv.","meaning":"เหนือ"},
-  {"word":"page","type":"noun","meaning":"หน้า"},
-  {"word":"paint","type":"verb/noun","meaning":"ทาสี"},
-  {"word":"painting","type":"noun","meaning":"ภาพวาด"},
-  {"word":"pair","type":"noun","meaning":"คู่"},
-  {"word":"paper","type":"noun","meaning":"กระดาษ"},
-  {"word":"paragraph","type":"noun","meaning":"ย่อหน้า"},
-  {"word":"parent","type":"noun","meaning":"พ่อแม่"},
-  {"word":"park","type":"noun/verb","meaning":"สวน"},
-  {"word":"part","type":"noun","meaning":"ส่วน"},
-  {"word":"party","type":"noun","meaning":"งานปาร์ตี้"},
-  {"word":"passport","type":"noun","meaning":"หนังสือเดินทาง"},
-  {"word":"past","type":"noun/adj.","meaning":"อดีต"},
-  {"word":"pay","type":"verb","meaning":"จ่าย"},
-  {"word":"pen","type":"noun","meaning":"ปากกา"},
-  {"word":"pencil","type":"noun","meaning":"ดินสอ"},
-  {"word":"people","type":"noun","meaning":"คน"},
-  {"word":"pepper","type":"noun","meaning":"พริกไทย"},
-  {"word":"perfect","type":"adj.","meaning":"สมบูรณ์แบบ"},
-  {"word":"period","type":"noun","meaning":"ระยะเวลา"},
-  {"word":"person","type":"noun","meaning":"บุคคล"},
-  {"word":"personal","type":"adj.","meaning":"ส่วนตัว"},
-  {"word":"phone","type":"noun/verb","meaning":"โทรศัพท์"},
-  {"word":"photo","type":"noun","meaning":"รูปถ่าย"},
-  {"word":"photograph","type":"noun","meaning":"รูปถ่าย"},
-  {"word":"phrase","type":"noun","meaning":"วลี"},
-  {"word":"piano","type":"noun","meaning":"เปียโน"},
-  {"word":"picture","type":"noun","meaning":"รูปภาพ"},
-  {"word":"piece","type":"noun","meaning":"ชิ้น"},
-  {"word":"pig","type":"noun","meaning":"หมู"},
-  {"word":"pink","type":"adj./noun","meaning":"สีชมพู"},
-  {"word":"Saturday","type":"noun","meaning":"วันเสาร์"},
-  {"word":"say","type":"verb","meaning":"พูด"},
-  {"word":"school","type":"noun","meaning":"โรงเรียน"},
-  {"word":"science","type":"noun","meaning":"วิทยาศาสตร์"},
-  {"word":"scientist","type":"noun","meaning":"นักวิทยาศาสตร์"},
-  {"word":"sea","type":"noun","meaning":"ทะเล"},
-  {"word":"second","type":"det.","meaning":"ที่สอง"},
-  {"word":"see","type":"verb","meaning":"เห็น"},
-  {"word":"sell","type":"verb","meaning":"ขาย"},
-  {"word":"sentence","type":"noun","meaning":"ประโยค"},
-  {"word":"September","type":"noun","meaning":"กันยายน"},
-  {"word":"seven","type":"number","meaning":"เจ็ด"},
-  {"word":"seventeen","type":"number","meaning":"สิบเจ็ด"},
-  {"word":"seventy","type":"number","meaning":"เจ็ดสิบ"},
-  {"word":"she","type":"pron.","meaning":"เธอ"},
-  {"word":"sheep","type":"noun","meaning":"แกะ"},
-  {"word":"shirt","type":"noun","meaning":"เสื้อ"},
-  {"word":"shoe","type":"noun","meaning":"รองเท้า"},
-  {"word":"shop","type":"noun/verb","meaning":"ร้านค้า"},
-  {"word":"shopping","type":"noun","meaning":"การช้อปปิ้ง"},
-  {"word":"short","type":"adj.","meaning":"สั้น"},
-  {"word":"shower","type":"noun","meaning":"ฝักบัวอาบน้ำ"},
-  {"word":"sick","type":"adj.","meaning":"ป่วย"},
-  {"word":"similar","type":"adj.","meaning":"คล้ายกัน"},
-  {"word":"sing","type":"verb","meaning":"ร้องเพลง"},
-  {"word":"singer","type":"noun","meaning":"นักร้อง"},
-  {"word":"sister","type":"noun","meaning":"พี่สาว / น้องสาว"},
-  {"word":"sit","type":"verb","meaning":"นั่ง"},
-  {"word":"six","type":"number","meaning":"หก"},
-  {"word":"sixteen","type":"number","meaning":"สิบหก"},
-  {"word":"sixty","type":"number","meaning":"หกสิบ"},
-  {"word":"skirt","type":"noun","meaning":"กระโปรง"},
-  {"word":"sleep","type":"verb","meaning":"นอน"},
-  {"word":"slow","type":"adj.","meaning":"ช้า"},
-  {"word":"small","type":"adj.","meaning":"เล็ก"},
-  {"word":"snake","type":"noun","meaning":"งู"},
-  {"word":"snow","type":"noun/verb","meaning":"หิมะ"},
-  {"word":"so","type":"adv./conj.","meaning":"ดังนั้น"},
-  {"word":"some","type":"det./pron.","meaning":"บาง"},
-  {"word":"somebody","type":"pron.","meaning":"ใครบางคน"},
-  {"word":"someone","type":"pron.","meaning":"บางคน"},
-  {"word":"something","type":"pron.","meaning":"บางสิ่ง"},
-  {"word":"sometimes","type":"adv.","meaning":"บางครั้ง"},
-  {"word":"son","type":"noun","meaning":"ลูกชาย"},
-  {"word":"song","type":"noun","meaning":"เพลง"},
-  {"word":"soon","type":"adv.","meaning":"เร็วๆ นี้"},
-  {"word":"sorry","type":"adj./exclam.","meaning":"ขอโทษ"},
-  {"word":"sound","type":"noun/verb","meaning":"เสียง"},
-  {"word":"soup","type":"noun","meaning":"ซุป"},
-  {"word":"south","type":"noun/adj.","meaning":"ทิศใต้"},
-  {"word":"space","type":"noun","meaning":"อวกาศ / ช่องว่าง"},
-  {"word":"speak","type":"verb","meaning":"พูด"},
-  {"word":"spell","type":"verb","meaning":"สะกด"},
-  {"word":"spelling","type":"noun","meaning":"การสะกด"},
-  {"word":"sport","type":"noun","meaning":"กีฬา"},
-  {"word":"spring","type":"noun","meaning":"ฤดูใบไม้ผลิ"},
-  {"word":"stand","type":"verb","meaning":"ยืน"},
-  {"word":"star","type":"noun","meaning":"ดาว"},
-  {"word":"statement","type":"noun","meaning":"คำแถลง"},
-  {"word":"station","type":"noun","meaning":"สถานี"},
-  {"word":"still","type":"adv.","meaning":"ยัง"},
-  {"word":"stop","type":"verb/noun","meaning":"หยุด"},
-  {"word":"story","type":"noun","meaning":"เรื่องราว"},
-  {"word":"street","type":"noun","meaning":"ถนน"},
-  {"word":"student","type":"noun","meaning":"นักเรียน"},
-  {"word":"style","type":"noun","meaning":"สไตล์"},
-  {"word":"sugar","type":"noun","meaning":"น้ำตาล"},
-  {"word":"summer","type":"noun","meaning":"ฤดูร้อน"},
-  {"word":"sun","type":"noun","meaning":"ดวงอาทิตย์"},
-  {"word":"Sunday","type":"noun","meaning":"วันอาทิตย์"},
-  {"word":"supermarket","type":"noun","meaning":"ซุปเปอร์มาร์เก็ต"},
-  {"word":"sure","type":"adj.","meaning":"แน่นอน"},
-  {"word":"sweater","type":"noun","meaning":"เสื้อกันหนาว"},
-  {"word":"swim","type":"verb","meaning":"ว่ายน้ำ"},
-  {"word":"swimming","type":"noun","meaning":"การว่ายน้ำ"},
-  {"word":"table","type":"noun","meaning":"โต๊ะ"},
-  {"word":"talk","type":"verb","meaning":"พูดคุย"},
-  {"word":"tall","type":"adj.","meaning":"สูง"},
-  {"word":"taxi","type":"noun","meaning":"แท็กซี่"},
-  {"word":"tea","type":"noun","meaning":"ชา"},
-  {"word":"teacher","type":"noun","meaning":"ครู"},
-  {"word":"team","type":"noun","meaning":"ทีม"},
-  {"word":"teenager","type":"noun","meaning":"วัยรุ่น"},
-  {"word":"telephone","type":"noun/verb","meaning":"โทรศัพท์"},
-  {"word":"television","type":"noun","meaning":"โทรทัศน์"},
-  {"word":"ten","type":"number","meaning":"สิบ"},
-  {"word":"tennis","type":"noun","meaning":"เทนนิส"},
-  {"word":"terrible","type":"adj.","meaning":"แย่มาก"},
-  {"word":"test","type":"noun/verb","meaning":"ทดสอบ"},
-  {"word":"text","type":"noun","meaning":"ข้อความ"},
-  {"word":"than","type":"conj.","meaning":"กว่า"},
-  {"word":"thank","type":"verb","meaning":"ขอบคุณ"},
-  {"word":"thanks","type":"exclam.","meaning":"ขอบคุณ"},
-  {"word":"that","type":"det./pron.","meaning":"ที่ / ซึ่ง"},
-  {"word":"the","type":"article","meaning":"คำนำหน้านาม"},
-  {"word":"theatre","type":"noun","meaning":"โรงละคร"},
-  {"word":"their","type":"det.","meaning":"ของพวกเขา"},
-  {"word":"them","type":"pron.","meaning":"พวกเขา"},
-  {"word":"then","type":"adv.","meaning":"แล้ว / จากนั้น"},
-  {"word":"there","type":"adv.","meaning":"ที่นั่น"},
-  {"word":"they","type":"pron.","meaning":"พวกเขา"},
-  {"word":"thing","type":"noun","meaning":"สิ่ง"},
-  {"word":"third","type":"number","meaning":"ที่สาม"},
-  {"word":"thirsty","type":"adj.","meaning":"กระหายน้ำ"},
-  {"word":"thirteen","type":"number","meaning":"สิบสาม"},
-  {"word":"thirty","type":"number","meaning":"สามสิบ"},
-  {"word":"this","type":"det./pron.","meaning":"นี้"},
-  {"word":"thousand","type":"number","meaning":"พัน"},
-  {"word":"three","type":"number","meaning":"สาม"},
-  {"word":"through","type":"prep./adv.","meaning":"ผ่าน"},
-  {"word":"Thursday","type":"noun","meaning":"วันพฤหัสบดี"},
-  {"word":"ticket","type":"noun","meaning":"ตั๋ว"},
-  {"word":"time","type":"noun","meaning":"เวลา"},
-  {"word":"tired","type":"adj.","meaning":"เหนื่อย"},
-  {"word":"title","type":"noun","meaning":"ชื่อเรื่อง"},
-  {"word":"to","type":"prep.","meaning":"ไปยัง"},
-  {"word":"today","type":"adv./noun","meaning":"วันนี้"},
-  {"word":"together","type":"adv.","meaning":"ด้วยกัน"},
-  {"word":"toilet","type":"noun","meaning":"ห้องน้ำ"},
-  {"word":"tomato","type":"noun","meaning":"มะเขือเทศ"},
-  {"word":"tomorrow","type":"adv./noun","meaning":"พรุ่งนี้"},
-  {"word":"tonight","type":"adv./noun","meaning":"คืนนี้"},
-  {"word":"too","type":"adv.","meaning":"ด้วย"},
-  {"word":"tooth","type":"noun","meaning":"ฟัน"},
-  {"word":"tourist","type":"noun","meaning":"นักท่องเที่ยว"},
-  {"word":"town","type":"noun","meaning":"เมืองเล็ก"},
-  {"word":"traffic","type":"noun","meaning":"การจราจร"},
-  {"word":"train","type":"noun","meaning":"รถไฟ"},
-  {"word":"travel","type":"verb/noun","meaning":"ท่องเที่ยว"},
-  {"word":"tree","type":"noun","meaning":"ต้นไม้"},
-  {"word":"trip","type":"noun","meaning":"การเดินทาง"},
-  {"word":"trousers","type":"noun","meaning":"กางเกงขายาว"},
-  {"word":"true","type":"adj.","meaning":"จริง"},
-  {"word":"T-shirt","type":"noun","meaning":"เสื้อยืด"},
-  {"word":"Tuesday","type":"noun","meaning":"วันอังคาร"},
-  {"word":"TV","type":"noun","meaning":"โทรทัศน์"},
-  {"word":"twelve","type":"number","meaning":"สิบสอง"},
-  {"word":"twenty","type":"number","meaning":"ยี่สิบ"},
-  {"word":"twice","type":"adv.","meaning":"สองครั้ง"},
-  {"word":"two","type":"number","meaning":"สอง"},
-  {"word":"umbrella","type":"noun","meaning":"ร่ม"},
-  {"word":"uncle","type":"noun","meaning":"ลุง"},
-  {"word":"under","type":"prep./adv.","meaning":"ใต้"},
-  {"word":"university","type":"noun","meaning":"มหาวิทยาลัย"},
-  {"word":"until","type":"conj./prep.","meaning":"จนกระทั่ง"},
-  {"word":"up","type":"adv./prep.","meaning":"ขึ้น"},
-  {"word":"upstairs","type":"adv.","meaning":"ชั้นบน"},
-  {"word":"us","type":"pron.","meaning":"เรา"},
-  {"word":"useful","type":"adj.","meaning":"มีประโยชน์"},
-  {"word":"usually","type":"adv.","meaning":"โดยปกติ"},
-  {"word":"vacation","type":"noun","meaning":"วันหยุดพักผ่อน"},
-  {"word":"vegetable","type":"noun","meaning":"ผัก"},
-  {"word":"very","type":"adv.","meaning":"มาก"},
-  {"word":"video","type":"noun","meaning":"วิดีโอ"},
-  {"word":"village","type":"noun","meaning":"หมู่บ้าน"},
-  {"word":"visitor","type":"noun","meaning":"ผู้มาเยือน"},
-  {"word":"waiter","type":"noun","meaning":"พนักงานเสิร์ฟ"},
-  {"word":"wake","type":"verb","meaning":"ตื่น"},
-  {"word":"walk","type":"verb/noun","meaning":"เดิน"},
-  {"word":"wall","type":"noun","meaning":"กำแพง"},
-  {"word":"warm","type":"adj.","meaning":"อบอุ่น"},
-  {"word":"wash","type":"verb","meaning":"ล้าง"},
-  {"word":"watch","type":"verb/noun","meaning":"ดู / นาฬิกา"},
-  {"word":"water","type":"noun","meaning":"น้ำ"},
-  {"word":"way","type":"noun","meaning":"ทาง"},
-  {"word":"we","type":"pron.","meaning":"เรา"},
-  {"word":"wear","type":"verb","meaning":"สวมใส่"},
-  {"word":"weather","type":"noun","meaning":"สภาพอากาศ"},
-  {"word":"website","type":"noun","meaning":"เว็บไซต์"},
-  {"word":"Wednesday","type":"noun","meaning":"วันพุธ"},
-  {"word":"week","type":"noun","meaning":"สัปดาห์"},
-  {"word":"weekend","type":"noun","meaning":"วันหยุดสุดสัปดาห์"},
-  {"word":"welcome","type":"exclam./verb","meaning":"ยินดีต้อนรับ"},
-  {"word":"well","type":"adv./adj.","meaning":"ดี"},
-  {"word":"west","type":"noun/adj.","meaning":"ทิศตะวันตก"},
-  {"word":"what","type":"pron./det.","meaning":"อะไร"},
-  {"word":"when","type":"adv./conj.","meaning":"เมื่อไร"},
-  {"word":"where","type":"adv./conj.","meaning":"ที่ไหน"},
-  {"word":"which","type":"pron./det.","meaning":"ซึ่ง"},
-  {"word":"white","type":"adj./noun","meaning":"สีขาว"},
-  {"word":"who","type":"pron.","meaning":"ใคร"},
-  {"word":"why","type":"adv.","meaning":"ทำไม"},
-  {"word":"wife","type":"noun","meaning":"ภรรยา"},
-  {"word":"window","type":"noun","meaning":"หน้าต่าง"},
-  {"word":"wine","type":"noun","meaning":"ไวน์"},
-  {"word":"winter","type":"noun","meaning":"ฤดูหนาว"},
-  {"word":"with","type":"prep.","meaning":"กับ"},
-  {"word":"without","type":"prep.","meaning":"ปราศจาก"},
-  {"word":"woman","type":"noun","meaning":"ผู้หญิง"},
-  {"word":"wonderful","type":"adj.","meaning":"มหัศจรรย์"},
-  {"word":"word","type":"noun","meaning":"คำ"},
-  {"word":"worker","type":"noun","meaning":"คนงาน"},
-  {"word":"world","type":"noun","meaning":"โลก"},
-  {"word":"write","type":"verb","meaning":"เขียน"},
-  {"word":"writer","type":"noun","meaning":"นักเขียน"},
-  {"word":"writing","type":"noun","meaning":"การเขียน"},
-  {"word":"yeah","type":"exclam.","meaning":"ใช่"},
-  {"word":"year","type":"noun","meaning":"ปี"},
-  {"word":"yellow","type":"adj./noun","meaning":"สีเหลือง"},
-  {"word":"yes","type":"exclam.","meaning":"ใช่"},
-  {"word":"yesterday","type":"adv./noun","meaning":"เมื่อวาน"},
-  {"word":"you","type":"pron.","meaning":"คุณ"},
-  {"word":"young","type":"adj.","meaning":"หนุ่มสาว"},
-  {"word":"your","type":"det.","meaning":"ของคุณ"},
-  {"word":"yourself","type":"pron.","meaning":"ตัวคุณเอง"},
-  {"word":"able","type":"adj.","meaning":"สามารถ"},
-  {"word":"abroad","type":"adv.","meaning":"ต่างประเทศ"},
-  {"word":"accident","type":"noun","meaning":"อุบัติเหตุ"},
-  {"word":"according to","type":"prep.","meaning":"ตาม"},
-  {"word":"act","type":"verb","meaning":"กระทำ"},
-  {"word":"actually","type":"adv.","meaning":"จริงๆ แล้ว"},
-  {"word":"adventure","type":"noun","meaning":"การผจญภัย"},
-  {"word":"advertise","type":"verb","meaning":"โฆษณา"},
-  {"word":"advertisement","type":"noun","meaning":"โฆษณา"},
-  {"word":"advertising","type":"noun","meaning":"การโฆษณา"},
-  {"word":"against","type":"prep.","meaning":"ต่อต้าน"},
-  {"word":"ah","type":"exclam.","meaning":"อา"},
-  {"word":"airline","type":"noun","meaning":"สายการบิน"},
-  {"word":"alive","type":"adj.","meaning":"มีชีวิตอยู่"},
-  {"word":"all right","type":"adj./adv.","meaning":"โอเค / เอาละ"},
-  {"word":"along","type":"prep./adv.","meaning":"ตาม"}
+  {
+    "word": "about",
+    "type": "prep./adv.",
+    "meaning": "เกี่ยวกับ"
+  },
+  {
+    "word": "above",
+    "type": "prep./adv.",
+    "meaning": "ด้านบน"
+  },
+  {
+    "word": "across",
+    "type": "prep./adv.",
+    "meaning": "ข้าม"
+  },
+  {
+    "word": "action",
+    "type": "noun",
+    "meaning": "การกระทำ"
+  },
+  {
+    "word": "activity",
+    "type": "noun",
+    "meaning": "กิจกรรม"
+  },
+  {
+    "word": "actor",
+    "type": "noun",
+    "meaning": "นักแสดงชาย"
+  },
+  {
+    "word": "actress",
+    "type": "noun",
+    "meaning": "นักแสดงหญิง"
+  },
+  {
+    "word": "add",
+    "type": "verb",
+    "meaning": "เพิ่ม"
+  },
+  {
+    "word": "address",
+    "type": "noun",
+    "meaning": "ที่อยู่"
+  },
+  {
+    "word": "adult",
+    "type": "noun",
+    "meaning": "ผู้ใหญ่"
+  },
+  {
+    "word": "advice",
+    "type": "noun",
+    "meaning": "คำแนะนำ"
+  },
+  {
+    "word": "afraid",
+    "type": "adj.",
+    "meaning": "กลัว"
+  },
+  {
+    "word": "after",
+    "type": "prep.",
+    "meaning": "หลังจาก"
+  },
+  {
+    "word": "afternoon",
+    "type": "noun",
+    "meaning": "ตอนบ่าย"
+  },
+  {
+    "word": "again",
+    "type": "adv.",
+    "meaning": "อีกครั้ง"
+  },
+  {
+    "word": "age",
+    "type": "noun",
+    "meaning": "อายุ"
+  },
+  {
+    "word": "ago",
+    "type": "adv.",
+    "meaning": "ที่ผ่านมา"
+  },
+  {
+    "word": "agree",
+    "type": "verb",
+    "meaning": "เห็นด้วย"
+  },
+  {
+    "word": "air",
+    "type": "noun",
+    "meaning": "อากาศ"
+  },
+  {
+    "word": "airport",
+    "type": "noun",
+    "meaning": "สนามบิน"
+  },
+  {
+    "word": "all",
+    "type": "det./pron.",
+    "meaning": "ทั้งหมด"
+  },
+  {
+    "word": "also",
+    "type": "adv.",
+    "meaning": "ด้วย"
+  },
+  {
+    "word": "always",
+    "type": "adv.",
+    "meaning": "เสมอ"
+  },
+  {
+    "word": "amazing",
+    "type": "adj.",
+    "meaning": "น่าอัศจรรย์"
+  },
+  {
+    "word": "and",
+    "type": "conj.",
+    "meaning": "และ"
+  },
+  {
+    "word": "angry",
+    "type": "adj.",
+    "meaning": "โกรธ"
+  },
+  {
+    "word": "animal",
+    "type": "noun",
+    "meaning": "สัตว์"
+  },
+  {
+    "word": "another",
+    "type": "det./pron.",
+    "meaning": "อื่น"
+  },
+  {
+    "word": "answer",
+    "type": "noun/verb",
+    "meaning": "ตอบ"
+  },
+  {
+    "word": "any",
+    "type": "det./pron.",
+    "meaning": "ใดๆ"
+  },
+  {
+    "word": "anyone",
+    "type": "pron.",
+    "meaning": "ใครก็ได้"
+  },
+  {
+    "word": "anything",
+    "type": "pron.",
+    "meaning": "อะไรก็ตาม"
+  },
+  {
+    "word": "apartment",
+    "type": "noun",
+    "meaning": "อพาร์ทเมนต์"
+  },
+  {
+    "word": "apple",
+    "type": "noun",
+    "meaning": "แอปเปิ้ล"
+  },
+  {
+    "word": "April",
+    "type": "noun",
+    "meaning": "เมษายน"
+  },
+  {
+    "word": "area",
+    "type": "noun",
+    "meaning": "พื้นที่"
+  },
+  {
+    "word": "arm",
+    "type": "noun",
+    "meaning": "แขน"
+  },
+  {
+    "word": "around",
+    "type": "prep./adv.",
+    "meaning": "รอบๆ"
+  },
+  {
+    "word": "arrive",
+    "type": "verb",
+    "meaning": "มาถึง"
+  },
+  {
+    "word": "art",
+    "type": "noun",
+    "meaning": "ศิลปะ"
+  },
+  {
+    "word": "article",
+    "type": "noun",
+    "meaning": "บทความ"
+  },
+  {
+    "word": "artist",
+    "type": "noun",
+    "meaning": "ศิลปิน"
+  },
+  {
+    "word": "as",
+    "type": "prep./conj.",
+    "meaning": "เป็น / ขณะที่"
+  },
+  {
+    "word": "ask",
+    "type": "verb",
+    "meaning": "ถาม"
+  },
+  {
+    "word": "at",
+    "type": "prep.",
+    "meaning": "ที่"
+  },
+  {
+    "word": "August",
+    "type": "noun",
+    "meaning": "สิงหาคม"
+  },
+  {
+    "word": "aunt",
+    "type": "noun",
+    "meaning": "ป้า"
+  },
+  {
+    "word": "autumn",
+    "type": "noun",
+    "meaning": "ฤดูใบไม้ร่วง"
+  },
+  {
+    "word": "away",
+    "type": "adv.",
+    "meaning": "ออกไป"
+  },
+  {
+    "word": "baby",
+    "type": "noun",
+    "meaning": "ทารก"
+  },
+  {
+    "word": "back",
+    "type": "noun/adv.",
+    "meaning": "กลับ"
+  },
+  {
+    "word": "bad",
+    "type": "adj.",
+    "meaning": "แย่"
+  },
+  {
+    "word": "bag",
+    "type": "noun",
+    "meaning": "กระเป๋า"
+  },
+  {
+    "word": "ball",
+    "type": "noun",
+    "meaning": "ลูกบอล"
+  },
+  {
+    "word": "banana",
+    "type": "noun",
+    "meaning": "กล้วย"
+  },
+  {
+    "word": "band",
+    "type": "noun",
+    "meaning": "วงดนตรี"
+  },
+  {
+    "word": "bank",
+    "type": "noun",
+    "meaning": "ธนาคาร"
+  },
+  {
+    "word": "bath",
+    "type": "noun",
+    "meaning": "อ่างอาบน้ำ"
+  },
+  {
+    "word": "bathroom",
+    "type": "noun",
+    "meaning": "ห้องน้ำ"
+  },
+  {
+    "word": "be",
+    "type": "verb",
+    "meaning": "เป็น"
+  },
+  {
+    "word": "beach",
+    "type": "noun",
+    "meaning": "ชายหาด"
+  },
+  {
+    "word": "beautiful",
+    "type": "adj.",
+    "meaning": "สวยงาม"
+  },
+  {
+    "word": "because",
+    "type": "conj.",
+    "meaning": "เพราะ"
+  },
+  {
+    "word": "become",
+    "type": "verb",
+    "meaning": "กลายเป็น"
+  },
+  {
+    "word": "bed",
+    "type": "noun",
+    "meaning": "เตียง"
+  },
+  {
+    "word": "bedroom",
+    "type": "noun",
+    "meaning": "ห้องนอน"
+  },
+  {
+    "word": "beer",
+    "type": "noun",
+    "meaning": "เบียร์"
+  },
+  {
+    "word": "before",
+    "type": "prep.",
+    "meaning": "ก่อน"
+  },
+  {
+    "word": "begin",
+    "type": "verb",
+    "meaning": "เริ่ม"
+  },
+  {
+    "word": "beginning",
+    "type": "noun",
+    "meaning": "จุดเริ่มต้น"
+  },
+  {
+    "word": "behind",
+    "type": "prep./adv.",
+    "meaning": "ด้านหลัง"
+  },
+  {
+    "word": "believe",
+    "type": "verb",
+    "meaning": "เชื่อ"
+  },
+  {
+    "word": "below",
+    "type": "adv./prep.",
+    "meaning": "ด้านล่าง"
+  },
+  {
+    "word": "best",
+    "type": "adj.",
+    "meaning": "ดีที่สุด"
+  },
+  {
+    "word": "better",
+    "type": "adj.",
+    "meaning": "ดีกว่า"
+  },
+  {
+    "word": "between",
+    "type": "prep.",
+    "meaning": "ระหว่าง"
+  },
+  {
+    "word": "bicycle",
+    "type": "noun",
+    "meaning": "จักรยาน"
+  },
+  {
+    "word": "big",
+    "type": "adj.",
+    "meaning": "ใหญ่"
+  },
+  {
+    "word": "bike",
+    "type": "noun",
+    "meaning": "จักรยาน"
+  },
+  {
+    "word": "bill",
+    "type": "noun",
+    "meaning": "ใบแจ้งหนี้"
+  },
+  {
+    "word": "bird",
+    "type": "noun",
+    "meaning": "นก"
+  },
+  {
+    "word": "birthday",
+    "type": "noun",
+    "meaning": "วันเกิด"
+  },
+  {
+    "word": "black",
+    "type": "adj./noun",
+    "meaning": "สีดำ"
+  },
+  {
+    "word": "blog",
+    "type": "noun",
+    "meaning": "บล็อก"
+  },
+  {
+    "word": "blonde",
+    "type": "adj.",
+    "meaning": "บลอนด์"
+  },
+  {
+    "word": "blue",
+    "type": "adj./noun",
+    "meaning": "สีน้ำเงิน"
+  },
+  {
+    "word": "boat",
+    "type": "noun",
+    "meaning": "เรือ"
+  },
+  {
+    "word": "body",
+    "type": "noun",
+    "meaning": "ร่างกาย"
+  },
+  {
+    "word": "book",
+    "type": "noun/verb",
+    "meaning": "หนังสือ"
+  },
+  {
+    "word": "boot",
+    "type": "noun",
+    "meaning": "บูท"
+  },
+  {
+    "word": "bored",
+    "type": "adj.",
+    "meaning": "เบื่อ"
+  },
+  {
+    "word": "boring",
+    "type": "adj.",
+    "meaning": "น่าเบื่อ"
+  },
+  {
+    "word": "born",
+    "type": "verb",
+    "meaning": "เกิด"
+  },
+  {
+    "word": "both",
+    "type": "det./pron.",
+    "meaning": "ทั้งสอง"
+  },
+  {
+    "word": "bottle",
+    "type": "noun",
+    "meaning": "ขวด"
+  },
+  {
+    "word": "box",
+    "type": "noun",
+    "meaning": "กล่อง"
+  },
+  {
+    "word": "boy",
+    "type": "noun",
+    "meaning": "เด็กชาย"
+  },
+  {
+    "word": "boyfriend",
+    "type": "noun",
+    "meaning": "แฟนหนุ่ม"
+  },
+  {
+    "word": "bread",
+    "type": "noun",
+    "meaning": "ขนมปัง"
+  },
+  {
+    "word": "break",
+    "type": "verb/noun",
+    "meaning": "หยุดพัก"
+  },
+  {
+    "word": "breakfast",
+    "type": "noun",
+    "meaning": "อาหารเช้า"
+  },
+  {
+    "word": "bring",
+    "type": "verb",
+    "meaning": "นำมา"
+  },
+  {
+    "word": "brother",
+    "type": "noun",
+    "meaning": "พี่ชาย/น้องชาย"
+  },
+  {
+    "word": "brown",
+    "type": "adj./noun",
+    "meaning": "สีน้ำตาล"
+  },
+  {
+    "word": "build",
+    "type": "verb",
+    "meaning": "สร้าง"
+  },
+  {
+    "word": "building",
+    "type": "noun",
+    "meaning": "อาคาร"
+  },
+  {
+    "word": "bus",
+    "type": "noun",
+    "meaning": "รถบัส"
+  },
+  {
+    "word": "business",
+    "type": "noun",
+    "meaning": "ธุรกิจ"
+  },
+  {
+    "word": "busy",
+    "type": "adj.",
+    "meaning": "ยุ่ง"
+  },
+  {
+    "word": "but",
+    "type": "conj.",
+    "meaning": "แต่"
+  },
+  {
+    "word": "butter",
+    "type": "noun",
+    "meaning": "เนย"
+  },
+  {
+    "word": "buy",
+    "type": "verb",
+    "meaning": "ซื้อ"
+  },
+  {
+    "word": "bye",
+    "type": "exclam.",
+    "meaning": "ลาก่อน"
+  },
+  {
+    "word": "cafe",
+    "type": "noun",
+    "meaning": "คาเฟ่"
+  },
+  {
+    "word": "cake",
+    "type": "noun",
+    "meaning": "เค้ก"
+  },
+  {
+    "word": "call",
+    "type": "verb/noun",
+    "meaning": "เรียก/โทร"
+  },
+  {
+    "word": "camera",
+    "type": "noun",
+    "meaning": "กล้อง"
+  },
+  {
+    "word": "capital",
+    "type": "noun/adj.",
+    "meaning": "เมืองหลวง"
+  },
+  {
+    "word": "car",
+    "type": "noun",
+    "meaning": "รถ"
+  },
+  {
+    "word": "card",
+    "type": "noun",
+    "meaning": "การ์ด"
+  },
+  {
+    "word": "career",
+    "type": "noun",
+    "meaning": "อาชีพ"
+  },
+  {
+    "word": "carrot",
+    "type": "noun",
+    "meaning": "แครอท"
+  },
+  {
+    "word": "carry",
+    "type": "verb",
+    "meaning": "พก"
+  },
+  {
+    "word": "cat",
+    "type": "noun",
+    "meaning": "แมว"
+  },
+  {
+    "word": "cent",
+    "type": "noun",
+    "meaning": "เซ็นต์"
+  },
+  {
+    "word": "centre",
+    "type": "noun",
+    "meaning": "ศูนย์กลาง"
+  },
+  {
+    "word": "century",
+    "type": "noun",
+    "meaning": "ศตวรรษ"
+  },
+  {
+    "word": "chair",
+    "type": "noun",
+    "meaning": "เก้าอี้"
+  },
+  {
+    "word": "change",
+    "type": "verb/noun",
+    "meaning": "เปลี่ยน"
+  },
+  {
+    "word": "chart",
+    "type": "noun",
+    "meaning": "แผนภูมิ"
+  },
+  {
+    "word": "cheap",
+    "type": "adj.",
+    "meaning": "ราคาถูก"
+  },
+  {
+    "word": "cheese",
+    "type": "noun",
+    "meaning": "ชีส"
+  },
+  {
+    "word": "chicken",
+    "type": "noun",
+    "meaning": "ไก่"
+  },
+  {
+    "word": "child",
+    "type": "noun",
+    "meaning": "เด็ก"
+  },
+  {
+    "word": "chocolate",
+    "type": "noun",
+    "meaning": "ช็อกโกแลต"
+  },
+  {
+    "word": "choose",
+    "type": "verb",
+    "meaning": "เลือก"
+  },
+  {
+    "word": "cinema",
+    "type": "noun",
+    "meaning": "โรงหนัง"
+  },
+  {
+    "word": "city",
+    "type": "noun",
+    "meaning": "เมือง"
+  },
+  {
+    "word": "class",
+    "type": "noun",
+    "meaning": "ชั้นเรียน"
+  },
+  {
+    "word": "classroom",
+    "type": "noun",
+    "meaning": "ห้องเรียน"
+  },
+  {
+    "word": "clean",
+    "type": "adj./verb",
+    "meaning": "สะอาด"
+  },
+  {
+    "word": "climb",
+    "type": "verb",
+    "meaning": "ปีน"
+  },
+  {
+    "word": "clock",
+    "type": "noun",
+    "meaning": "นาฬิกา"
+  },
+  {
+    "word": "close",
+    "type": "verb",
+    "meaning": "ปิด"
+  },
+  {
+    "word": "clothes",
+    "type": "noun",
+    "meaning": "เสื้อผ้า"
+  },
+  {
+    "word": "club",
+    "type": "noun",
+    "meaning": "สโมสร"
+  },
+  {
+    "word": "coat",
+    "type": "noun",
+    "meaning": "เสื้อโค้ท"
+  },
+  {
+    "word": "coffee",
+    "type": "noun",
+    "meaning": "กาแฟ"
+  },
+  {
+    "word": "cold",
+    "type": "adj./noun",
+    "meaning": "เย็น/หนาว"
+  },
+  {
+    "word": "college",
+    "type": "noun",
+    "meaning": "วิทยาลัย"
+  },
+  {
+    "word": "colour",
+    "type": "noun",
+    "meaning": "สี"
+  },
+  {
+    "word": "come",
+    "type": "verb",
+    "meaning": "มา"
+  },
+  {
+    "word": "common",
+    "type": "adj.",
+    "meaning": "ทั่วไป"
+  },
+  {
+    "word": "company",
+    "type": "noun",
+    "meaning": "บริษัท"
+  },
+  {
+    "word": "compare",
+    "type": "verb",
+    "meaning": "เปรียบเทียบ"
+  },
+  {
+    "word": "complete",
+    "type": "adj./verb",
+    "meaning": "สมบูรณ์"
+  },
+  {
+    "word": "computer",
+    "type": "noun",
+    "meaning": "คอมพิวเตอร์"
+  },
+  {
+    "word": "concert",
+    "type": "noun",
+    "meaning": "คอนเสิร์ต"
+  },
+  {
+    "word": "conversation",
+    "type": "noun",
+    "meaning": "การสนทนา"
+  },
+  {
+    "word": "cook",
+    "type": "verb/noun",
+    "meaning": "ทำอาหาร"
+  },
+  {
+    "word": "cooking",
+    "type": "noun",
+    "meaning": "การทำอาหาร"
+  },
+  {
+    "word": "cool",
+    "type": "adj.",
+    "meaning": "เย็น"
+  },
+  {
+    "word": "correct",
+    "type": "adj./verb",
+    "meaning": "ถูกต้อง"
+  },
+  {
+    "word": "cost",
+    "type": "noun/verb",
+    "meaning": "ราคา"
+  },
+  {
+    "word": "country",
+    "type": "noun",
+    "meaning": "ประเทศ"
+  },
+  {
+    "word": "course",
+    "type": "noun",
+    "meaning": "คอร์ส"
+  },
+  {
+    "word": "cousin",
+    "type": "noun",
+    "meaning": "ลูกพี่ลูกน้อง"
+  },
+  {
+    "word": "cow",
+    "type": "noun",
+    "meaning": "วัว"
+  },
+  {
+    "word": "cream",
+    "type": "noun",
+    "meaning": "ครีม"
+  },
+  {
+    "word": "create",
+    "type": "verb",
+    "meaning": "สร้าง"
+  },
+  {
+    "word": "culture",
+    "type": "noun",
+    "meaning": "วัฒนธรรม"
+  },
+  {
+    "word": "cup",
+    "type": "noun",
+    "meaning": "ถ้วย"
+  },
+  {
+    "word": "customer",
+    "type": "noun",
+    "meaning": "ลูกค้า"
+  },
+  {
+    "word": "cut",
+    "type": "verb",
+    "meaning": "ตัด"
+  },
+  {
+    "word": "dad",
+    "type": "noun",
+    "meaning": "พ่อ"
+  },
+  {
+    "word": "dance",
+    "type": "noun/verb",
+    "meaning": "เต้นรำ"
+  },
+  {
+    "word": "dancer",
+    "type": "noun",
+    "meaning": "นักเต้น"
+  },
+  {
+    "word": "dancing",
+    "type": "noun",
+    "meaning": "การเต้นรำ"
+  },
+  {
+    "word": "dangerous",
+    "type": "adj.",
+    "meaning": "อันตราย"
+  },
+  {
+    "word": "dark",
+    "type": "adj.",
+    "meaning": "มืด"
+  },
+  {
+    "word": "date",
+    "type": "noun",
+    "meaning": "วันที่"
+  },
+  {
+    "word": "daughter",
+    "type": "noun",
+    "meaning": "ลูกสาว"
+  },
+  {
+    "word": "day",
+    "type": "noun",
+    "meaning": "วัน"
+  },
+  {
+    "word": "dear",
+    "type": "adj.",
+    "meaning": "ที่รัก"
+  },
+  {
+    "word": "December",
+    "type": "noun",
+    "meaning": "ธันวาคม"
+  },
+  {
+    "word": "decide",
+    "type": "verb",
+    "meaning": "ตัดสินใจ"
+  },
+  {
+    "word": "delicious",
+    "type": "adj.",
+    "meaning": "อร่อย"
+  },
+  {
+    "word": "describe",
+    "type": "verb",
+    "meaning": "อธิบาย"
+  },
+  {
+    "word": "description",
+    "type": "noun",
+    "meaning": "คำอธิบาย"
+  },
+  {
+    "word": "design",
+    "type": "noun/verb",
+    "meaning": "ออกแบบ"
+  },
+  {
+    "word": "desk",
+    "type": "noun",
+    "meaning": "โต๊ะ"
+  },
+  {
+    "word": "detail",
+    "type": "noun",
+    "meaning": "รายละเอียด"
+  },
+  {
+    "word": "dialogue",
+    "type": "noun",
+    "meaning": "บทสนทนา"
+  },
+  {
+    "word": "dictionary",
+    "type": "noun",
+    "meaning": "พจนานุกรม"
+  },
+  {
+    "word": "die",
+    "type": "verb",
+    "meaning": "ตาย"
+  },
+  {
+    "word": "diet",
+    "type": "noun",
+    "meaning": "อาหาร/ควบคุมอาหาร"
+  },
+  {
+    "word": "difference",
+    "type": "noun",
+    "meaning": "ความแตกต่าง"
+  },
+  {
+    "word": "different",
+    "type": "adj.",
+    "meaning": "แตกต่าง"
+  },
+  {
+    "word": "difficult",
+    "type": "adj.",
+    "meaning": "ยาก"
+  },
+  {
+    "word": "dinner",
+    "type": "noun",
+    "meaning": "อาหารเย็น"
+  },
+  {
+    "word": "dirty",
+    "type": "adj.",
+    "meaning": "สกปรก"
+  },
+  {
+    "word": "discuss",
+    "type": "verb",
+    "meaning": "พูดคุย"
+  },
+  {
+    "word": "dish",
+    "type": "noun",
+    "meaning": "จาน"
+  },
+  {
+    "word": "do",
+    "type": "verb",
+    "meaning": "ทำ"
+  },
+  {
+    "word": "doctor",
+    "type": "noun",
+    "meaning": "หมอ"
+  },
+  {
+    "word": "dog",
+    "type": "noun",
+    "meaning": "สุนัข"
+  },
+  {
+    "word": "dollar",
+    "type": "noun",
+    "meaning": "ดอลลาร์"
+  },
+  {
+    "word": "door",
+    "type": "noun",
+    "meaning": "ประตู"
+  },
+  {
+    "word": "down",
+    "type": "adv./prep.",
+    "meaning": "ลง"
+  },
+  {
+    "word": "downstairs",
+    "type": "adv.",
+    "meaning": "ชั้นล่าง"
+  },
+  {
+    "word": "draw",
+    "type": "verb",
+    "meaning": "วาด"
+  },
+  {
+    "word": "dress",
+    "type": "noun/verb",
+    "meaning": "ชุดเดรส"
+  },
+  {
+    "word": "drink",
+    "type": "noun/verb",
+    "meaning": "ดื่ม"
+  },
+  {
+    "word": "drive",
+    "type": "verb",
+    "meaning": "ขับรถ"
+  },
+  {
+    "word": "driver",
+    "type": "noun",
+    "meaning": "คนขับรถ"
+  },
+  {
+    "word": "during",
+    "type": "prep.",
+    "meaning": "ในระหว่าง"
+  },
+  {
+    "word": "each",
+    "type": "det./pron.",
+    "meaning": "แต่ละ"
+  },
+  {
+    "word": "ear",
+    "type": "noun",
+    "meaning": "หู"
+  },
+  {
+    "word": "early",
+    "type": "adj./adv.",
+    "meaning": "แรก/เช้า"
+  },
+  {
+    "word": "east",
+    "type": "noun/adj./adv.",
+    "meaning": "ตะวันออก"
+  },
+  {
+    "word": "easy",
+    "type": "adj.",
+    "meaning": "ง่าย"
+  },
+  {
+    "word": "eat",
+    "type": "verb",
+    "meaning": "กิน"
+  },
+  {
+    "word": "egg",
+    "type": "noun",
+    "meaning": "ไข่"
+  },
+  {
+    "word": "eight",
+    "type": "number",
+    "meaning": "แปด"
+  },
+  {
+    "word": "eighteen",
+    "type": "number",
+    "meaning": "สิบแปด"
+  },
+  {
+    "word": "eighty",
+    "type": "number",
+    "meaning": "แปดสิบ"
+  },
+  {
+    "word": "elephant",
+    "type": "noun",
+    "meaning": "ช้าง"
+  },
+  {
+    "word": "eleven",
+    "type": "number",
+    "meaning": "สิบเอ็ด"
+  },
+  {
+    "word": "else",
+    "type": "adv.",
+    "meaning": "อื่น"
+  },
+  {
+    "word": "email",
+    "type": "noun/verb",
+    "meaning": "อีเมล"
+  },
+  {
+    "word": "end",
+    "type": "noun/verb",
+    "meaning": "จบ/สิ้นสุด"
+  },
+  {
+    "word": "enjoy",
+    "type": "verb",
+    "meaning": "สนุก"
+  },
+  {
+    "word": "enough",
+    "type": "det./pron./adv.",
+    "meaning": "เพียงพอ"
+  },
+  {
+    "word": "euro",
+    "type": "noun",
+    "meaning": "ยูโร"
+  },
+  {
+    "word": "front",
+    "type": "noun/adj.",
+    "meaning": "ด้านหน้า"
+  },
+  {
+    "word": "fruit",
+    "type": "noun",
+    "meaning": "ผลไม้"
+  },
+  {
+    "word": "full",
+    "type": "adj.",
+    "meaning": "เต็ม"
+  },
+  {
+    "word": "funny",
+    "type": "adj.",
+    "meaning": "ตลก"
+  },
+  {
+    "word": "game",
+    "type": "noun",
+    "meaning": "เกม"
+  },
+  {
+    "word": "garden",
+    "type": "noun",
+    "meaning": "สวน"
+  },
+  {
+    "word": "geography",
+    "type": "noun",
+    "meaning": "ภูมิศาสตร์"
+  },
+  {
+    "word": "get",
+    "type": "verb",
+    "meaning": "ได้รับ"
+  },
+  {
+    "word": "girl",
+    "type": "noun",
+    "meaning": "เด็กหญิง"
+  },
+  {
+    "word": "give",
+    "type": "verb",
+    "meaning": "ให้"
+  },
+  {
+    "word": "go",
+    "type": "verb",
+    "meaning": "ไป"
+  },
+  {
+    "word": "good",
+    "type": "adj.",
+    "meaning": "ดี"
+  },
+  {
+    "word": "goodbye",
+    "type": "exclam.",
+    "meaning": "ลาก่อน"
+  },
+  {
+    "word": "grammar",
+    "type": "noun",
+    "meaning": "ไวยากรณ์"
+  },
+  {
+    "word": "grandparent",
+    "type": "noun",
+    "meaning": "ปู่ย่าตายาย"
+  },
+  {
+    "word": "great",
+    "type": "adj.",
+    "meaning": "ยอดเยี่ยม"
+  },
+  {
+    "word": "green",
+    "type": "adj./noun",
+    "meaning": "สีเขียว"
+  },
+  {
+    "word": "grey",
+    "type": "adj./noun",
+    "meaning": "สีเทา"
+  },
+  {
+    "word": "group",
+    "type": "noun",
+    "meaning": "กลุ่ม"
+  },
+  {
+    "word": "grow",
+    "type": "verb",
+    "meaning": "เติบโต"
+  },
+  {
+    "word": "guess",
+    "type": "verb",
+    "meaning": "เดา"
+  },
+  {
+    "word": "half",
+    "type": "adv./noun",
+    "meaning": "ครึ่ง"
+  },
+  {
+    "word": "hamburger",
+    "type": "noun",
+    "meaning": "แฮมเบอร์เกอร์"
+  },
+  {
+    "word": "happy",
+    "type": "adj.",
+    "meaning": "มีความสุข"
+  },
+  {
+    "word": "hat",
+    "type": "noun",
+    "meaning": "หมวก"
+  },
+  {
+    "word": "have",
+    "type": "verb",
+    "meaning": "มี"
+  },
+  {
+    "word": "he",
+    "type": "pron.",
+    "meaning": "เขา"
+  },
+  {
+    "word": "head",
+    "type": "noun",
+    "meaning": "หัว"
+  },
+  {
+    "word": "health",
+    "type": "noun",
+    "meaning": "สุขภาพ"
+  },
+  {
+    "word": "hello",
+    "type": "exclam.",
+    "meaning": "สวัสดี"
+  },
+  {
+    "word": "help",
+    "type": "verb/noun",
+    "meaning": "ช่วย"
+  },
+  {
+    "word": "her",
+    "type": "det./pron.",
+    "meaning": "ของเธอ"
+  },
+  {
+    "word": "here",
+    "type": "adv.",
+    "meaning": "ที่นี่"
+  },
+  {
+    "word": "him",
+    "type": "pron.",
+    "meaning": "เขา (กรรม)"
+  },
+  {
+    "word": "his",
+    "type": "det./pron.",
+    "meaning": "ของเขา"
+  },
+  {
+    "word": "holiday",
+    "type": "noun",
+    "meaning": "วันหยุด"
+  },
+  {
+    "word": "home",
+    "type": "noun/adv.",
+    "meaning": "บ้าน"
+  },
+  {
+    "word": "homework",
+    "type": "noun",
+    "meaning": "การบ้าน"
+  },
+  {
+    "word": "hope",
+    "type": "verb/noun",
+    "meaning": "หวัง"
+  },
+  {
+    "word": "hospital",
+    "type": "noun",
+    "meaning": "โรงพยาบาล"
+  },
+  {
+    "word": "hot",
+    "type": "adj.",
+    "meaning": "ร้อน"
+  },
+  {
+    "word": "hour",
+    "type": "noun",
+    "meaning": "ชั่วโมง"
+  },
+  {
+    "word": "house",
+    "type": "noun",
+    "meaning": "บ้าน"
+  },
+  {
+    "word": "how",
+    "type": "adv.",
+    "meaning": "อย่างไร"
+  },
+  {
+    "word": "hundred",
+    "type": "number",
+    "meaning": "ร้อย"
+  },
+  {
+    "word": "hungry",
+    "type": "adj.",
+    "meaning": "หิว"
+  },
+  {
+    "word": "husband",
+    "type": "noun",
+    "meaning": "สามี"
+  },
+  {
+    "word": "I",
+    "type": "pron.",
+    "meaning": "ฉัน"
+  },
+  {
+    "word": "idea",
+    "type": "noun",
+    "meaning": "ความคิด"
+  },
+  {
+    "word": "if",
+    "type": "conj.",
+    "meaning": "ถ้า"
+  },
+  {
+    "word": "important",
+    "type": "adj.",
+    "meaning": "สำคัญ"
+  },
+  {
+    "word": "in",
+    "type": "prep.",
+    "meaning": "ใน"
+  },
+  {
+    "word": "information",
+    "type": "noun",
+    "meaning": "ข้อมูล"
+  },
+  {
+    "word": "inside",
+    "type": "prep./adv.",
+    "meaning": "ข้างใน"
+  },
+  {
+    "word": "interesting",
+    "type": "adj.",
+    "meaning": "น่าสนใจ"
+  },
+  {
+    "word": "internet",
+    "type": "noun",
+    "meaning": "อินเทอร์เน็ต"
+  },
+  {
+    "word": "into",
+    "type": "prep.",
+    "meaning": "เข้าไปใน"
+  },
+  {
+    "word": "it",
+    "type": "pron.",
+    "meaning": "มัน"
+  },
+  {
+    "word": "January",
+    "type": "noun",
+    "meaning": "มกราคม"
+  },
+  {
+    "word": "job",
+    "type": "noun",
+    "meaning": "งาน"
+  },
+  {
+    "word": "joke",
+    "type": "noun/verb",
+    "meaning": "ตลก"
+  },
+  {
+    "word": "journey",
+    "type": "noun",
+    "meaning": "การเดินทาง"
+  },
+  {
+    "word": "July",
+    "type": "noun",
+    "meaning": "กรกฎาคม"
+  },
+  {
+    "word": "June",
+    "type": "noun",
+    "meaning": "มิถุนายน"
+  },
+  {
+    "word": "just",
+    "type": "adv.",
+    "meaning": "แค่/เพิ่งแล้ว"
+  },
+  {
+    "word": "keep",
+    "type": "verb",
+    "meaning": "เก็บ"
+  },
+  {
+    "word": "key",
+    "type": "noun",
+    "meaning": "กุญแจ"
+  },
+  {
+    "word": "kid",
+    "type": "noun",
+    "meaning": "เด็ก"
+  },
+  {
+    "word": "kind",
+    "type": "adj./noun",
+    "meaning": "ใจดี/ชนิด"
+  },
+  {
+    "word": "know",
+    "type": "verb",
+    "meaning": "รู้"
+  },
+  {
+    "word": "lake",
+    "type": "noun",
+    "meaning": "ทะเลสาบ"
+  },
+  {
+    "word": "language",
+    "type": "noun",
+    "meaning": "ภาษา"
+  },
+  {
+    "word": "large",
+    "type": "adj.",
+    "meaning": "ใหญ่"
+  },
+  {
+    "word": "last",
+    "type": "adj./adv.",
+    "meaning": "ล่าสุด/สุดท้าย"
+  },
+  {
+    "word": "late",
+    "type": "adj./adv.",
+    "meaning": "ช้า/ดึก"
+  },
+  {
+    "word": "later",
+    "type": "adv.",
+    "meaning": "ภายหลัง"
+  },
+  {
+    "word": "laugh",
+    "type": "verb/noun",
+    "meaning": "หัวเราะ"
+  },
+  {
+    "word": "leave",
+    "type": "verb",
+    "meaning": "ออกจาก"
+  },
+  {
+    "word": "left",
+    "type": "adj./adv.",
+    "meaning": "ซ้าย"
+  },
+  {
+    "word": "lesson",
+    "type": "noun",
+    "meaning": "บทเรียน"
+  },
+  {
+    "word": "let",
+    "type": "verb",
+    "meaning": "ให้/ยอม"
+  },
+  {
+    "word": "library",
+    "type": "noun",
+    "meaning": "ห้องสมุด"
+  },
+  {
+    "word": "like",
+    "type": "verb/prep.",
+    "meaning": "ชอบ/เหมือน"
+  },
+  {
+    "word": "list",
+    "type": "noun/verb",
+    "meaning": "รายการ"
+  },
+  {
+    "word": "listen",
+    "type": "verb",
+    "meaning": "ฟัง"
+  },
+  {
+    "word": "little",
+    "type": "adj./adv.",
+    "meaning": "เล็กน้อย"
+  },
+  {
+    "word": "live",
+    "type": "verb",
+    "meaning": "อาศัย"
+  },
+  {
+    "word": "long",
+    "type": "adj./adv.",
+    "meaning": "ยาว/นาน"
+  },
+  {
+    "word": "look",
+    "type": "verb",
+    "meaning": "ดู"
+  },
+  {
+    "word": "loud",
+    "type": "adj./adv.",
+    "meaning": "เสียงดัง"
+  },
+  {
+    "word": "love",
+    "type": "verb/noun",
+    "meaning": "รัก"
+  },
+  {
+    "word": "lunch",
+    "type": "noun",
+    "meaning": "อาหารกลางวัน"
+  },
+  {
+    "word": "make",
+    "type": "verb",
+    "meaning": "ทำ"
+  },
+  {
+    "word": "male",
+    "type": "adj./noun",
+    "meaning": "เพศชาย"
+  },
+  {
+    "word": "man",
+    "type": "noun",
+    "meaning": "ผู้ชาย"
+  },
+  {
+    "word": "map",
+    "type": "noun",
+    "meaning": "แผนที่"
+  },
+  {
+    "word": "March",
+    "type": "noun",
+    "meaning": "มีนาคม"
+  },
+  {
+    "word": "market",
+    "type": "noun",
+    "meaning": "ตลาด"
+  },
+  {
+    "word": "married",
+    "type": "adj.",
+    "meaning": "แต่งงานแล้ว"
+  },
+  {
+    "word": "May",
+    "type": "noun",
+    "meaning": "พฤษภาคม"
+  },
+  {
+    "word": "me",
+    "type": "pron.",
+    "meaning": "ฉัน (กรรม)"
+  },
+  {
+    "word": "meal",
+    "type": "noun",
+    "meaning": "มื้ออาหาร"
+  },
+  {
+    "word": "meet",
+    "type": "verb",
+    "meaning": "พบ"
+  },
+  {
+    "word": "meeting",
+    "type": "noun",
+    "meaning": "การประชุม"
+  },
+  {
+    "word": "menu",
+    "type": "noun",
+    "meaning": "เมนู"
+  },
+  {
+    "word": "message",
+    "type": "noun",
+    "meaning": "ข้อความ"
+  },
+  {
+    "word": "milk",
+    "type": "noun",
+    "meaning": "นม"
+  },
+  {
+    "word": "million",
+    "type": "number",
+    "meaning": "ล้าน"
+  },
+  {
+    "word": "minute",
+    "type": "noun",
+    "meaning": "นาที"
+  },
+  {
+    "word": "miss",
+    "type": "verb",
+    "meaning": "คิดถึง"
+  },
+  {
+    "word": "Monday",
+    "type": "noun",
+    "meaning": "วันจันทร์"
+  },
+  {
+    "word": "month",
+    "type": "noun",
+    "meaning": "เดือน"
+  },
+  {
+    "word": "morning",
+    "type": "noun",
+    "meaning": "ตอนเช้า"
+  },
+  {
+    "word": "mother",
+    "type": "noun",
+    "meaning": "แม่"
+  },
+  {
+    "word": "much",
+    "type": "det./pron./adv.",
+    "meaning": "มาก"
+  },
+  {
+    "word": "mum",
+    "type": "noun",
+    "meaning": "แม่"
+  },
+  {
+    "word": "museum",
+    "type": "noun",
+    "meaning": "พิพิธภัณฑ์"
+  },
+  {
+    "word": "music",
+    "type": "noun",
+    "meaning": "ดนตรี"
+  },
+  {
+    "word": "my",
+    "type": "det.",
+    "meaning": "ของฉัน"
+  },
+  {
+    "word": "name",
+    "type": "noun/verb",
+    "meaning": "ชื่อ"
+  },
+  {
+    "word": "natural",
+    "type": "adj.",
+    "meaning": "เป็นธรรมชาติ"
+  },
+  {
+    "word": "near",
+    "type": "prep./adj./adv.",
+    "meaning": "ใกล้"
+  },
+  {
+    "word": "need",
+    "type": "verb",
+    "meaning": "ต้องการ"
+  },
+  {
+    "word": "negative",
+    "type": "adj.",
+    "meaning": "เชิงลบ"
+  },
+  {
+    "word": "neighbour",
+    "type": "noun",
+    "meaning": "เพื่อนบ้าน"
+  },
+  {
+    "word": "never",
+    "type": "adv.",
+    "meaning": "ไม่เคย"
+  },
+  {
+    "word": "new",
+    "type": "adj.",
+    "meaning": "ใหม่"
+  },
+  {
+    "word": "news",
+    "type": "noun",
+    "meaning": "ข่าว"
+  },
+  {
+    "word": "newspaper",
+    "type": "noun",
+    "meaning": "หนังสือพิมพ์"
+  },
+  {
+    "word": "next",
+    "type": "adj./adv.",
+    "meaning": "ต่อไป"
+  },
+  {
+    "word": "nice",
+    "type": "adj.",
+    "meaning": "ดี/น่ารัก"
+  },
+  {
+    "word": "night",
+    "type": "noun",
+    "meaning": "กลางคืน"
+  },
+  {
+    "word": "nine",
+    "type": "number",
+    "meaning": "เก้า"
+  },
+  {
+    "word": "nineteen",
+    "type": "number",
+    "meaning": "สิบเก้า"
+  },
+  {
+    "word": "ninety",
+    "type": "number",
+    "meaning": "เก้าสิบ"
+  },
+  {
+    "word": "no",
+    "type": "exclam./det.",
+    "meaning": "ไม่"
+  },
+  {
+    "word": "nobody",
+    "type": "pron.",
+    "meaning": "ไม่มีใคร"
+  },
+  {
+    "word": "north",
+    "type": "noun/adj./adv.",
+    "meaning": "เหนือ"
+  },
+  {
+    "word": "nose",
+    "type": "noun",
+    "meaning": "จมูก"
+  },
+  {
+    "word": "not",
+    "type": "adv.",
+    "meaning": "ไม่"
+  },
+  {
+    "word": "note",
+    "type": "noun",
+    "meaning": "บันทึก"
+  },
+  {
+    "word": "nothing",
+    "type": "pron.",
+    "meaning": "ไม่มีอะไร"
+  },
+  {
+    "word": "November",
+    "type": "noun",
+    "meaning": "พฤศจิกายน"
+  },
+  {
+    "word": "now",
+    "type": "adv.",
+    "meaning": "ตอนนี้"
+  },
+  {
+    "word": "number",
+    "type": "noun",
+    "meaning": "หมายเลข"
+  },
+  {
+    "word": "nurse",
+    "type": "noun",
+    "meaning": "พยาบาล"
+  },
+  {
+    "word": "object",
+    "type": "noun",
+    "meaning": "สิ่งของ"
+  },
+  {
+    "word": "October",
+    "type": "noun",
+    "meaning": "ตุลาคม"
+  },
+  {
+    "word": "of",
+    "type": "prep.",
+    "meaning": "ของ"
+  },
+  {
+    "word": "off",
+    "type": "adv./prep.",
+    "meaning": "ปิด/ออก"
+  },
+  {
+    "word": "office",
+    "type": "noun",
+    "meaning": "ที่ทำงาน"
+  },
+  {
+    "word": "often",
+    "type": "adv.",
+    "meaning": "บ่อยครั้ง"
+  },
+  {
+    "word": "oh",
+    "type": "exclam.",
+    "meaning": "โอ้"
+  },
+  {
+    "word": "OK",
+    "type": "exclam./adj./adv.",
+    "meaning": "ตกลง"
+  },
+  {
+    "word": "old",
+    "type": "adj.",
+    "meaning": "เก่า/แก่"
+  },
+  {
+    "word": "on",
+    "type": "prep./adv.",
+    "meaning": "บน"
+  },
+  {
+    "word": "once",
+    "type": "adv.",
+    "meaning": "ครั้งหนึ่ง"
+  },
+  {
+    "word": "one",
+    "type": "number/pron./det.",
+    "meaning": "หนึ่ง"
+  },
+  {
+    "word": "onion",
+    "type": "noun",
+    "meaning": "หัวหอม"
+  },
+  {
+    "word": "online",
+    "type": "adj./adv.",
+    "meaning": "ออนไลน์"
+  },
+  {
+    "word": "only",
+    "type": "adj./adv.",
+    "meaning": "เท่านั้น"
+  },
+  {
+    "word": "open",
+    "type": "adj./verb",
+    "meaning": "เปิด"
+  },
+  {
+    "word": "opinion",
+    "type": "noun",
+    "meaning": "ความคิดเห็น"
+  },
+  {
+    "word": "opposite",
+    "type": "adj./noun/prep.",
+    "meaning": "ตรงข้าม"
+  },
+  {
+    "word": "or",
+    "type": "conj.",
+    "meaning": "หรือ"
+  },
+  {
+    "word": "orange",
+    "type": "noun/adj.",
+    "meaning": "ส้ม"
+  },
+  {
+    "word": "order",
+    "type": "noun/verb",
+    "meaning": "สั่ง"
+  },
+  {
+    "word": "other",
+    "type": "adj./pron.",
+    "meaning": "อื่น"
+  },
+  {
+    "word": "our",
+    "type": "det.",
+    "meaning": "ของเรา"
+  },
+  {
+    "word": "out",
+    "type": "adv./prep.",
+    "meaning": "ออก"
+  },
+  {
+    "word": "outside",
+    "type": "adv.",
+    "meaning": "ข้างนอก"
+  },
+  {
+    "word": "over",
+    "type": "prep./adv.",
+    "meaning": "เกิน/ข้าม"
+  },
+  {
+    "word": "own",
+    "type": "adj./pron.",
+    "meaning": "เป็นเจ้าของ"
+  },
+  {
+    "word": "page",
+    "type": "noun",
+    "meaning": "หน้าหนังสือ"
+  },
+  {
+    "word": "paint",
+    "type": "verb/noun",
+    "meaning": "ทาสี"
+  },
+  {
+    "word": "painting",
+    "type": "noun",
+    "meaning": "จิตรกรรม"
+  },
+  {
+    "word": "pair",
+    "type": "noun",
+    "meaning": "คู่"
+  },
+  {
+    "word": "paper",
+    "type": "noun",
+    "meaning": "กระดาษ"
+  },
+  {
+    "word": "paragraph",
+    "type": "noun",
+    "meaning": "ย่อหน้า"
+  },
+  {
+    "word": "parent",
+    "type": "noun",
+    "meaning": "พ่อแม่"
+  },
+  {
+    "word": "park",
+    "type": "noun/verb",
+    "meaning": "สวน"
+  },
+  {
+    "word": "part",
+    "type": "noun",
+    "meaning": "ส่วนหนึ่ง"
+  },
+  {
+    "word": "partner",
+    "type": "noun",
+    "meaning": "หุ้นส่วน"
+  },
+  {
+    "word": "party",
+    "type": "noun",
+    "meaning": "งานเลี้ยง"
+  },
+  {
+    "word": "passport",
+    "type": "noun",
+    "meaning": "หนังสือเดินทาง"
+  },
+  {
+    "word": "past",
+    "type": "adj./noun/prep.",
+    "meaning": "อดีต"
+  },
+  {
+    "word": "pay",
+    "type": "verb",
+    "meaning": "จ่าย"
+  },
+  {
+    "word": "pen",
+    "type": "noun",
+    "meaning": "ปากกา"
+  },
+  {
+    "word": "pencil",
+    "type": "noun",
+    "meaning": "ดินสอ"
+  },
+  {
+    "word": "people",
+    "type": "noun",
+    "meaning": "ประชากร"
+  },
+  {
+    "word": "pepper",
+    "type": "noun",
+    "meaning": "พริกไทย"
+  },
+  {
+    "word": "perfect",
+    "type": "adj.",
+    "meaning": "สมบูรณ์แบบ"
+  },
+  {
+    "word": "period",
+    "type": "noun",
+    "meaning": "ระยะเวลา"
+  },
+  {
+    "word": "person",
+    "type": "noun",
+    "meaning": "บุคคล"
+  },
+  {
+    "word": "personal",
+    "type": "adj.",
+    "meaning": "ส่วนตัว"
+  },
+  {
+    "word": "phone",
+    "type": "noun/verb",
+    "meaning": "โทรศัพท์"
+  },
+  {
+    "word": "photo",
+    "type": "noun",
+    "meaning": "ภาพถ่าย"
+  },
+  {
+    "word": "photograph",
+    "type": "noun",
+    "meaning": "ภาพถ่าย"
+  },
+  {
+    "word": "phrase",
+    "type": "noun",
+    "meaning": "วลี"
+  },
+  {
+    "word": "piano",
+    "type": "noun",
+    "meaning": "เปียโน"
+  },
+  {
+    "word": "picture",
+    "type": "noun",
+    "meaning": "ภาพ"
+  },
+  {
+    "word": "piece",
+    "type": "noun",
+    "meaning": "ชิ้น"
+  },
+  {
+    "word": "pig",
+    "type": "noun",
+    "meaning": "หมู"
+  },
+  {
+    "word": "pink",
+    "type": "adj./noun",
+    "meaning": "สีชมพู"
+  },
+  {
+    "word": "Saturday",
+    "type": "noun",
+    "meaning": "วันเสาร์"
+  },
+  {
+    "word": "say",
+    "type": "verb",
+    "meaning": "พูด"
+  },
+  {
+    "word": "school",
+    "type": "noun",
+    "meaning": "โรงเรียน"
+  },
+  {
+    "word": "science",
+    "type": "noun",
+    "meaning": "วิทยาศาสตร์"
+  },
+  {
+    "word": "scientist",
+    "type": "noun",
+    "meaning": "นักวิทยาศาสตร์"
+  },
+  {
+    "word": "sea",
+    "type": "noun",
+    "meaning": "ทะเล"
+  },
+  {
+    "word": "second",
+    "type": "det./noun",
+    "meaning": "ที่สอง"
+  },
+  {
+    "word": "section",
+    "type": "noun",
+    "meaning": "ส่วน"
+  },
+  {
+    "word": "see",
+    "type": "verb",
+    "meaning": "เห็น"
+  },
+  {
+    "word": "sell",
+    "type": "verb",
+    "meaning": "ขาย"
+  },
+  {
+    "word": "send",
+    "type": "verb",
+    "meaning": "ส่ง"
+  },
+  {
+    "word": "sentence",
+    "type": "noun",
+    "meaning": "ประโยค"
+  },
+  {
+    "word": "September",
+    "type": "noun",
+    "meaning": "กันยายน"
+  },
+  {
+    "word": "seven",
+    "type": "number",
+    "meaning": "เจ็ด"
+  },
+  {
+    "word": "seventeen",
+    "type": "number",
+    "meaning": "สิบเจ็ด"
+  },
+  {
+    "word": "seventy",
+    "type": "number",
+    "meaning": "เจ็ดสิบ"
+  },
+  {
+    "word": "share",
+    "type": "verb",
+    "meaning": "แบ่งปัน"
+  },
+  {
+    "word": "she",
+    "type": "pron.",
+    "meaning": "เธอ"
+  },
+  {
+    "word": "sheep",
+    "type": "noun",
+    "meaning": "แกะ"
+  },
+  {
+    "word": "shirt",
+    "type": "noun",
+    "meaning": "เสื้อ"
+  },
+  {
+    "word": "shoe",
+    "type": "noun",
+    "meaning": "รองเท้า"
+  },
+  {
+    "word": "shop",
+    "type": "noun/verb",
+    "meaning": "ร้านค้า"
+  },
+  {
+    "word": "shopping",
+    "type": "noun",
+    "meaning": "การช้อปปิ้ง"
+  },
+  {
+    "word": "short",
+    "type": "adj.",
+    "meaning": "สั้น"
+  },
+  {
+    "word": "show",
+    "type": "verb/noun",
+    "meaning": "แสดง"
+  },
+  {
+    "word": "shower",
+    "type": "noun",
+    "meaning": "อาบน้ำฝักบัว"
+  },
+  {
+    "word": "sick",
+    "type": "adj.",
+    "meaning": "ป่วย"
+  },
+  {
+    "word": "similar",
+    "type": "adj.",
+    "meaning": "คล้ายกัน"
+  },
+  {
+    "word": "sing",
+    "type": "verb",
+    "meaning": "ร้องเพลง"
+  },
+  {
+    "word": "singer",
+    "type": "noun",
+    "meaning": "นักร้อง"
+  },
+  {
+    "word": "sister",
+    "type": "noun",
+    "meaning": "น้องสาว/พี่สาว"
+  },
+  {
+    "word": "sit",
+    "type": "verb",
+    "meaning": "นั่ง"
+  },
+  {
+    "word": "situation",
+    "type": "noun",
+    "meaning": "สถานการณ์"
+  },
+  {
+    "word": "six",
+    "type": "number",
+    "meaning": "หก"
+  },
+  {
+    "word": "sixteen",
+    "type": "number",
+    "meaning": "สิบหก"
+  },
+  {
+    "word": "sixty",
+    "type": "number",
+    "meaning": "หกสิบ"
+  },
+  {
+    "word": "skill",
+    "type": "noun",
+    "meaning": "ทักษะ"
+  },
+  {
+    "word": "skirt",
+    "type": "noun",
+    "meaning": "กระโปรง"
+  },
+  {
+    "word": "sleep",
+    "type": "verb",
+    "meaning": "นอน"
+  },
+  {
+    "word": "slow",
+    "type": "adj.",
+    "meaning": "ช้า"
+  },
+  {
+    "word": "small",
+    "type": "adj.",
+    "meaning": "เล็ก"
+  },
+  {
+    "word": "snake",
+    "type": "noun",
+    "meaning": "งู"
+  },
+  {
+    "word": "snow",
+    "type": "noun/verb",
+    "meaning": "หิมะ"
+  },
+  {
+    "word": "so",
+    "type": "adv./conj.",
+    "meaning": "ดังนั้น"
+  },
+  {
+    "word": "some",
+    "type": "det./pron.",
+    "meaning": "บาง"
+  },
+  {
+    "word": "somebody",
+    "type": "pron.",
+    "meaning": "ใครบางคน"
+  },
+  {
+    "word": "someone",
+    "type": "pron.",
+    "meaning": "บางคน"
+  },
+  {
+    "word": "something",
+    "type": "pron.",
+    "meaning": "บางสิ่ง"
+  },
+  {
+    "word": "sometimes",
+    "type": "adv.",
+    "meaning": "บางครั้ง"
+  },
+  {
+    "word": "son",
+    "type": "noun",
+    "meaning": "ลูกชาย"
+  },
+  {
+    "word": "song",
+    "type": "noun",
+    "meaning": "เพลง"
+  },
+  {
+    "word": "soon",
+    "type": "adv.",
+    "meaning": "เร็วๆ นี้"
+  },
+  {
+    "word": "sorry",
+    "type": "adj./exclam.",
+    "meaning": "ขอโทษ"
+  },
+  {
+    "word": "sound",
+    "type": "noun/verb",
+    "meaning": "เสียง"
+  },
+  {
+    "word": "soup",
+    "type": "noun",
+    "meaning": "ซุป"
+  },
+  {
+    "word": "south",
+    "type": "noun/adj./adv.",
+    "meaning": "ใต้"
+  },
+  {
+    "word": "space",
+    "type": "noun",
+    "meaning": "อวกาศ/ช่องว่าง"
+  },
+  {
+    "word": "speak",
+    "type": "verb",
+    "meaning": "พูด"
+  },
+  {
+    "word": "special",
+    "type": "adj.",
+    "meaning": "พิเศษ"
+  },
+  {
+    "word": "spell",
+    "type": "verb",
+    "meaning": "สะกด"
+  },
+  {
+    "word": "spelling",
+    "type": "noun",
+    "meaning": "การสะกด"
+  },
+  {
+    "word": "spend",
+    "type": "verb",
+    "meaning": "ใช้เงิน"
+  },
+  {
+    "word": "sport",
+    "type": "noun",
+    "meaning": "กีฬา"
+  },
+  {
+    "word": "spring",
+    "type": "noun",
+    "meaning": "ฤดูใบไม้ผลิ"
+  },
+  {
+    "word": "stand",
+    "type": "verb",
+    "meaning": "ยืน"
+  },
+  {
+    "word": "star",
+    "type": "noun",
+    "meaning": "ดาว"
+  },
+  {
+    "word": "start",
+    "type": "verb",
+    "meaning": "เริ่ม"
+  },
+  {
+    "word": "statement",
+    "type": "noun",
+    "meaning": "คำแถลง"
+  },
+  {
+    "word": "station",
+    "type": "noun",
+    "meaning": "สถานี"
+  },
+  {
+    "word": "stay",
+    "type": "verb",
+    "meaning": "อยู่"
+  },
+  {
+    "word": "still",
+    "type": "adv.",
+    "meaning": "ยัง"
+  },
+  {
+    "word": "stop",
+    "type": "verb/noun",
+    "meaning": "หยุด"
+  },
+  {
+    "word": "story",
+    "type": "noun",
+    "meaning": "เรื่องราว"
+  },
+  {
+    "word": "street",
+    "type": "noun",
+    "meaning": "ถนน"
+  },
+  {
+    "word": "strong",
+    "type": "adj.",
+    "meaning": "แข็งแกร่ง"
+  },
+  {
+    "word": "student",
+    "type": "noun",
+    "meaning": "นักเรียน"
+  },
+  {
+    "word": "study",
+    "type": "noun/verb",
+    "meaning": "เรียน"
+  },
+  {
+    "word": "style",
+    "type": "noun",
+    "meaning": "สไตล์"
+  },
+  {
+    "word": "subject",
+    "type": "noun",
+    "meaning": "เรื่อง/วิชา"
+  },
+  {
+    "word": "success",
+    "type": "noun",
+    "meaning": "ความสำเร็จ"
+  },
+  {
+    "word": "sugar",
+    "type": "noun",
+    "meaning": "น้ำตาล"
+  },
+  {
+    "word": "summer",
+    "type": "noun",
+    "meaning": "ฤดูร้อน"
+  },
+  {
+    "word": "sun",
+    "type": "noun",
+    "meaning": "ดวงอาทิตย์"
+  },
+  {
+    "word": "Sunday",
+    "type": "noun",
+    "meaning": "วันอาทิตย์"
+  },
+  {
+    "word": "supermarket",
+    "type": "noun",
+    "meaning": "ซูเปอร์มาร์เก็ต"
+  },
+  {
+    "word": "sure",
+    "type": "adj.",
+    "meaning": "แน่ใจ"
+  },
+  {
+    "word": "sweater",
+    "type": "noun",
+    "meaning": "เสื้อกันหนาว"
+  },
+  {
+    "word": "swim",
+    "type": "verb",
+    "meaning": "ว่ายน้ำ"
+  },
+  {
+    "word": "swimming",
+    "type": "noun",
+    "meaning": "การว่ายน้ำ"
+  },
+  {
+    "word": "table",
+    "type": "noun",
+    "meaning": "โต๊ะ"
+  },
+  {
+    "word": "take",
+    "type": "verb",
+    "meaning": "เอา/ใช้"
+  },
+  {
+    "word": "talk",
+    "type": "verb",
+    "meaning": "พูดคุย"
+  },
+  {
+    "word": "tall",
+    "type": "adj.",
+    "meaning": "สูง"
+  },
+  {
+    "word": "taxi",
+    "type": "noun",
+    "meaning": "แท็กซี่"
+  },
+  {
+    "word": "tea",
+    "type": "noun",
+    "meaning": "ชา"
+  },
+  {
+    "word": "teach",
+    "type": "verb",
+    "meaning": "สอน"
+  },
+  {
+    "word": "teacher",
+    "type": "noun",
+    "meaning": "ครู"
+  },
+  {
+    "word": "team",
+    "type": "noun",
+    "meaning": "ทีม"
+  },
+  {
+    "word": "teenager",
+    "type": "noun",
+    "meaning": "วัยรุ่น"
+  },
+  {
+    "word": "telephone",
+    "type": "noun/verb",
+    "meaning": "โทรศัพท์"
+  },
+  {
+    "word": "television",
+    "type": "noun",
+    "meaning": "โทรทัศน์"
+  },
+  {
+    "word": "tell",
+    "type": "verb",
+    "meaning": "บอก"
+  },
+  {
+    "word": "ten",
+    "type": "number",
+    "meaning": "สิบ"
+  },
+  {
+    "word": "tennis",
+    "type": "noun",
+    "meaning": "เทนนิส"
+  },
+  {
+    "word": "terrible",
+    "type": "adj.",
+    "meaning": "แย่มาก"
+  },
+  {
+    "word": "test",
+    "type": "noun/verb",
+    "meaning": "ทดสอบ"
+  },
+  {
+    "word": "text",
+    "type": "noun",
+    "meaning": "ข้อความ"
+  },
+  {
+    "word": "than",
+    "type": "conj.",
+    "meaning": "กว่า"
+  },
+  {
+    "word": "thank",
+    "type": "verb",
+    "meaning": "ขอบคุณ"
+  },
+  {
+    "word": "thanks",
+    "type": "exclam.",
+    "meaning": "ขอบคุณ"
+  },
+  {
+    "word": "that",
+    "type": "det./pron./conj.",
+    "meaning": "นั้น"
+  },
+  {
+    "word": "the",
+    "type": "det.",
+    "meaning": "(คำนำหน้านาม)"
+  },
+  {
+    "word": "theatre",
+    "type": "noun",
+    "meaning": "โรงภาพยนตร์"
+  },
+  {
+    "word": "their",
+    "type": "det.",
+    "meaning": "ของพวกเขา"
+  },
+  {
+    "word": "them",
+    "type": "pron.",
+    "meaning": "พวกเขา"
+  },
+  {
+    "word": "then",
+    "type": "adv.",
+    "meaning": "แล้ว"
+  },
+  {
+    "word": "there",
+    "type": "adv.",
+    "meaning": "ที่นั่น"
+  },
+  {
+    "word": "they",
+    "type": "pron.",
+    "meaning": "พวกเขา"
+  },
+  {
+    "word": "thing",
+    "type": "noun",
+    "meaning": "สิ่ง"
+  },
+  {
+    "word": "think",
+    "type": "verb",
+    "meaning": "คิด"
+  },
+  {
+    "word": "third",
+    "type": "number",
+    "meaning": "ที่สาม"
+  },
+  {
+    "word": "thirsty",
+    "type": "adj.",
+    "meaning": "กระหายน้ำ"
+  },
+  {
+    "word": "thirteen",
+    "type": "number",
+    "meaning": "สิบสาม"
+  },
+  {
+    "word": "thirty",
+    "type": "number",
+    "meaning": "สามสิบ"
+  },
+  {
+    "word": "this",
+    "type": "det./pron.",
+    "meaning": "นี้"
+  },
+  {
+    "word": "thousand",
+    "type": "number",
+    "meaning": "พัน"
+  },
+  {
+    "word": "three",
+    "type": "number",
+    "meaning": "สาม"
+  },
+  {
+    "word": "through",
+    "type": "prep./adv.",
+    "meaning": "ผ่าน"
+  },
+  {
+    "word": "Thursday",
+    "type": "noun",
+    "meaning": "วันพฤหัสบดี"
+  },
+  {
+    "word": "ticket",
+    "type": "noun",
+    "meaning": "ตั๋ว"
+  },
+  {
+    "word": "time",
+    "type": "noun",
+    "meaning": "เวลา"
+  },
+  {
+    "word": "tired",
+    "type": "adj.",
+    "meaning": "เหนื่อย"
+  },
+  {
+    "word": "title",
+    "type": "noun",
+    "meaning": "ชื่อ/ตำแหน่ง"
+  },
+  {
+    "word": "to",
+    "type": "prep.",
+    "meaning": "ถึง"
+  },
+  {
+    "word": "today",
+    "type": "adv./noun",
+    "meaning": "วันนี้"
+  },
+  {
+    "word": "together",
+    "type": "adv.",
+    "meaning": "ด้วยกัน"
+  },
+  {
+    "word": "toilet",
+    "type": "noun",
+    "meaning": "ห้องน้ำ"
+  },
+  {
+    "word": "tomato",
+    "type": "noun",
+    "meaning": "มะเขือเทศ"
+  },
+  {
+    "word": "tomorrow",
+    "type": "adv./noun",
+    "meaning": "พรุ่งนี้"
+  },
+  {
+    "word": "tonight",
+    "type": "adv./noun",
+    "meaning": "คืนนี้"
+  },
+  {
+    "word": "too",
+    "type": "adv.",
+    "meaning": "ด้วย"
+  },
+  {
+    "word": "tooth",
+    "type": "noun",
+    "meaning": "ฟัน"
+  },
+  {
+    "word": "topic",
+    "type": "noun",
+    "meaning": "หัวข้อ"
+  },
+  {
+    "word": "tourist",
+    "type": "noun",
+    "meaning": "นักท่องเที่ยว"
+  },
+  {
+    "word": "town",
+    "type": "noun",
+    "meaning": "เมือง"
+  },
+  {
+    "word": "traffic",
+    "type": "noun",
+    "meaning": "การจราจร"
+  },
+  {
+    "word": "train",
+    "type": "noun",
+    "meaning": "รถไฟ"
+  },
+  {
+    "word": "travel",
+    "type": "verb/noun",
+    "meaning": "การท่องเที่ยว"
+  },
+  {
+    "word": "tree",
+    "type": "noun",
+    "meaning": "ต้นไม้"
+  },
+  {
+    "word": "trip",
+    "type": "noun",
+    "meaning": "การเดินทาง"
+  },
+  {
+    "word": "trousers",
+    "type": "noun",
+    "meaning": "กางเกงขายาว"
+  },
+  {
+    "word": "true",
+    "type": "adj.",
+    "meaning": "จริง"
+  },
+  {
+    "word": "try",
+    "type": "verb",
+    "meaning": "พยายาม"
+  },
+  {
+    "word": "T-shirt",
+    "type": "noun",
+    "meaning": "เสื้อยืด"
+  },
+  {
+    "word": "Tuesday",
+    "type": "noun",
+    "meaning": "วันอังคาร"
+  },
+  {
+    "word": "turn",
+    "type": "verb/noun",
+    "meaning": "เปลี่ยน/หมุน"
+  },
+  {
+    "word": "TV",
+    "type": "noun",
+    "meaning": "โทรทัศน์"
+  },
+  {
+    "word": "twelve",
+    "type": "number",
+    "meaning": "สิบสอง"
+  },
+  {
+    "word": "twenty",
+    "type": "number",
+    "meaning": "ยี่สิบ"
+  },
+  {
+    "word": "twice",
+    "type": "adv.",
+    "meaning": "สองครั้ง"
+  },
+  {
+    "word": "two",
+    "type": "number",
+    "meaning": "สอง"
+  },
+  {
+    "word": "type",
+    "type": "noun",
+    "meaning": "ประเภท"
+  },
+  {
+    "word": "umbrella",
+    "type": "noun",
+    "meaning": "ร่ม"
+  },
+  {
+    "word": "uncle",
+    "type": "noun",
+    "meaning": "ลุง"
+  },
+  {
+    "word": "under",
+    "type": "prep./adv.",
+    "meaning": "ภายใต้"
+  },
+  {
+    "word": "understand",
+    "type": "verb",
+    "meaning": "เข้าใจ"
+  },
+  {
+    "word": "university",
+    "type": "noun",
+    "meaning": "มหาวิทยาลัย"
+  },
+  {
+    "word": "until",
+    "type": "conj./prep.",
+    "meaning": "จนกระทั่ง"
+  },
+  {
+    "word": "up",
+    "type": "adv./prep.",
+    "meaning": "ขึ้น"
+  },
+  {
+    "word": "upstairs",
+    "type": "adv.",
+    "meaning": "ชั้นบน"
+  },
+  {
+    "word": "us",
+    "type": "pron.",
+    "meaning": "เรา"
+  },
+  {
+    "word": "use",
+    "type": "verb",
+    "meaning": "ใช้"
+  },
+  {
+    "word": "useful",
+    "type": "adj.",
+    "meaning": "มีประโยชน์"
+  },
+  {
+    "word": "usually",
+    "type": "adv.",
+    "meaning": "โดยปกติ"
+  },
+  {
+    "word": "vacation",
+    "type": "noun",
+    "meaning": "วันหยุด"
+  },
+  {
+    "word": "vegetable",
+    "type": "noun",
+    "meaning": "ผัก"
+  },
+  {
+    "word": "very",
+    "type": "adv.",
+    "meaning": "มาก"
+  },
+  {
+    "word": "video",
+    "type": "noun",
+    "meaning": "วิดีโอ"
+  },
+  {
+    "word": "village",
+    "type": "noun",
+    "meaning": "หมู่บ้าน"
+  },
+  {
+    "word": "visit",
+    "type": "verb/noun",
+    "meaning": "เยี่ยม"
+  },
+  {
+    "word": "visitor",
+    "type": "noun",
+    "meaning": "ผู้เยี่ยมชม"
+  },
+  {
+    "word": "wait",
+    "type": "verb",
+    "meaning": "รอ"
+  },
+  {
+    "word": "waiter",
+    "type": "noun",
+    "meaning": "บริกร"
+  },
+  {
+    "word": "wake",
+    "type": "verb",
+    "meaning": "ตื่น"
+  },
+  {
+    "word": "walk",
+    "type": "verb/noun",
+    "meaning": "เดิน"
+  },
+  {
+    "word": "wall",
+    "type": "noun",
+    "meaning": "กำแพง"
+  },
+  {
+    "word": "want",
+    "type": "verb",
+    "meaning": "ต้องการ"
+  },
+  {
+    "word": "warm",
+    "type": "adj.",
+    "meaning": "อบอุ่น"
+  },
+  {
+    "word": "wash",
+    "type": "verb",
+    "meaning": "ล้าง"
+  },
+  {
+    "word": "watch",
+    "type": "verb/noun",
+    "meaning": "ดู/นาฬิกา"
+  },
+  {
+    "word": "water",
+    "type": "noun",
+    "meaning": "น้ำ"
+  },
+  {
+    "word": "way",
+    "type": "noun",
+    "meaning": "ทาง"
+  },
+  {
+    "word": "we",
+    "type": "pron.",
+    "meaning": "เรา"
+  },
+  {
+    "word": "wear",
+    "type": "verb",
+    "meaning": "สวมใส่"
+  },
+  {
+    "word": "weather",
+    "type": "noun",
+    "meaning": "สภาพอากาศ"
+  },
+  {
+    "word": "website",
+    "type": "noun",
+    "meaning": "เว็บไซต์"
+  },
+  {
+    "word": "Wednesday",
+    "type": "noun",
+    "meaning": "วันพุธ"
+  },
+  {
+    "word": "week",
+    "type": "noun",
+    "meaning": "สัปดาห์"
+  },
+  {
+    "word": "weekend",
+    "type": "noun",
+    "meaning": "วันหยุดสุดสัปดาห์"
+  },
+  {
+    "word": "welcome",
+    "type": "exclam./verb",
+    "meaning": "ยินดีต้อนรับ"
+  },
+  {
+    "word": "well",
+    "type": "adv./adj.",
+    "meaning": "ดี"
+  },
+  {
+    "word": "west",
+    "type": "noun/adj./adv.",
+    "meaning": "ตะวันตก"
+  },
+  {
+    "word": "what",
+    "type": "pron./det.",
+    "meaning": "อะไร"
+  },
+  {
+    "word": "when",
+    "type": "adv./conj.",
+    "meaning": "เมื่อไร"
+  },
+  {
+    "word": "where",
+    "type": "adv./conj.",
+    "meaning": "ที่ไหน"
+  },
+  {
+    "word": "which",
+    "type": "pron./det.",
+    "meaning": "ซึ่ง"
+  },
+  {
+    "word": "white",
+    "type": "adj./noun",
+    "meaning": "สีขาว"
+  },
+  {
+    "word": "who",
+    "type": "pron.",
+    "meaning": "ใคร"
+  },
+  {
+    "word": "why",
+    "type": "adv.",
+    "meaning": "ทำไม"
+  },
+  {
+    "word": "wife",
+    "type": "noun",
+    "meaning": "ภรรยา"
+  },
+  {
+    "word": "win",
+    "type": "verb",
+    "meaning": "ชนะ"
+  },
+  {
+    "word": "window",
+    "type": "noun",
+    "meaning": "หน้าต่าง"
+  },
+  {
+    "word": "wine",
+    "type": "noun",
+    "meaning": "ไวน์"
+  },
+  {
+    "word": "winter",
+    "type": "noun",
+    "meaning": "ฤดูหนาว"
+  },
+  {
+    "word": "with",
+    "type": "prep.",
+    "meaning": "กับ"
+  },
+  {
+    "word": "without",
+    "type": "prep.",
+    "meaning": "ปราศจาก"
+  },
+  {
+    "word": "woman",
+    "type": "noun",
+    "meaning": "ผู้หญิง"
+  },
+  {
+    "word": "wonderful",
+    "type": "adj.",
+    "meaning": "มหัศจรรย์"
+  },
+  {
+    "word": "word",
+    "type": "noun",
+    "meaning": "คำ"
+  },
+  {
+    "word": "work",
+    "type": "verb/noun",
+    "meaning": "งาน"
+  },
+  {
+    "word": "worker",
+    "type": "noun",
+    "meaning": "คนงาน"
+  },
+  {
+    "word": "world",
+    "type": "noun",
+    "meaning": "โลก"
+  },
+  {
+    "word": "write",
+    "type": "verb",
+    "meaning": "เขียน"
+  },
+  {
+    "word": "writer",
+    "type": "noun",
+    "meaning": "นักเขียน"
+  },
+  {
+    "word": "writing",
+    "type": "noun",
+    "meaning": "การเขียน"
+  },
+  {
+    "word": "wrong",
+    "type": "adj.",
+    "meaning": "ผิด"
+  },
+  {
+    "word": "yeah",
+    "type": "exclam.",
+    "meaning": "ใช่"
+  },
+  {
+    "word": "year",
+    "type": "noun",
+    "meaning": "ปี"
+  },
+  {
+    "word": "yellow",
+    "type": "adj./noun",
+    "meaning": "สีเหลือง"
+  },
+  {
+    "word": "yes",
+    "type": "exclam.",
+    "meaning": "ใช่"
+  },
+  {
+    "word": "yesterday",
+    "type": "adv./noun",
+    "meaning": "เมื่อวาน"
+  },
+  {
+    "word": "you",
+    "type": "pron.",
+    "meaning": "คุณ"
+  },
+  {
+    "word": "young",
+    "type": "adj.",
+    "meaning": "หนุ่มสาว"
+  },
+  {
+    "word": "your",
+    "type": "det.",
+    "meaning": "ของคุณ"
+  },
+  {
+    "word": "yourself",
+    "type": "pron.",
+    "meaning": "ตัวคุณเอง"
+  },
+  {
+    "word": "ability",
+    "type": "noun",
+    "meaning": "ความสามารถ"
+  },
+  {
+    "word": "able",
+    "type": "adj.",
+    "meaning": "สามารถ"
+  },
+  {
+    "word": "abroad",
+    "type": "adv.",
+    "meaning": "ต่างประเทศ"
+  },
+  {
+    "word": "accept",
+    "type": "verb",
+    "meaning": "ยอมรับ"
+  },
+  {
+    "word": "accident",
+    "type": "noun",
+    "meaning": "อุบัติเหตุ"
+  },
+  {
+    "word": "achieve",
+    "type": "verb",
+    "meaning": "บรรลุ"
+  },
+  {
+    "word": "act",
+    "type": "verb",
+    "meaning": "กระทำ"
+  },
+  {
+    "word": "active",
+    "type": "adj.",
+    "meaning": "คล่องแคล่ว"
+  },
+  {
+    "word": "actually",
+    "type": "adv.",
+    "meaning": "จริงๆ"
+  },
+  {
+    "word": "advantage",
+    "type": "noun",
+    "meaning": "ข้อได้เปรียบ"
+  },
+  {
+    "word": "adventure",
+    "type": "noun",
+    "meaning": "การผจญภัย"
+  },
+  {
+    "word": "advertise",
+    "type": "verb",
+    "meaning": "โฆษณา"
+  },
+  {
+    "word": "advertisement",
+    "type": "noun",
+    "meaning": "โฆษณา"
+  },
+  {
+    "word": "advertising",
+    "type": "noun",
+    "meaning": "การโฆษณา"
+  },
+  {
+    "word": "affect",
+    "type": "verb",
+    "meaning": "ส่งผลกระทบ"
+  },
+  {
+    "word": "against",
+    "type": "prep.",
+    "meaning": "ต่อต้าน"
+  },
+  {
+    "word": "airline",
+    "type": "noun",
+    "meaning": "สายการบิน"
+  },
+  {
+    "word": "alive",
+    "type": "adj.",
+    "meaning": "มีชีวิตอยู่"
+  },
+  {
+    "word": "all right",
+    "type": "adj./adv./exclam.",
+    "meaning": "เอาละ"
+  },
+  {
+    "word": "allow",
+    "type": "verb",
+    "meaning": "อนุญาต"
+  },
+  {
+    "word": "almost",
+    "type": "adv.",
+    "meaning": "เกือบ"
+  },
+  {
+    "word": "alone",
+    "type": "adj./adv.",
+    "meaning": "ตามลำพัง"
+  },
+  {
+    "word": "along",
+    "type": "prep./adv.",
+    "meaning": "ตาม"
+  },
+  {
+    "word": "alternative",
+    "type": "noun",
+    "meaning": "ทางเลือก"
+  },
+  {
+    "word": "among",
+    "type": "prep.",
+    "meaning": "ท่ามกลาง"
+  },
+  {
+    "word": "ankle",
+    "type": "noun",
+    "meaning": "ข้อเท้า"
+  },
+  {
+    "word": "anybody",
+    "type": "pron.",
+    "meaning": "ใครก็ได้"
+  },
+  {
+    "word": "anymore",
+    "type": "adv.",
+    "meaning": "อีกต่อไป"
+  },
+  {
+    "word": "anyway",
+    "type": "adv.",
+    "meaning": "อย่างไรก็ตาม"
+  },
+  {
+    "word": "anywhere",
+    "type": "adv./pron.",
+    "meaning": "ที่ไหนก็ได้"
+  },
+  {
+    "word": "app",
+    "type": "noun",
+    "meaning": "แอป"
+  },
+  {
+    "word": "appear",
+    "type": "verb",
+    "meaning": "ปรากฏ"
+  },
+  {
+    "word": "appearance",
+    "type": "noun",
+    "meaning": "รูปลักษณ์"
+  },
+  {
+    "word": "architect",
+    "type": "noun",
+    "meaning": "สถาปนิก"
+  },
+  {
+    "word": "architecture",
+    "type": "noun",
+    "meaning": "สถาปัตยกรรม"
+  },
+  {
+    "word": "argument",
+    "type": "noun",
+    "meaning": "การโต้เถียง"
+  },
+  {
+    "word": "army",
+    "type": "noun",
+    "meaning": "กองทัพบก"
+  },
+  {
+    "word": "arrange",
+    "type": "verb",
+    "meaning": "จัดเตรียม"
+  },
+  {
+    "word": "arrangement",
+    "type": "noun",
+    "meaning": "การจัดเตรียม"
+  },
+  {
+    "word": "asleep",
+    "type": "adj.",
+    "meaning": "นอนหลับ"
+  },
+  {
+    "word": "assistant",
+    "type": "noun",
+    "meaning": "ผู้ช่วย"
+  },
+  {
+    "word": "athlete",
+    "type": "noun",
+    "meaning": "นักกีฬา"
+  },
+  {
+    "word": "attack",
+    "type": "noun/verb",
+    "meaning": "โจมตี"
+  },
+  {
+    "word": "attractive",
+    "type": "adj.",
+    "meaning": "น่าดึงดูด"
+  },
+  {
+    "word": "author",
+    "type": "noun",
+    "meaning": "ผู้เขียน"
+  },
+  {
+    "word": "available",
+    "type": "adj.",
+    "meaning": "พร้อมใช้งาน"
+  },
+  {
+    "word": "average",
+    "type": "adj./noun",
+    "meaning": "เฉลี่ย"
+  },
+  {
+    "word": "award",
+    "type": "noun",
+    "meaning": "รางวัล"
+  },
+  {
+    "word": "background",
+    "type": "noun",
+    "meaning": "พื้นหลัง"
+  },
+  {
+    "word": "badly",
+    "type": "adv.",
+    "meaning": "อย่างไม่ดี"
+  },
+  {
+    "word": "bar",
+    "type": "noun",
+    "meaning": "บาร์"
+  },
+  {
+    "word": "baseball",
+    "type": "noun",
+    "meaning": "เบสบอล"
+  },
+  {
+    "word": "based",
+    "type": "adj.",
+    "meaning": "อิงตาม"
+  },
+  {
+    "word": "basketball",
+    "type": "noun",
+    "meaning": "บาสเกตบอล"
+  },
+  {
+    "word": "bean",
+    "type": "noun",
+    "meaning": "ถั่ว"
+  },
+  {
+    "word": "bear",
+    "type": "noun",
+    "meaning": "หมี"
+  },
+  {
+    "word": "beat",
+    "type": "verb",
+    "meaning": "เอาชนะ"
+  },
+  {
+    "word": "beef",
+    "type": "noun",
+    "meaning": "เนื้อวัว"
+  },
+  {
+    "word": "behaviour",
+    "type": "noun",
+    "meaning": "พฤติกรรม"
+  },
+  {
+    "word": "belt",
+    "type": "noun",
+    "meaning": "เข็มขัด"
+  },
+  {
+    "word": "billion",
+    "type": "number",
+    "meaning": "พันล้าน"
+  },
+  {
+    "word": "bin",
+    "type": "noun",
+    "meaning": "ถังขยะ"
+  },
+  {
+    "word": "biology",
+    "type": "noun",
+    "meaning": "ชีววิทยา"
+  },
+  {
+    "word": "birth",
+    "type": "noun",
+    "meaning": "การเกิด"
+  },
+  {
+    "word": "biscuit",
+    "type": "noun",
+    "meaning": "บิสกิต"
+  },
+  {
+    "word": "bit",
+    "type": "noun",
+    "meaning": "นิดหน่อย"
+  },
+  {
+    "word": "blank",
+    "type": "adj./noun",
+    "meaning": "ว่างเปล่า"
+  },
+  {
+    "word": "blood",
+    "type": "noun",
+    "meaning": "เลือด"
+  },
+  {
+    "word": "blow",
+    "type": "verb",
+    "meaning": "เป่า"
+  },
+  {
+    "word": "board",
+    "type": "noun",
+    "meaning": "กระดาน"
+  },
+  {
+    "word": "boil",
+    "type": "verb",
+    "meaning": "ต้ม"
+  },
+  {
+    "word": "bone",
+    "type": "noun",
+    "meaning": "กระดูก"
+  },
+  {
+    "word": "boss",
+    "type": "noun",
+    "meaning": "เจ้านาย"
+  },
+  {
+    "word": "bowl",
+    "type": "noun",
+    "meaning": "ชาม"
+  },
+  {
+    "word": "brain",
+    "type": "noun",
+    "meaning": "สมอง"
+  },
+  {
+    "word": "bridge",
+    "type": "noun",
+    "meaning": "สะพาน"
+  },
+  {
+    "word": "brilliant",
+    "type": "adj.",
+    "meaning": "ฉลาดหลักแหลม"
+  },
+  {
+    "word": "broken",
+    "type": "adj.",
+    "meaning": "แตกหัก"
+  },
+  {
+    "word": "brush",
+    "type": "verb/noun",
+    "meaning": "แปรง"
+  },
+  {
+    "word": "burn",
+    "type": "verb",
+    "meaning": "เผา"
+  },
+  {
+    "word": "businessman",
+    "type": "noun",
+    "meaning": "นักธุรกิจ"
+  },
+  {
+    "word": "button",
+    "type": "noun",
+    "meaning": "ปุ่ม"
+  },
+  {
+    "word": "camp",
+    "type": "noun/verb",
+    "meaning": "ค่าย"
+  },
+  {
+    "word": "camping",
+    "type": "noun",
+    "meaning": "การตั้งแคมป์"
+  },
+  {
+    "word": "care",
+    "type": "noun/verb",
+    "meaning": "การดูแล"
+  },
+  {
+    "word": "carefully",
+    "type": "adv.",
+    "meaning": "อย่างระมัดระวัง"
+  },
+  {
+    "word": "carpet",
+    "type": "noun",
+    "meaning": "พรม"
+  },
+  {
+    "word": "cartoon",
+    "type": "noun",
+    "meaning": "การ์ตูน"
+  },
+  {
+    "word": "case",
+    "type": "noun",
+    "meaning": "กรณี"
+  },
+  {
+    "word": "cash",
+    "type": "noun",
+    "meaning": "เงินสด"
+  },
+  {
+    "word": "castle",
+    "type": "noun",
+    "meaning": "ปราสาท"
+  },
+  {
+    "word": "catch",
+    "type": "verb",
+    "meaning": "จับ"
+  },
+  {
+    "word": "celebrate",
+    "type": "verb",
+    "meaning": "ฉลอง"
+  },
+  {
+    "word": "celebrity",
+    "type": "noun",
+    "meaning": "คนดัง"
+  },
+  {
+    "word": "certainly",
+    "type": "adv.",
+    "meaning": "แน่นอน"
+  },
+  {
+    "word": "charity",
+    "type": "noun",
+    "meaning": "การกุศล"
+  },
+  {
+    "word": "chat",
+    "type": "verb/noun",
+    "meaning": "แชท"
+  },
+  {
+    "word": "chef",
+    "type": "noun",
+    "meaning": "พ่อครัว"
+  },
+  {
+    "word": "chemistry",
+    "type": "noun",
+    "meaning": "เคมี"
+  },
+  {
+    "word": "chip",
+    "type": "noun",
+    "meaning": "มันฝรั่งทอด"
+  },
+  {
+    "word": "church",
+    "type": "noun",
+    "meaning": "คริสต์จักร"
+  },
+  {
+    "word": "cigarette",
+    "type": "noun",
+    "meaning": "บุหรี่"
+  },
+  {
+    "word": "circle",
+    "type": "noun/verb",
+    "meaning": "วงกลม"
+  },
+  {
+    "word": "classical",
+    "type": "adj.",
+    "meaning": "คลาสสิค"
+  },
+  {
+    "word": "clearly",
+    "type": "adv.",
+    "meaning": "อย่างชัดเจน"
+  },
+  {
+    "word": "climate",
+    "type": "noun",
+    "meaning": "สภาพภูมิอากาศ"
+  },
+  {
+    "word": "closed",
+    "type": "adj.",
+    "meaning": "ปิดอยู่"
+  },
+  {
+    "word": "clothing",
+    "type": "noun",
+    "meaning": "เสื้อผ้า"
+  },
+  {
+    "word": "cloud",
+    "type": "noun",
+    "meaning": "เมฆ"
+  },
+  {
+    "word": "coach",
+    "type": "noun",
+    "meaning": "โค้ช"
+  },
+  {
+    "word": "coast",
+    "type": "noun",
+    "meaning": "ชายฝั่ง"
+  },
+  {
+    "word": "code",
+    "type": "noun",
+    "meaning": "รหัส"
+  },
+  {
+    "word": "colleague",
+    "type": "noun",
+    "meaning": "เพื่อนร่วมงาน"
+  },
+  {
+    "word": "column",
+    "type": "noun",
+    "meaning": "คอลัมน์"
+  },
+  {
+    "word": "comedy",
+    "type": "noun",
+    "meaning": "ตลก"
+  },
+  {
+    "word": "comment",
+    "type": "noun",
+    "meaning": "ความคิดเห็น"
+  },
+  {
+    "word": "communicate",
+    "type": "verb",
+    "meaning": "สื่อสาร"
+  },
+  {
+    "word": "community",
+    "type": "noun",
+    "meaning": "ชุมชน"
+  },
+  {
+    "word": "compete",
+    "type": "verb",
+    "meaning": "แข่งขัน"
+  },
+  {
+    "word": "competition",
+    "type": "noun",
+    "meaning": "การแข่งขัน"
+  },
+  {
+    "word": "complain",
+    "type": "verb",
+    "meaning": "บ่น"
+  },
+  {
+    "word": "completely",
+    "type": "adv.",
+    "meaning": "อย่างสมบูรณ์"
+  },
+  {
+    "word": "condition",
+    "type": "noun",
+    "meaning": "เงื่อนไข"
+  },
+  {
+    "word": "conference",
+    "type": "noun",
+    "meaning": "การประชุม"
+  },
+  {
+    "word": "connected",
+    "type": "adj.",
+    "meaning": "เชื่อมต่อแล้ว"
+  },
+  {
+    "word": "contain",
+    "type": "verb",
+    "meaning": "บรรจุ"
+  },
+  {
+    "word": "context",
+    "type": "noun",
+    "meaning": "บริบท"
+  },
+  {
+    "word": "continent",
+    "type": "noun",
+    "meaning": "ทวีป"
+  },
+  {
+    "word": "cooker",
+    "type": "noun",
+    "meaning": "หม้อหุงข้าว"
+  },
+  {
+    "word": "copy",
+    "type": "noun/verb",
+    "meaning": "สำเนา"
+  },
+  {
+    "word": "corner",
+    "type": "noun",
+    "meaning": "มุม"
+  },
+  {
+    "word": "correctly",
+    "type": "adv.",
+    "meaning": "อย่างถูกต้อง"
+  },
+  {
+    "word": "count",
+    "type": "verb",
+    "meaning": "นับ"
+  },
+  {
+    "word": "couple",
+    "type": "noun",
+    "meaning": "คู่"
+  },
+  {
+    "word": "cover",
+    "type": "verb",
+    "meaning": "ปกคลุม"
+  },
+  {
+    "word": "crazy",
+    "type": "adj.",
+    "meaning": "บ้าคลั่ง"
+  },
+  {
+    "word": "creative",
+    "type": "adj.",
+    "meaning": "สร้างสรรค์"
+  },
+  {
+    "word": "credit",
+    "type": "noun",
+    "meaning": "เครดิต"
+  },
+  {
+    "word": "crime",
+    "type": "noun",
+    "meaning": "อาชญากรรม"
+  },
+  {
+    "word": "criminal",
+    "type": "noun",
+    "meaning": "อาชญากร"
+  },
+  {
+    "word": "cross",
+    "type": "verb/noun",
+    "meaning": "ข้าม"
+  },
+  {
+    "word": "crowd",
+    "type": "noun",
+    "meaning": "ฝูงชน"
+  },
+  {
+    "word": "crowded",
+    "type": "adj.",
+    "meaning": "แออัด"
+  },
+  {
+    "word": "cry",
+    "type": "verb",
+    "meaning": "ร้องไห้"
+  },
+  {
+    "word": "cupboard",
+    "type": "noun",
+    "meaning": "ตู้"
+  },
+  {
+    "word": "curly",
+    "type": "adj.",
+    "meaning": "หยักงอ"
+  },
+  {
+    "word": "cycle",
+    "type": "noun/verb",
+    "meaning": "วงจร"
+  },
+  {
+    "word": "dead",
+    "type": "adj.",
+    "meaning": "ตาย"
+  },
+  {
+    "word": "death",
+    "type": "noun",
+    "meaning": "ความตาย"
+  },
+  {
+    "word": "decision",
+    "type": "noun",
+    "meaning": "การตัดสินใจ"
+  },
+  {
+    "word": "deep",
+    "type": "adj.",
+    "meaning": "ลึก"
+  },
+  {
+    "word": "definitely",
+    "type": "adv.",
+    "meaning": "อย่างแน่นอน"
+  },
+  {
+    "word": "degree",
+    "type": "noun",
+    "meaning": "ระดับ"
+  },
+  {
+    "word": "dentist",
+    "type": "noun",
+    "meaning": "ทันตแพทย์"
+  },
+  {
+    "word": "department",
+    "type": "noun",
+    "meaning": "แผนก"
+  },
+  {
+    "word": "desert",
+    "type": "noun",
+    "meaning": "ทะเลทราย"
+  },
+  {
+    "word": "designer",
+    "type": "noun",
+    "meaning": "นักออกแบบ"
+  },
+  {
+    "word": "destroy",
+    "type": "verb",
+    "meaning": "ทำลาย"
+  },
+  {
+    "word": "detective",
+    "type": "noun",
+    "meaning": "นักสืบ"
+  },
+  {
+    "word": "device",
+    "type": "noun",
+    "meaning": "อุปกรณ์"
+  },
+  {
+    "word": "diary",
+    "type": "noun",
+    "meaning": "ไดอารี่"
+  },
+  {
+    "word": "differently",
+    "type": "adv.",
+    "meaning": "แตกต่างกัน"
+  },
+  {
+    "word": "digital",
+    "type": "adj.",
+    "meaning": "ดิจิทัล"
+  },
+  {
+    "word": "direct",
+    "type": "adj.",
+    "meaning": "โดยตรง"
+  },
+  {
+    "word": "director",
+    "type": "noun",
+    "meaning": "ผู้อำนวยการ"
+  },
+  {
+    "word": "disagree",
+    "type": "verb",
+    "meaning": "ไม่เห็นด้วย"
+  },
+  {
+    "word": "disappear",
+    "type": "verb",
+    "meaning": "หายไป"
+  },
+  {
+    "word": "disaster",
+    "type": "noun",
+    "meaning": "ภัยพิบัติ"
+  },
+  {
+    "word": "discovery",
+    "type": "noun",
+    "meaning": "การค้นพบ"
+  },
+  {
+    "word": "discussion",
+    "type": "noun",
+    "meaning": "การอภิปราย"
+  },
+  {
+    "word": "disease",
+    "type": "noun",
+    "meaning": "โรค"
+  },
+  {
+    "word": "divorced",
+    "type": "adj.",
+    "meaning": "หย่าร้าง"
+  },
+  {
+    "word": "document",
+    "type": "noun",
+    "meaning": "เอกสาร"
+  },
+  {
+    "word": "double",
+    "type": "adj./det.",
+    "meaning": "สองเท่า"
+  },
+  {
+    "word": "download",
+    "type": "verb/noun",
+    "meaning": "ดาวน์โหลด"
+  },
+  {
+    "word": "drama",
+    "type": "noun",
+    "meaning": "ละคร"
+  },
+  {
+    "word": "drawing",
+    "type": "noun",
+    "meaning": "การวาดภาพ"
+  },
+  {
+    "word": "driving",
+    "type": "noun",
+    "meaning": "การขับรถ"
+  },
+  {
+    "word": "drop",
+    "type": "verb",
+    "meaning": "หยด"
+  },
+  {
+    "word": "drug",
+    "type": "noun",
+    "meaning": "ยา"
+  },
+  {
+    "word": "dry",
+    "type": "adj./verb",
+    "meaning": "แห้ง"
+  },
+  {
+    "word": "easily",
+    "type": "adv.",
+    "meaning": "อย่างง่ายดาย"
+  },
+  {
+    "word": "education",
+    "type": "noun",
+    "meaning": "การศึกษา"
+  },
+  {
+    "word": "either",
+    "type": "det./pron./adv.",
+    "meaning": "ทั้งสอง"
+  },
+  {
+    "word": "electric",
+    "type": "adj.",
+    "meaning": "ไฟฟ้า"
+  },
+  {
+    "word": "electrical",
+    "type": "adj.",
+    "meaning": "เกี่ยวกับไฟฟ้า"
+  },
+  {
+    "word": "electricity",
+    "type": "noun",
+    "meaning": "ไฟฟ้า"
+  },
+  {
+    "word": "electronic",
+    "type": "adj.",
+    "meaning": "อิเล็กทรอนิกส์"
+  },
+  {
+    "word": "employ",
+    "type": "verb",
+    "meaning": "จ้าง"
+  },
+  {
+    "word": "employee",
+    "type": "noun",
+    "meaning": "พนักงาน"
+  },
+  {
+    "word": "employer",
+    "type": "noun",
+    "meaning": "นายจ้าง"
+  },
+  {
+    "word": "ending",
+    "type": "noun",
+    "meaning": "ตอนจบ"
+  },
+  {
+    "word": "engine",
+    "type": "noun",
+    "meaning": "เครื่องยนต์"
+  },
+  {
+    "word": "engineer",
+    "type": "noun",
+    "meaning": "วิศวกร"
+  },
+  {
+    "word": "enormous",
+    "type": "adj.",
+    "meaning": "มหาศาล"
+  },
+  {
+    "word": "equipment",
+    "type": "noun",
+    "meaning": "อุปกรณ์"
+  },
+  {
+    "word": "error",
+    "type": "noun",
+    "meaning": "ความผิดพลาด"
+  },
+  {
+    "word": "essay",
+    "type": "noun",
+    "meaning": "เรียงความ"
+  },
+  {
+    "word": "everyday",
+    "type": "adj.",
+    "meaning": "ทุกวัน"
+  },
+  {
+    "word": "everywhere",
+    "type": "adv.",
+    "meaning": "ทุกที่"
+  },
+  {
+    "word": "exactly",
+    "type": "adv.",
+    "meaning": "อย่างแน่นอน"
+  },
+  {
+    "word": "except",
+    "type": "prep.",
+    "meaning": "ยกเว้น"
+  },
+  {
+    "word": "exist",
+    "type": "verb",
+    "meaning": "มีอยู่"
+  },
+  {
+    "word": "expert",
+    "type": "noun/adj.",
+    "meaning": "ผู้เชี่ยวชาญ"
+  },
+  {
+    "word": "explanation",
+    "type": "noun",
+    "meaning": "คำอธิบาย"
+  },
+  {
+    "word": "expression",
+    "type": "noun",
+    "meaning": "การแสดงออก"
+  },
+  {
+    "word": "extremely",
+    "type": "adv.",
+    "meaning": "อย่างสุดโต่ง"
+  },
+  {
+    "word": "factory",
+    "type": "noun",
+    "meaning": "โรงงาน"
+  },
+  {
+    "word": "fall",
+    "type": "verb/noun",
+    "meaning": "ตก"
+  },
+  {
+    "word": "fan",
+    "type": "noun",
+    "meaning": "พัดลม"
+  },
+  {
+    "word": "farm",
+    "type": "noun/verb",
+    "meaning": "ฟาร์ม"
+  },
+  {
+    "word": "farming",
+    "type": "noun",
+    "meaning": "เกษตรกรรม"
+  },
+  {
+    "word": "fashion",
+    "type": "noun",
+    "meaning": "แฟชั่น"
+  },
+  {
+    "word": "fat",
+    "type": "noun/adj.",
+    "meaning": "ไขมัน"
+  },
+  {
+    "word": "feed",
+    "type": "verb",
+    "meaning": "ให้อาหาร"
+  },
+  {
+    "word": "female",
+    "type": "adj./noun",
+    "meaning": "เพศหญิง"
+  },
+  {
+    "word": "fiction",
+    "type": "noun",
+    "meaning": "นิยาย"
+  },
+  {
+    "word": "field",
+    "type": "noun",
+    "meaning": "สนาม"
+  },
+  {
+    "word": "figure",
+    "type": "noun",
+    "meaning": "รูป"
+  },
+  {
+    "word": "film",
+    "type": "verb/noun",
+    "meaning": "ภาพยนตร์"
+  },
+  {
+    "word": "final",
+    "type": "adj./noun",
+    "meaning": "รอบสุดท้าย"
+  },
+  {
+    "word": "finally",
+    "type": "adv.",
+    "meaning": "ในที่สุด"
+  },
+  {
+    "word": "finger",
+    "type": "noun",
+    "meaning": "นิ้ว"
+  },
+  {
+    "word": "finish",
+    "type": "verb/noun",
+    "meaning": "เสร็จ"
+  },
+  {
+    "word": "first",
+    "type": "adj./adv.",
+    "meaning": "ที่หนึ่ง"
+  },
+  {
+    "word": "firstly",
+    "type": "adv.",
+    "meaning": "ประการแรก"
+  },
+  {
+    "word": "fish",
+    "type": "verb/noun",
+    "meaning": "ปลา / ตกปลา"
+  },
+  {
+    "word": "fishing",
+    "type": "noun",
+    "meaning": "การตกปลา"
+  },
+  {
+    "word": "fit",
+    "type": "verb/adj.",
+    "meaning": "พอดี"
+  },
+  {
+    "word": "fix",
+    "type": "verb",
+    "meaning": "แก้ไข"
+  },
+  {
+    "word": "flat",
+    "type": "adj.",
+    "meaning": "แบน"
+  },
+  {
+    "word": "flu",
+    "type": "noun",
+    "meaning": "ไข้หวัดใหญ่"
+  },
+  {
+    "word": "fly",
+    "type": "verb/noun",
+    "meaning": "บิน"
+  },
+  {
+    "word": "flying",
+    "type": "noun/adj.",
+    "meaning": "การบิน"
+  },
+  {
+    "word": "following",
+    "type": "adj.",
+    "meaning": "ถัดตาม"
+  },
+  {
+    "word": "foreign",
+    "type": "adj.",
+    "meaning": "ต่างชาติ"
+  },
+  {
+    "word": "forest",
+    "type": "noun",
+    "meaning": "ป่า"
+  },
+  {
+    "word": "fork",
+    "type": "noun",
+    "meaning": "ส้อม"
+  },
+  {
+    "word": "formal",
+    "type": "adj.",
+    "meaning": "เป็นทางการ"
+  },
+  {
+    "word": "fortunately",
+    "type": "adv.",
+    "meaning": "โชคดีที่"
+  },
+  {
+    "word": "free",
+    "type": "adj./adv.",
+    "meaning": "ฟรี"
+  },
+  {
+    "word": "fridge",
+    "type": "noun",
+    "meaning": "ตู้เย็น"
+  },
+  {
+    "word": "frog",
+    "type": "noun",
+    "meaning": "กบ"
+  },
+  {
+    "word": "furniture",
+    "type": "noun",
+    "meaning": "เฟอร์นิเจอร์"
+  },
+  {
+    "word": "further",
+    "type": "adj./adv.",
+    "meaning": "ไกลออกไป"
+  },
+  {
+    "word": "gallery",
+    "type": "noun",
+    "meaning": "แกลเลอรี่"
+  },
+  {
+    "word": "gap",
+    "type": "noun",
+    "meaning": "ช่องว่าง"
+  },
+  {
+    "word": "gas",
+    "type": "noun",
+    "meaning": "แก๊ส"
+  },
+  {
+    "word": "gate",
+    "type": "noun",
+    "meaning": "ประตูรั้ว"
+  },
+  {
+    "word": "gift",
+    "type": "noun",
+    "meaning": "ของขวัญ"
+  },
+  {
+    "word": "god",
+    "type": "noun",
+    "meaning": "พระเจ้า"
+  },
+  {
+    "word": "gold",
+    "type": "noun/adj.",
+    "meaning": "ทอง"
+  },
+  {
+    "word": "golf",
+    "type": "noun",
+    "meaning": "กอล์ฟ"
+  },
+  {
+    "word": "government",
+    "type": "noun",
+    "meaning": "รัฐบาล"
+  },
+  {
+    "word": "grass",
+    "type": "noun",
+    "meaning": "หญ้า"
+  },
+  {
+    "word": "greet",
+    "type": "verb",
+    "meaning": "ทักทาย"
+  },
+  {
+    "word": "ground",
+    "type": "noun",
+    "meaning": "พื้น"
+  },
+  {
+    "word": "guest",
+    "type": "noun",
+    "meaning": "แขก"
+  },
+  {
+    "word": "guide",
+    "type": "noun/verb",
+    "meaning": "แนะนำ"
+  },
+  {
+    "word": "gun",
+    "type": "noun",
+    "meaning": "ปืน"
+  },
+  {
+    "word": "guy",
+    "type": "noun",
+    "meaning": "ผู้ชาย"
+  },
+  {
+    "word": "habit",
+    "type": "noun",
+    "meaning": "นิสัย"
+  },
+  {
+    "word": "hall",
+    "type": "noun",
+    "meaning": "ห้องโถง"
+  },
+  {
+    "word": "happily",
+    "type": "adv.",
+    "meaning": "อย่างมีความสุข"
+  },
+  {
+    "word": "headache",
+    "type": "noun",
+    "meaning": "ปวดหัว"
+  },
+  {
+    "word": "heart",
+    "type": "noun",
+    "meaning": "หัวใจ"
+  },
+  {
+    "word": "heat",
+    "type": "noun/verb",
+    "meaning": "ความร้อน"
+  },
+  {
+    "word": "height",
+    "type": "noun",
+    "meaning": "ความสูง"
+  }
 ]
