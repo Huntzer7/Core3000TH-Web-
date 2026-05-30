@@ -119,7 +119,7 @@
   { "word": "expect", "type": "v.", "meaning": "คาดหวัง" },
   { "word": "experience", "type": "n.", "meaning": "ประสบการณ์" },
   { "word": "experiment", "type": "n.", "meaning": "การทดลอง" },
-  { "word": "expert", "type": "n./adj.", "meaning": "ผู้เชี่ยวชาญ / เชี่ยวชาญ" },
+  { "word": "expert", "type": "n./adj.", "meaning": "ผู้เชี่ยวชาญ / เชี่ยวชาญ"   },
   { "word": "explanation", "type": "n.", "meaning": "คำอธิบาย" },
   { "word": "express", "type": "v.", "meaning": "แสดงออก" },
   { "word": "expression", "type": "n.", "meaning": "การแสดงออก" },
@@ -184,7 +184,7 @@
   { "word": "god", "type": "n.", "meaning": "พระเจ้า" },
   { "word": "gold", "type": "n./adj.", "meaning": "ทอง / สีทอง" },
   { "word": "golf", "type": "n.", "meaning": "กอล์ฟ" },
-  { "word": "good", "type": "n.", "meaning": "ความดี / สิ่งที่ดี" }
+  { "word": "good", "type": "n.", "meaning": "ความดี / สิ่งที่ดี" },
   { "word": "government", "type": "n.", "meaning": "รัฐบาล" },
   { "word": "grass", "type": "n.", "meaning": "หญ้า" },
   { "word": "greet", "type": "v.", "meaning": "ทักทาย" },
