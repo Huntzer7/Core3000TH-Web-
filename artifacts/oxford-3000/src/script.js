@@ -526,7 +526,7 @@ function displayFavorites() {
   });
 
   // เพิ่ม Event Listener สำหรับปุ่มลบ
-  document.querySelectorAll(".favorite-delete-btn").forEach(btn => {
+  document.querySelectorAll(".favorite-delete-btn").forEach((btn) => {
     btn.addEventListener("click", (e) => {
       const index = parseInt(e.currentTarget.dataset.index);
       toggleFavorite(index);
@@ -536,19 +536,19 @@ function displayFavorites() {
   });
 }
 
-  emptyFavorites.style.display = "none";
-  favoriteFab.style.display = "block";
-  favoriteCount.textContent = `${favorites.length} words`;
+emptyFavorites.style.display = "none";
+favoriteFab.style.display = "block";
+favoriteCount.textContent = `${favorites.length} words`;
 
-  favoriteList.innerHTML = "";
+favoriteList.innerHTML = "";
 
-  favorites.forEach((index) => {
-    const word = words[index];
-    if (!word) return;
+favorites.forEach((index) => {
+  const word = words[index];
+  if (!word) return;
 
-    const div = document.createElement("div");
-    div.className = "favorite-item";
-    div.innerHTML = `
+  const div = document.createElement("div");
+  div.className = "favorite-item";
+  div.innerHTML = `
       <div class="favorite-item-word">
         <div class="favorite-word">${word.word}</div>
         <div class="favorite-type">${word.type || ""}</div>
@@ -558,17 +558,18 @@ function displayFavorites() {
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
       </button>
     `;
-    favoriteList.appendChild(div);
-  });
-}
+  favoriteList.appendChild(div);
+});
 
 function filterFavorites(query) {
   const items = favoriteList.querySelectorAll(".favorite-item");
   const searchLower = query.toLowerCase();
 
-  items.forEach(item => {
+  items.forEach((item) => {
     const word = item.querySelector(".favorite-word").textContent.toLowerCase();
-    const meaning = item.querySelector(".favorite-meaning").textContent.toLowerCase();
+    const meaning = item
+      .querySelector(".favorite-meaning")
+      .textContent.toLowerCase();
 
     if (word.includes(searchLower) || meaning.includes(searchLower)) {
       item.classList.remove("hidden");
