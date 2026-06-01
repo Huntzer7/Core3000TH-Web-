@@ -77,6 +77,74 @@
         </svg>
       </button>
     </header>
+
+    <!-- QUIZ SETUP MODAL -->
+    <div id="quizSetupModal" class="modal">
+      <div class="modal-content">
+        <h2>Advanced Quiz Mode</h2>
+
+        <div class="setup-section">
+          <label>จำนวนข้อ:</label>
+          <div class="radio-group">
+            <input
+              type="radio"
+              id="quiz10"
+              name="quizCount"
+              value="10"
+              checked
+            />
+            <label for="quiz10">10 ข้อ</label>
+
+            <input type="radio" id="quiz20" name="quizCount" value="20" />
+            <label for="quiz20">20 ข้อ</label>
+
+            <input type="radio" id="quiz30" name="quizCount" value="30" />
+            <label for="quiz30">30 ข้อ</label>
+
+            <input type="radio" id="quiz40" name="quizCount" value="40" />
+            <label for="quiz40">40 ข้อ</label>
+
+            <input type="radio" id="quiz50" name="quizCount" value="50" />
+            <label for="quiz50">50 ข้อ</label>
+          </div>
+        </div>
+
+        <div class="setup-section">
+          <label>เลือกโหมด:</label>
+          <div class="radio-group">
+            <input
+              type="radio"
+              id="modeLatest"
+              name="quizMode"
+              value="latest"
+              checked
+            />
+            <label for="modeLatest">📌 คำล่าสุด (Latest 50)</label>
+
+            <input
+              type="radio"
+              id="modeRandom"
+              name="quizMode"
+              value="random"
+            />
+            <label for="modeRandom">🎲 สุ่มจากทั้งหมด (Random)</label>
+          </div>
+        </div>
+
+        <div class="setup-buttons">
+          <button id="setupCancelBtn" class="btn btn-outline">ยกเลิก</button>
+          <button id="setupStartBtn" class="btn btn-primary">
+            เริ่มทำควิซ
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- UNLOCK MESSAGE -->
+    <div id="unlockMessage" class="unlock-message" style="display: none">
+      🔓 ปลดล็อกได้! สะสมคำศัพท์ครบ 50 คำแล้ว
+    </div>
+
     <!-- HOME PAGE -->
     <section id="homePage" class="page active">
       <div class="card home-card">
@@ -350,6 +418,20 @@
           <p class="score-label">Score</p>
           <p id="scorePercent" class="score-big" data-testid="text-score">0%</p>
         </div>
+
+        <!-- REVIEW WRONG ANSWERS -->
+        <div id="reviewSection" class="review-section" style="display: none">
+          <h3>ข้อที่ตอบผิด</h3>
+          <div id="wrongAnswersList" class="wrong-answers-list"></div>
+        </div>
+
+        <button
+          id="reviewToggleBtn"
+          class="btn btn-outline btn-full"
+          style="display: none; margin-bottom: 12px"
+        >
+          📋 ดูข้อที่ผิด
+        </button>
 
         <div class="result-buttons">
           <button

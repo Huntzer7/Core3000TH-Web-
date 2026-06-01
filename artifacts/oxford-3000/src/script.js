@@ -11,6 +11,12 @@ let quizIndex = 0;
 let correct = 0;
 let incorrect = 0;
 let quizAnswered = false;
+let wrongAnswers = []; // เก็บข้อที่ผิด
+let quizConfig = {
+  // ตั้งค่า Quiz
+  count: 10,
+  mode: "latest",
+};
 
 // =========================
 // LOAD LOCAL STORAGE (SAFE)
@@ -143,6 +149,14 @@ const quizBackBtn = document.getElementById("quizBackBtn");
 const restartBtn = document.getElementById("restartBtn");
 const newWordBtn = document.getElementById("newWordBtn");
 
+const quizSetupModal = document.getElementById("quizSetupModal");
+const setupStartBtn = document.getElementById("setupStartBtn");
+const setupCancelBtn = document.getElementById("setupCancelBtn");
+const reviewToggleBtn = document.getElementById("reviewToggleBtn");
+const reviewSection = document.getElementById("reviewSection");
+const wrongAnswersListEl = document.getElementById("wrongAnswersList");
+const unlockMessage = document.getElementById("unlockMessage");
+
 // =========================
 // HELPERS
 // =========================
@@ -206,23 +220,60 @@ function showWord() {
 // QUIZ
 // =========================
 
-function startQuiz() {
+function openQuizSetup() {
+  const learnedCount = learnedWords.length;
+
+  if (learnedCount < 50) {
+    showToast(
+      `🔒 สะสมคำศัพท์ให้ครบ 50 คำ เพื่อปลดล็อค Quiz ขั้นสูง(ปัจจุบัน: ${learnedCount}/50)`,
+    );
+    startQuizNormal();
+  } else {
+    quizSetupModal.classList.add("active");
+  }
+}
+
+function startQuizNormal() {
   if (!learnedWords.length) {
     alert("Learn some words first!");
     return;
   }
 
-  quizWords = learnedWords.map((i) => words[i]).filter(Boolean);
+  quizConfig.count = Math.min(10, learnedWords.length);
+  quizConfig.mode = "latest";
+  initQuiz();
+}
 
-  // shuffle
-  for (let i = quizWords.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [quizWords[i], quizWords[j]] = [quizWords[j], quizWords[i]];
+function initQuiz() {
+  let selectedWordIndices = [];
+
+  if (quizConfig.mode === "latest") {
+    // เอา 50 คำล่าสุด
+    const startIdx = Math.max(0, learnedWords.length - 50);
+    selectedWordIndices = learnedWords.slice(startIdx);
+  } else {
+    // Random จากทั้งหมด
+    selectedWordIndices = [...learnedWords];
   }
+
+  // Shuffle
+  for (let i = selectedWordIndices.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [selectedWordIndices[i], selectedWordIndices[j]] = [
+      selectedWordIndices[j],
+      selectedWordIndices[i],
+    ];
+  }
+
+  // เอาเฉพาะจำนวนที่เลือก
+  selectedWordIndices = selectedWordIndices.slice(0, quizConfig.count);
+
+  quizWords = selectedWordIndices.map((i) => words[i]).filter(Boolean);
 
   quizIndex = 0;
   correct = 0;
   incorrect = 0;
+  wrongAnswers = [];
 
   showPage("quiz");
   showQuiz();
@@ -290,6 +341,13 @@ function checkAnswer(selected, correctAnswer) {
   } else {
     incorrect++;
 
+    // เก็บข้อที่ผิด
+    wrongAnswers.push({
+      word: quizWords[quizIndex].word,
+      yourAnswer: selected,
+      correctAnswer: correctAnswer,
+    });
+
     buttons.forEach((btn) => {
       if (btn.textContent === selected) {
         btn.classList.add("incorrect");
@@ -323,6 +381,47 @@ function showResult() {
   correctCountEl.textContent = correct;
   incorrectCountEl.textContent = incorrect;
   scorePercentEl.textContent = score + "%";
+
+  // แสดงปุ่ม Review ถ้ามีข้อที่ผิด
+  if (wrongAnswers.length > 0) {
+    reviewToggleBtn.style.display = "block";
+  } else {
+    reviewToggleBtn.style.display = "none";
+    reviewSection.style.display = "none";
+  }
+}
+
+function displayWrongAnswers() {
+  wrongAnswersListEl.innerHTML = "";
+
+  wrongAnswers.forEach((item, index) => {
+    const div = document.createElement("div");
+    div.className = "wrong-answer-item";
+    div.innerHTML = `
+      <div class="question">ข้อที่ ${index + 1}: ${item.word}</div>
+      <div class="your-answer">❌ คำตอบของคุณ: ${item.yourAnswer}</div>
+      <div class="correct-answer">✅ คำตอบที่ถูกต้อง: ${item.correctAnswer}</div>
+    `;
+    wrongAnswersListEl.appendChild(div);
+  });
+}
+
+function showToast(message, duration = 5000) {
+  let toast = document.querySelector(".toast");
+
+  if (toast) {
+    toast.remove();
+  }
+
+  toast = document.createElement("div");
+  toast.className = "toast";
+  toast.textContent = message;
+  document.body.appendChild(toast);
+
+  setTimeout(() => {
+    toast.classList.add("hide");
+    setTimeout(() => toast.remove(), 300);
+  }, duration);
 }
 
 // =========================
@@ -371,7 +470,37 @@ meaningBtnEl.addEventListener("click", () => {
   meaningBtnEl.textContent = hidden ? "Show Meaning" : "Hide Meaning";
 });
 
-modeBtn.addEventListener("click", startQuiz);
+// Quiz Setup
+modeBtn.addEventListener("click", openQuizSetup);
+
+setupStartBtn.addEventListener("click", () => {
+  quizConfig.count = parseInt(
+    document.querySelector('input[name="quizCount"]:checked').value,
+  );
+  quizConfig.mode = document.querySelector(
+    'input[name="quizMode"]:checked',
+  ).value;
+
+  quizSetupModal.classList.remove("active");
+  initQuiz();
+});
+
+setupCancelBtn.addEventListener("click", () => {
+  quizSetupModal.classList.remove("active");
+});
+
+// Review Wrong Answers
+reviewToggleBtn.addEventListener("click", () => {
+  const isHidden = reviewSection.style.display === "none";
+  reviewSection.style.display = isHidden ? "block" : "none";
+  reviewToggleBtn.textContent = isHidden
+    ? "📋 ซ่อนข้อที่ผิด"
+    : "📋 ดูข้อที่ผิด";
+
+  if (isHidden) {
+    displayWrongAnswers();
+  }
+});
 
 quizBackBtn.addEventListener("click", () => {
   showPage("learning");
