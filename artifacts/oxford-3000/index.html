@@ -1,151 +1,375 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Oxford 3000</title>
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/src/style.css" />
-</head>
-<body>
-
-  <!-- HOME PAGE -->
-  <section id="homePage" class="page active">
-    <div class="card home-card">
-      <div class="home-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Oxford 3000</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <header class="header-top">
+      <button id="homeBtn" class="btn btn-ghost header-btn" title="Go Home">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+          <polyline points="9 22 9 12 15 12 15 22" />
         </svg>
-      </div>
-      <h1>Oxford 3000</h1>
-      <p class="subtitle">The core vocabulary for English learners</p>
-
-      <div class="stats-card">
-        <div class="stat">
-          <span class="stat-label">LEARNED</span>
-          <span class="stat-value" id="learnedCount">0</span>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat">
-          <span class="stat-label">REMAINING</span>
-          <span class="stat-value remaining" id="remainingCount">0</span>
-        </div>
-      </div>
-
-      <div class="progress-wrap">
-        <div class="progress-bar">
-          <div class="progress-fill" id="homeProgress" style="width:0%"></div>
-        </div>
-        <span class="progress-label" id="homePercent">0% Complete</span>
-      </div>
-
-      <button id="startBtn" class="btn btn-primary btn-full" data-testid="button-start">
-        Continue Learning
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </button>
-    </div>
-  </section>
 
-  <!-- LEARNING PAGE -->
-  <section id="learningPage" class="page">
-    <div class="learning-layout">
-
-      <div class="top-bar">
-        <div class="progress-info">
-          <span id="wordProgress" data-testid="text-word-progress">Word 1 / 0</span>
-          <div class="progress-bar thin">
-            <div class="progress-fill" id="learnProgress" style="width:0%"></div>
-          </div>
-        </div>
-        <button id="modeBtn" class="btn btn-outline" data-testid="button-quiz-mode">Quiz Mode</button>
-      </div>
-
-      <div class="word-card" id="wordCard">
-        <p id="wordType" class="word-type" data-testid="text-word-type">noun</p>
-        <h2 id="word" class="word-display" data-testid="text-word">Word</h2>
-
-        <button id="meaningBtn" class="btn btn-ghost" data-testid="button-show-meaning">Show Meaning</button>
-
-        <div id="meaningBox" class="meaning-box hidden">
-          <div class="meaning-divider"></div>
-          <p id="meaning" class="meaning-text" data-testid="text-meaning">Meaning</p>
-        </div>
-      </div>
-
-      <div class="bottom-buttons">
-        <button id="backBtn" class="btn btn-outline" data-testid="button-back">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-          Back
-        </button>
-        <button id="nextBtn" class="btn btn-primary" data-testid="button-next">
-          Next
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-        </button>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- QUIZ PAGE -->
-  <section id="quizPage" class="page">
-    <div class="quiz-layout">
-
-      <div class="top-bar">
-        <div class="progress-info">
-          <span id="quizProgress" data-testid="text-quiz-progress">Question 1 / 0</span>
-          <div class="progress-bar thin">
-            <div class="progress-fill" id="quizProgressBar" style="width:0%"></div>
-          </div>
-        </div>
-        <button id="quizBackBtn" class="btn btn-outline" data-testid="button-quiz-back">Exit</button>
-      </div>
-
-      <div class="word-card quiz-card">
-        <p class="quiz-label">What does this mean?</p>
-        <h2 id="quizWord" class="word-display" data-testid="text-quiz-word">Word</h2>
-        <div id="quizChoices" class="choices"></div>
-        <p id="quizResult" class="quiz-result" data-testid="text-quiz-result"></p>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- RESULT PAGE -->
-  <section id="resultPage" class="page">
-    <div class="card result-card">
-      <div class="result-icon" id="resultIcon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+      <button
+        id="darkModeBtn"
+        class="btn btn-ghost header-btn"
+        title="Toggle Dark Mode"
+      >
+        <svg
+          id="sunIcon"
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          style="display: none"
+        >
+          <circle cx="12" cy="12" r="5" />
+          <line x1="12" y1="1" x2="12" y2="3" />
+          <line x1="12" y1="21" x2="12" y2="23" />
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+          <line x1="1" y1="12" x2="3" y2="12" />
+          <line x1="21" y1="12" x2="23" y2="12" />
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
         </svg>
-      </div>
-      <h1>Quiz Complete</h1>
-
-      <div class="result-stats">
-        <div class="result-stat correct">
-          <span class="result-stat-value" id="correctCount" data-testid="text-correct-count">0</span>
-          <span class="result-stat-label">Correct</span>
+        <svg
+          id="moonIcon"
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </svg>
+      </button>
+    </header>
+    <!-- HOME PAGE -->
+    <section id="homePage" class="page active">
+      <div class="card home-card">
+        <div class="home-icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+          </svg>
         </div>
-        <div class="result-stat incorrect">
-          <span class="result-stat-value" id="incorrectCount" data-testid="text-incorrect-count">0</span>
-          <span class="result-stat-label">Incorrect</span>
+        <h1>Oxford 3000</h1>
+        <p class="subtitle">The core vocabulary for English learners</p>
+
+        <div class="stats-card">
+          <div class="stat">
+            <span class="stat-label">LEARNED</span>
+            <span class="stat-value" id="learnedCount">0</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-label">REMAINING</span>
+            <span class="stat-value remaining" id="remainingCount">0</span>
+          </div>
+        </div>
+
+        <div class="progress-wrap">
+          <div class="progress-bar">
+            <div
+              class="progress-fill"
+              id="homeProgress"
+              style="width: 0%"
+            ></div>
+          </div>
+          <span class="progress-label" id="homePercent">0% Complete</span>
+        </div>
+
+        <button
+          id="startBtn"
+          class="btn btn-primary btn-full"
+          data-testid="button-start"
+        >
+          Continue Learning
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M5 12h14" />
+            <path d="m12 5 7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- LEARNING PAGE -->
+    <section id="learningPage" class="page">
+      <div class="learning-layout">
+        <div class="top-bar">
+          <div class="progress-info">
+            <span id="wordProgress" data-testid="text-word-progress"
+              >Word 1 / 0</span
+            >
+            <div class="progress-bar thin">
+              <div
+                class="progress-fill"
+                id="learnProgress"
+                style="width: 0%"
+              ></div>
+            </div>
+          </div>
+          <button
+            id="modeBtn"
+            class="btn btn-outline"
+            data-testid="button-quiz-mode"
+          >
+            Quiz Mode
+          </button>
+        </div>
+
+        <div class="word-card" id="wordCard">
+          <p id="wordType" class="word-type" data-testid="text-word-type">
+            noun
+          </p>
+          <h2 id="word" class="word-display" data-testid="text-word">Word</h2>
+
+          <button
+            id="meaningBtn"
+            class="btn btn-ghost"
+            data-testid="button-show-meaning"
+          >
+            Show Meaning
+          </button>
+
+          <button id="soundBtn" class="btn btn-ghost" title="Pronounce word">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+              <path d="M15.54 8.46a6.5 6.5 0 0 1 0 9.07" />
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+            </svg>
+          </button>
+
+          <div id="meaningBox" class="meaning-box hidden">
+            <div class="meaning-divider"></div>
+            <p id="meaning" class="meaning-text" data-testid="text-meaning">
+              Meaning
+            </p>
+          </div>
+        </div>
+
+        <div class="bottom-buttons">
+          <button
+            id="backBtn"
+            class="btn btn-outline"
+            data-testid="button-back"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="m15 18-6-6 6-6" />
+            </svg>
+            Back
+          </button>
+          <button
+            id="nextBtn"
+            class="btn btn-primary"
+            data-testid="button-next"
+          >
+            Next
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="m9 18 6-6-6-6" />
+            </svg>
+          </button>
         </div>
       </div>
+    </section>
 
-      <div class="score-ring-wrap">
-        <p class="score-label">Score</p>
-        <p id="scorePercent" class="score-big" data-testid="text-score">0%</p>
+    <!-- QUIZ PAGE -->
+    <section id="quizPage" class="page">
+      <div class="quiz-layout">
+        <div class="top-bar">
+          <div class="progress-info">
+            <span id="quizProgress" data-testid="text-quiz-progress"
+              >Question 1 / 0</span
+            >
+            <div class="progress-bar thin">
+              <div
+                class="progress-fill"
+                id="quizProgressBar"
+                style="width: 0%"
+              ></div>
+            </div>
+          </div>
+          <button
+            id="quizBackBtn"
+            class="btn btn-outline"
+            data-testid="button-quiz-back"
+          >
+            Exit
+          </button>
+        </div>
+
+        <div class="word-card quiz-card">
+          <p class="quiz-label">What does this mean?</p>
+          <h2 id="quizWord" class="word-display" data-testid="text-quiz-word">
+            Word
+          </h2>
+          <div id="quizChoices" class="choices"></div>
+          <p
+            id="quizResult"
+            class="quiz-result"
+            data-testid="text-quiz-result"
+          ></p>
+        </div>
       </div>
+    </section>
 
-      <div class="result-buttons">
-        <button id="restartBtn" class="btn btn-outline" data-testid="button-restart">Restart Quiz</button>
-        <button id="newWordBtn" class="btn btn-primary" data-testid="button-keep-learning">Keep Learning</button>
+    <!-- RESULT PAGE -->
+    <section id="resultPage" class="page">
+      <div class="card result-card">
+        <div class="result-icon" id="resultIcon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="36"
+            height="36"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+            <path d="M4 22h16" />
+            <path
+              d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"
+            />
+            <path
+              d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"
+            />
+            <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
+          </svg>
+        </div>
+        <h1>Quiz Complete</h1>
+
+        <div class="result-stats">
+          <div class="result-stat correct">
+            <span
+              class="result-stat-value"
+              id="correctCount"
+              data-testid="text-correct-count"
+              >0</span
+            >
+            <span class="result-stat-label">Correct</span>
+          </div>
+          <div class="result-stat incorrect">
+            <span
+              class="result-stat-value"
+              id="incorrectCount"
+              data-testid="text-incorrect-count"
+              >0</span
+            >
+            <span class="result-stat-label">Incorrect</span>
+          </div>
+        </div>
+
+        <div class="score-ring-wrap">
+          <p class="score-label">Score</p>
+          <p id="scorePercent" class="score-big" data-testid="text-score">0%</p>
+        </div>
+
+        <div class="result-buttons">
+          <button
+            id="restartBtn"
+            class="btn btn-outline"
+            data-testid="button-restart"
+          >
+            Restart Quiz
+          </button>
+          <button
+            id="newWordBtn"
+            class="btn btn-primary"
+            data-testid="button-keep-learning"
+          >
+            Keep Learning
+          </button>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <script type="module" src="/src/script.js"></script>
-</body>
+    <script type="module" src="/src/script.js"></script>
+  </body>
 </html>

@@ -37,6 +37,74 @@ function saveProgress() {
 // ELEMENTS
 // =========================
 
+// Dark Mode
+const homeBtn = document.getElementById("homeBtn");
+const darkModeBtn = document.getElementById("darkModeBtn");
+const sunIcon = document.getElementById("sunIcon");
+const moonIcon = document.getElementById("moonIcon");
+const soundBtn = document.getElementById("soundBtn");
+
+function initDarkMode() {
+  const isDark = localStorage.getItem("darkMode") === "true";
+  if (isDark) {
+    document.body.classList.add("dark-mode");
+    updateDarkModeIcon();
+  }
+}
+
+function updateDarkModeIcon() {
+  const isDark = document.body.classList.contains("dark-mode");
+  sunIcon.style.display = isDark ? "block" : "none";
+  moonIcon.style.display = isDark ? "none" : "block";
+}
+
+function toggleDarkMode() {
+  document.body.classList.toggle("dark-mode");
+  const isDark = document.body.classList.contains("dark-mode");
+  localStorage.setItem("darkMode", isDark);
+  updateDarkModeIcon();
+}
+
+// Pronunciation
+function pronounceWord(word) {
+  // หยุดเสียงที่กำลังเล่นอยู่
+  window.speechSynthesis.cancel();
+
+  const utterance = new SpeechSynthesisUtterance(word);
+
+  // ตั้งค่าเสียง British English
+  utterance.lang = "en-US";
+  utterance.rate = 0.9; // ความเร็ว (0.1 - 10)
+  utterance.pitch = 0.9; // ระดับเสียง (0.1 - 2)
+  utterance.volume = 1.0; // ระดับเสียง (0 - 1)
+
+  // เลือก voice ที่ดีที่สุด
+  const voices = window.speechSynthesis.getVoices();
+
+  // หาเสียง British English ที่ดี
+  let selectedVoice = voices.find(
+    (voice) => voice.lang === "en-US" && voice.name.includes("Google"),
+  );
+
+  // ถ้าไม่มี Google voice ให้หา voice ที่ยาว (ปกติเสียงดี)
+  if (!selectedVoice) {
+    selectedVoice = voices.find(
+      (voice) => voice.lang === "en-US" && voice.name.length > 10,
+    );
+  }
+
+  // ถ้ายังไม่มี ให้ใช้ en-GB ตัวแรกที่เจอ
+  if (!selectedVoice) {
+    selectedVoice = voices.find((voice) => voice.lang === "en-US");
+  }
+
+  if (selectedVoice) {
+    utterance.voice = selectedVoice;
+  }
+
+  window.speechSynthesis.speak(utterance);
+}
+
 const pages = {
   home: document.getElementById("homePage"),
   learning: document.getElementById("learningPage"),
@@ -261,6 +329,18 @@ function showResult() {
 // EVENTS
 // =========================
 
+homeBtn.addEventListener("click", () => {
+  showPage("home");
+  updateHome();
+});
+
+darkModeBtn.addEventListener("click", toggleDarkMode);
+
+soundBtn.addEventListener("click", () => {
+  const word = wordEl.textContent;
+  if (word) pronounceWord(word);
+});
+
 startBtn.addEventListener("click", () => {
   showPage("learning");
   showWord();
@@ -316,6 +396,7 @@ newWordBtn.addEventListener("click", () => {
 // =========================
 
 loadState();
+initDarkMode();
 
 fetch("/words.json")
   .then((r) => r.json())
