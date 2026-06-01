@@ -12,6 +12,7 @@ let correct = 0;
 let incorrect = 0;
 let quizAnswered = false;
 let wrongAnswers = []; // เก็บข้อที่ผิด
+let favorites = []; // เก็บ index ของคำศัพท์โปรด
 let quizConfig = {
   // ตั้งค่า Quiz
   count: 10,
@@ -52,6 +53,7 @@ const soundBtn = document.getElementById("soundBtn");
 
 function initDarkMode() {
   const isDark = localStorage.getItem("darkMode") === "true";
+  loadFavorites();
   if (isDark) {
     document.body.classList.add("dark-mode");
     updateDarkModeIcon();
@@ -116,6 +118,7 @@ const pages = {
   learning: document.getElementById("learningPage"),
   quiz: document.getElementById("quizPage"),
   result: document.getElementById("resultPage"),
+  favorite: document.getElementById("favoritePage"), // เพิ่มบรรทัดนี้
 };
 
 const learnedCountEl = document.getElementById("learnedCount");
@@ -156,6 +159,24 @@ const reviewToggleBtn = document.getElementById("reviewToggleBtn");
 const reviewSection = document.getElementById("reviewSection");
 const wrongAnswersListEl = document.getElementById("wrongAnswersList");
 const unlockMessage = document.getElementById("unlockMessage");
+
+// Hamburger & Sidebar
+const hamburgerBtn = document.getElementById("hamburgerBtn");
+const sidebar = document.getElementById("sidebar");
+const sidebarOverlay = document.getElementById("sidebarOverlay");
+const closeSidebarBtn = document.getElementById("closeSidebarBtn");
+const favoriteMenuBtn = document.getElementById("favoriteMenuBtn");
+const restartMenuBtn = document.getElementById("restartMenuBtn");
+
+// Favorite
+const favoritePage = document.getElementById("favoritePage");
+const favoriteList = document.getElementById("favoriteList");
+const emptyFavorites = document.getElementById("emptyFavorites");
+const favoriteFab = document.getElementById("favoriteFab");
+const favQuizBtn = document.getElementById("favQuizBtn");
+const searchToggleBtn = document.getElementById("searchToggleBtn");
+const favoriteSearch = document.getElementById("favoriteSearch");
+const favoriteCount = document.getElementById("favoriteCount");
 
 // =========================
 // HELPERS
@@ -212,6 +233,8 @@ function showWord() {
 
   meaningBoxEl.classList.add("hidden");
   meaningBtnEl.textContent = "Show Meaning";
+
+  updateFavoritesUI();
 
   backBtn.disabled = currentIndex === 0;
 }
@@ -425,12 +448,213 @@ function showToast(message, duration = 5000) {
 }
 
 // =========================
+// FAVORITES
+// =========================
+
+function loadFavorites() {
+  try {
+    const saved = localStorage.getItem("favorites");
+    favorites = saved ? JSON.parse(saved) : [];
+  } catch {
+    favorites = [];
+  }
+}
+
+function saveFavorites() {
+  localStorage.setItem("favorites", JSON.stringify(favorites));
+}
+
+function toggleFavorite(index) {
+  if (favorites.includes(index)) {
+    favorites = favorites.filter((i) => i !== index);
+  } else {
+    favorites.push(index);
+  }
+  saveFavorites();
+  updateFavoritesUI();
+}
+
+function isFavorite(index) {
+  return favorites.includes(index);
+}
+
+function updateFavoritesUI() {
+  // อัปเดตไอคอนหัวใจในการ์ดเรียน
+  const favBtn = document.getElementById("favBtn");
+  if (favBtn) {
+    const currentWordIndex = currentIndex;
+    if (isFavorite(currentWordIndex)) {
+      favBtn.classList.add("active");
+    } else {
+      favBtn.classList.remove("active");
+    }
+  }
+}
+
+function displayFavorites() {
+  if (!favorites.length) {
+    favoriteList.innerHTML = "";
+    emptyFavorites.style.display = "block";
+    favoriteFab.style.display = "none";
+    favoriteCount.textContent = "0 words";
+    return;
+  }
+
+  emptyFavorites.style.display = "none";
+  favoriteFab.style.display = "block";
+  favoriteCount.textContent = `${favorites.length} words`;
+
+  favoriteList.innerHTML = "";
+
+  favorites.forEach((index) => {
+    const word = words[index];
+    if (!word) return;
+
+    const div = document.createElement("div");
+    div.className = "favorite-item";
+    div.innerHTML = `
+      <div class="favorite-item-word">
+        <div class="favorite-word">${word.word}</div>
+        <div class="favorite-type">${word.type || ""}</div>
+        <div class="favorite-meaning">${word.meaning}</div>
+      </div>
+      <button class="btn btn-ghost favorite-delete-btn" data-index="${index}" title="Remove">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </button>
+    `;
+    favoriteList.appendChild(div);
+  });
+
+  // เพิ่ม Event Listener สำหรับปุ่มลบ
+  document.querySelectorAll(".favorite-delete-btn").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      const index = parseInt(e.currentTarget.dataset.index);
+      toggleFavorite(index);
+      displayFavorites();
+      showToast("💔 ลบออกจากคลังโปรด");
+    });
+  });
+}
+
+  emptyFavorites.style.display = "none";
+  favoriteFab.style.display = "block";
+  favoriteCount.textContent = `${favorites.length} words`;
+
+  favoriteList.innerHTML = "";
+
+  favorites.forEach((index) => {
+    const word = words[index];
+    if (!word) return;
+
+    const div = document.createElement("div");
+    div.className = "favorite-item";
+    div.innerHTML = `
+      <div class="favorite-item-word">
+        <div class="favorite-word">${word.word}</div>
+        <div class="favorite-type">${word.type || ""}</div>
+        <div class="favorite-meaning">${word.meaning}</div>
+      </div>
+      <button class="btn btn-ghost" onclick="toggleFavorite(${index})" title="Remove">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </button>
+    `;
+    favoriteList.appendChild(div);
+  });
+}
+
+function filterFavorites(query) {
+  const items = favoriteList.querySelectorAll(".favorite-item");
+  const searchLower = query.toLowerCase();
+
+  items.forEach(item => {
+    const word = item.querySelector(".favorite-word").textContent.toLowerCase();
+    const meaning = item.querySelector(".favorite-meaning").textContent.toLowerCase();
+
+    if (word.includes(searchLower) || meaning.includes(searchLower)) {
+      item.classList.remove("hidden");
+    } else {
+      item.classList.add("hidden");
+    }
+  });
+}
+
+// =========================
 // EVENTS
 // =========================
 
 homeBtn.addEventListener("click", () => {
   showPage("home");
   updateHome();
+});
+
+const favBtn = document.getElementById("favBtn");
+
+favBtn.addEventListener("click", () => {
+  toggleFavorite(currentIndex);
+  showToast(
+    isFavorite(currentIndex) ? "❤️ เพิ่มลงคลังโปรด" : "💔 ลบออกจากคลังโปรด",
+  );
+});
+
+// Hamburger Menu
+hamburgerBtn.addEventListener("click", () => {
+  sidebar.classList.add("active");
+  sidebarOverlay.classList.add("active");
+});
+
+closeSidebarBtn.addEventListener("click", () => {
+  sidebar.classList.remove("active");
+  sidebarOverlay.classList.remove("active");
+});
+
+sidebarOverlay.addEventListener("click", () => {
+  sidebar.classList.remove("active");
+  sidebarOverlay.classList.remove("active");
+});
+
+// Favorite Menu
+favoriteMenuBtn.addEventListener("click", () => {
+  sidebar.classList.remove("active");
+  sidebarOverlay.classList.remove("active");
+  showPage("favorite");
+  displayFavorites();
+});
+
+// Restart Menu
+restartMenuBtn.addEventListener("click", () => {
+  const confirmed = confirm(
+    "⚠️ คุณต้องการเริ่มต้นการเรียนใหม่จริงใช่ไหม?\n\nข้อมูลทั้งหมดจะถูกลบ",
+  );
+  if (confirmed) {
+    localStorage.clear();
+    location.reload();
+  }
+});
+
+// Favorite Quiz
+favQuizBtn.addEventListener("click", () => {
+  if (favorites.length < 1) {
+    alert("เพิ่มคำศัพท์โปรดก่อนสำหรับทำควิซ");
+    return;
+  }
+  openFavQuizSetup();
+});
+
+// Search in Favorite
+searchToggleBtn.addEventListener("click", () => {
+  const isHidden = favoriteSearch.style.display === "none";
+  favoriteSearch.style.display = isHidden ? "block" : "none";
+  if (isHidden) {
+    favoriteSearch.focus();
+  } else {
+    favoriteSearch.value = "";
+    filterFavorites("");
+    displayFavorites();
+  }
+});
+
+favoriteSearch.addEventListener("input", (e) => {
+  filterFavorites(e.target.value);
 });
 
 darkModeBtn.addEventListener("click", toggleDarkMode);
@@ -525,6 +749,7 @@ newWordBtn.addEventListener("click", () => {
 // =========================
 
 loadState();
+loadFavorites();
 initDarkMode();
 
 fetch("/words.json")
