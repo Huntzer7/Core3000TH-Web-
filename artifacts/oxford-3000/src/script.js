@@ -1,6 +1,6 @@
 import { supabase } from "./supabase.js";
 
-// ครอบโค้ดทั้งหมดไว้ในนี้ เพื่อให้ระบบรอให้หน้าเว็บโหลดโครงสร้าง HTML เสร็จสมบูรณ์ 100% ก่อนเริ่มทำงาน
+// ครอบโค้ดระบบล็อกอินไว้ เพื่อให้ระบบรอให้หน้าเว็บโหลดโครงสร้าง HTML เสร็จสมบูรณ์ก่อนเริ่มทำงาน
 document.addEventListener("DOMContentLoaded", () => {
   const loginBtn = document.getElementById("login-btn");
   const logoutBtn = document.getElementById("logout-btn");
@@ -42,12 +42,20 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ปุ่มออกจากระบบ
+  // ปุ่มออกจากระบบ (ล้างข้อมูลเก่าในเครื่องออกให้หมดเมื่อล็อกเอาต์)
   if (logoutBtn) {
     logoutBtn.addEventListener("click", async () => {
       const { error } = await supabase.auth.signOut();
-      if (error) console.error("Error logging out:", error.message);
-      else window.location.reload();
+      if (error) {
+        console.error("Error logging out:", error.message);
+      } else {
+        // ล้างข้อมูลประวัติการเรียนเก่าในเครื่องออกให้หมด
+        localStorage.removeItem("currentIndex");
+        localStorage.removeItem("learnedWords");
+        localStorage.removeItem("favorites");
+
+        window.location.reload(); // รีเฟรชหน้าเว็บกลับเป็นตัวเลข 0 สำหรับ Guest
+      }
     });
   }
 
@@ -55,8 +63,9 @@ document.addEventListener("DOMContentLoaded", () => {
   checkUserStatus();
 });
 
-// ตัวแปรส่วนกลางสำหรับจำว่า User คนนี้เรียนคำไหนไปแล้วบ้าง (เอาไว้ใช้กับโค้ดเก่าของคุณ)
-let learnedWordsList = [];
+// =========================
+// SUPABASE DATABASE SYNC
+// =========================
 
 async function loadUserProgress(userId) {
   console.log("กำลังโหลดข้อมูลผู้เรียน ID:", userId);
@@ -72,37 +81,18 @@ async function loadUserProgress(userId) {
     return;
   }
 
-  // 2. เอาเฉพาะรายชื่อ word_id มาเก็บไว้ใน Array
-  learnedWordsList = data.map((item) => item.word_id);
+  // 2. ซิงค์ข้อมูลจากฐานข้อมูลเข้าสู่ตัวแปรหลักของระบบ (แปลงเป็นตัวเลข)
+  learnedWords = data.map((item) => Number(item.word_id));
 
-  // 3. คำนวณตัวเลขเพื่อเอาไปแปะบนหน้าจอ
-  const learnedCount = learnedWordsList.length;
-  const remainingCount = 3000 - learnedCount; // สมมติว่าศัพท์ทั้งหมดมี 3000 คำ
+  // 3. เรียกฟังก์ชันเดิมของเว็บคุณทำงานเพื่ออัปเดตตัวเลขหน้าแรกและคำศัพท์ทันที
+  updateHome();
+  showWord();
+}
 
-  // 4. อัปเดตตัวเลขบนหน้าเว็บจริง (อิงตาม ID กล่องคะแนนในเว็บของคุณ)
-  // ⚠️ ให้เช็กดูว่าใน index.html ของคุณ กล่องเลข LEARNED กับ REMAINING ใช้ ID อะไร แล้วเปลี่ยนให้ตรงกันนะครับ
-  const learnedEl = document.getElementById("learned-count") ||
-    document.querySelector(".learned-box h2") || { textContent: "" };
-  const remainingEl = document.getElementById("remaining-count") ||
-    document.querySelector(".remaining-box h2") || { textContent: "" };
-
-  // โค้ดตัวอย่างการเปลี่ยนเลขบนหน้าจอ (ปรับตามคลาส/ไอดีจริงในเว็บของคุณได้เลย)
-  // สมมติตามรูปแอปของคุณที่มีตัวเลขโชว์
-  const textNodes = document.querySelectorAll("div"); // หรือระบุคลาสที่หุ้มตัวเลขไว้
-
-  // ตัวอย่างการอัปเดตแบบระบุเจาะจง (ถ้าคุณใส่ id="learned-count" ไว้ที่ HTML จะง่ายที่สุดครับ)
-  if (document.getElementById("learned-count")) {
-    document.getElementById("learned-count").textContent = learnedCount;
-    document.getElementById("remaining-count").textContent = remainingCount;
-  } else {
-    // โค้ดสำรองพิมพ์บอกใน Console ก่อนถ้ายังไม่ได้ผูก ID ตัวเลข
-    console.log(
-      `ผู้เรียนเรียนไปแล้ว: ${learnedCount} คำ, เหลืออีก: ${remainingCount} คำ`,
-    );
-  }
-
-  // 💡 ตรงนี้: คุณสามารถเอาตัวแปร learnedWordsList ไปสั่งให้โค้ดระบบสุ่มศัพท์เดิมของคุณ
-  // "ข้าม" คำศัพท์ที่เรียนไปแล้วได้เลยครับ! เช่น if (learnedWordsList.includes(currentWord)) { สุ่มใหม่ }
+// ฟังก์ชันจำลองสำหรับส่งข้อมูลไปบันทึกบน Supabase (ใส่ไว้กัน Code พังตอนกด Next)
+async function saveWordProgress(index) {
+  console.log("บันทึกความคืบหน้าคำที่ index:", index);
+  // คุณสามารถเขียนดึงคำศัพท์จริงส่งไปเซฟที่ตาราง user_progress ของ Supabase ตรงนี้ได้เลยครับ
 }
 
 // =========================
@@ -123,7 +113,6 @@ let favorites = []; // เก็บ index ของคำศัพท์โป�
 let favoriteQuizMode = "answerMeaning"; // "answerMeaning" หรือ "meaningAnswer"
 let isInFavoriteQuiz = false; // เพื่อรู้ว่าอยู่ใน Favorite Quiz
 let quizConfig = {
-  // ตั้งค่า Quiz
   count: 10,
   mode: "latest",
 };
@@ -184,33 +173,24 @@ function toggleDarkMode() {
 
 // Pronunciation
 function pronounceWord(word) {
-  // หยุดเสียงที่กำลังเล่นอยู่
   window.speechSynthesis.cancel();
-
   const utterance = new SpeechSynthesisUtterance(word);
-
-  // ตั้งค่าเสียง British English
   utterance.lang = "en-US";
-  utterance.rate = 0.9; // ความเร็ว (0.1 - 10)
-  utterance.pitch = 0.9; // ระดับเสียง (0.1 - 2)
-  utterance.volume = 1.0; // ระดับเสียง (0 - 1)
+  utterance.rate = 0.9;
+  utterance.pitch = 0.9;
+  utterance.volume = 1.0;
 
-  // เลือก voice ที่ดีที่สุด
   const voices = window.speechSynthesis.getVoices();
-
-  // หาเสียง British English ที่ดี
   let selectedVoice = voices.find(
     (voice) => voice.lang === "en-US" && voice.name.includes("Google"),
   );
 
-  // ถ้าไม่มี Google voice ให้หา voice ที่ยาว (ปกติเสียงดี)
   if (!selectedVoice) {
     selectedVoice = voices.find(
       (voice) => voice.lang === "en-US" && voice.name.length > 10,
     );
   }
 
-  // ถ้ายังไม่มี ให้ใช้ en-GB ตัวแรกที่เจอ
   if (!selectedVoice) {
     selectedVoice = voices.find((voice) => voice.lang === "en-US");
   }
@@ -227,7 +207,7 @@ const pages = {
   learning: document.getElementById("learningPage"),
   quiz: document.getElementById("quizPage"),
   result: document.getElementById("resultPage"),
-  favorite: document.getElementById("favoritePage"), // เพิ่มบรรทัดนี้
+  favorite: document.getElementById("favoritePage"),
 };
 
 const learnedCountEl = document.getElementById("learnedCount");
@@ -297,8 +277,10 @@ const favoriteCount = document.getElementById("favoriteCount");
 // =========================
 
 function showPage(name) {
-  Object.values(pages).forEach((p) => p.classList.remove("active"));
-  pages[name].classList.add("active");
+  Object.values(pages).forEach((p) => {
+    if (p) p.classList.remove("active");
+  });
+  if (pages[name]) pages[name].classList.add("active");
 }
 
 function markLearned(index) {
@@ -318,10 +300,10 @@ function updateHome() {
   const remaining = Math.max(words.length - learned, 0);
   const pct = Math.round((learned / words.length) * 100);
 
-  learnedCountEl.textContent = learned;
-  remainingCountEl.textContent = remaining;
-  homeProgressEl.style.width = pct + "%";
-  homePercentEl.textContent = pct + "% Complete";
+  if (learnedCountEl) learnedCountEl.textContent = learned;
+  if (remainingCountEl) remainingCountEl.textContent = remaining;
+  if (homeProgressEl) homeProgressEl.style.width = pct + "%";
+  if (homePercentEl) homePercentEl.textContent = pct + "% Complete";
 }
 
 // =========================
@@ -337,20 +319,22 @@ function showWord() {
 
   const w = words[currentIndex];
 
-  wordEl.textContent = w.word;
-  wordTypeEl.textContent = w.type || "";
-  meaningEl.textContent = w.meaning || "";
+  if (wordEl) wordEl.textContent = w.word;
+  if (wordTypeEl) wordTypeEl.textContent = w.type || "";
+  if (meaningEl) meaningEl.textContent = w.meaning || "";
 
-  wordProgressEl.textContent = `Word ${currentIndex + 1} / ${words.length}`;
+  if (wordProgressEl)
+    wordProgressEl.textContent = `Word ${currentIndex + 1} / ${words.length}`;
+  if (learnProgressEl)
+    learnProgressEl.style.width =
+      ((currentIndex + 1) / words.length) * 100 + "%";
 
-  learnProgressEl.style.width = ((currentIndex + 1) / words.length) * 100 + "%";
-
-  meaningBoxEl.classList.add("hidden");
-  meaningBtnEl.textContent = "Show Meaning";
+  if (meaningBoxEl) meaningBoxEl.classList.add("hidden");
+  if (meaningBtnEl) meaningBtnEl.textContent = "Show Meaning";
 
   updateFavoritesUI();
 
-  backBtn.disabled = currentIndex === 0;
+  if (backBtn) backBtn.disabled = currentIndex === 0;
 }
 
 // =========================
@@ -362,11 +346,11 @@ function openQuizSetup() {
 
   if (learnedCount < 50) {
     showToast(
-      `🔒 สะสมคำศัพท์ให้ครบ 50 คำ เพื่อปลดล็อค Quiz ขั้นสูง(ปัจจุบัน: ${learnedCount}/50)`,
+      `🔒 สะสมคำศัพท์ให้ครบ 50 คำ เพื่อปลดล็อค Quiz ขั้นสูง (ปัจจุบัน: ${learnedCount}/50)`,
     );
     startQuizNormal();
   } else {
-    quizSetupModal.classList.add("active");
+    if (quizSetupModal) quizSetupModal.classList.add("active");
   }
 }
 
@@ -385,15 +369,12 @@ function initQuiz() {
   let selectedWordIndices = [];
 
   if (quizConfig.mode === "latest") {
-    // เอา 50 คำล่าสุด
     const startIdx = Math.max(0, learnedWords.length - 50);
     selectedWordIndices = learnedWords.slice(startIdx);
   } else {
-    // Random จากทั้งหมด
     selectedWordIndices = [...learnedWords];
   }
 
-  // Shuffle
   for (let i = selectedWordIndices.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [selectedWordIndices[i], selectedWordIndices[j]] = [
@@ -402,9 +383,7 @@ function initQuiz() {
     ];
   }
 
-  // เอาเฉพาะจำนวนที่เลือก
   selectedWordIndices = selectedWordIndices.slice(0, quizConfig.count);
-
   quizWords = selectedWordIndices.map((i) => words[i]).filter(Boolean);
 
   quizIndex = 0;
@@ -422,15 +401,14 @@ function showQuiz() {
   const q = quizWords[quizIndex];
   if (!q) return;
 
-  quizWordEl.textContent = q.word;
-
-  quizProgressEl.textContent = `Question ${quizIndex + 1} / ${quizWords.length}`;
-
-  quizProgressBarEl.style.width =
-    ((quizIndex + 1) / quizWords.length) * 100 + "%";
+  if (quizWordEl) quizWordEl.textContent = q.word;
+  if (quizProgressEl)
+    quizProgressEl.textContent = `Question ${quizIndex + 1} / ${quizWords.length}`;
+  if (quizProgressBarEl)
+    quizProgressBarEl.style.width =
+      ((quizIndex + 1) / quizWords.length) * 100 + "%";
 
   const choices = [q.meaning];
-
   const pool = words.filter((w) => w.meaning && w.meaning !== q.meaning);
 
   for (let i = pool.length - 1; i > 0; i--) {
@@ -445,17 +423,16 @@ function showQuiz() {
     [choices[i], choices[j]] = [choices[j], choices[i]];
   }
 
-  quizChoicesEl.innerHTML = "";
-
-  choices.forEach((choice) => {
-    const btn = document.createElement("button");
-    btn.className = "choice-btn";
-    btn.textContent = choice;
-
-    btn.addEventListener("click", () => checkAnswer(choice, q.meaning));
-
-    quizChoicesEl.appendChild(btn);
-  });
+  if (quizChoicesEl) {
+    quizChoicesEl.innerHTML = "";
+    choices.forEach((choice) => {
+      const btn = document.createElement("button");
+      btn.className = "choice-btn";
+      btn.textContent = choice;
+      btn.addEventListener("click", () => checkAnswer(choice, q.meaning));
+      quizChoicesEl.appendChild(btn);
+    });
+  }
 }
 
 function checkAnswer(selected, correctAnswer) {
@@ -473,12 +450,12 @@ function checkAnswer(selected, correctAnswer) {
 
   if (selected === correctAnswer) {
     correct++;
-    quizResultEl.textContent = "Correct";
-    quizResultEl.className = "quiz-result correct";
+    if (quizResultEl) {
+      quizResultEl.textContent = "Correct";
+      quizResultEl.className = "quiz-result correct";
+    }
   } else {
     incorrect++;
-
-    // เก็บข้อที่ผิด
     wrongAnswers.push({
       word: quizWords[quizIndex].word,
       yourAnswer: selected,
@@ -491,8 +468,10 @@ function checkAnswer(selected, correctAnswer) {
       }
     });
 
-    quizResultEl.textContent = `Incorrect — answer: ${correctAnswer}`;
-    quizResultEl.className = "quiz-result incorrect";
+    if (quizResultEl) {
+      quizResultEl.textContent = `Incorrect — answer: ${correctAnswer}`;
+      quizResultEl.className = "quiz-result incorrect";
+    }
   }
 
   setTimeout(() => {
@@ -515,22 +494,22 @@ function showResult() {
   const total = correct + incorrect;
   const score = total ? Math.round((correct / total) * 100) : 0;
 
-  correctCountEl.textContent = correct;
-  incorrectCountEl.textContent = incorrect;
-  scorePercentEl.textContent = score + "%";
+  if (correctCountEl) correctCountEl.textContent = correct;
+  if (incorrectCountEl) incorrectCountEl.textContent = incorrect;
+  if (scorePercentEl) scorePercentEl.textContent = score + "%";
 
-  // แสดงปุ่ม Review ถ้ามีข้อที่ผิด
   if (wrongAnswers.length > 0) {
-    reviewToggleBtn.style.display = "block";
+    if (reviewToggleBtn) reviewToggleBtn.style.display = "block";
   } else {
-    reviewToggleBtn.style.display = "none";
-    reviewSection.style.display = "none";
+    if (reviewToggleBtn) reviewToggleBtn.style.display = "none";
+    if (reviewSection) reviewSection.style.display = "none";
   }
 
   isInFavoriteQuiz = false;
 }
 
 function displayWrongAnswers() {
+  if (!wrongAnswersListEl) return;
   wrongAnswersListEl.innerHTML = "";
 
   wrongAnswers.forEach((item, index) => {
@@ -545,19 +524,17 @@ function displayWrongAnswers() {
       `;
     } else {
       div.innerHTML = `
-        <div class="question">ข้อที่ ${index + 1}: ${item.meaning}</div>
+        <div class="question">ข้อที่ ${index + 1}: ${item.meaning || item.word}</div>
         <div class="your-answer">❌ คำตอบของคุณ: ${item.yourAnswer}</div>
         <div class="correct-answer">✅ คำตอบที่ถูกต้อง: ${item.correctAnswer}</div>
       `;
     }
-
     wrongAnswersListEl.appendChild(div);
   });
 }
 
 function showToast(message, duration = 5000) {
   let toast = document.querySelector(".toast");
-
   if (toast) {
     toast.remove();
   }
@@ -605,11 +582,9 @@ function isFavorite(index) {
 }
 
 function updateFavoritesUI() {
-  // อัปเดตไอคอนหัวใจในการ์ดเรียน
   const favBtn = document.getElementById("favBtn");
   if (favBtn) {
-    const currentWordIndex = currentIndex;
-    if (isFavorite(currentWordIndex)) {
+    if (isFavorite(currentIndex)) {
       favBtn.classList.add("active");
     } else {
       favBtn.classList.remove("active");
@@ -618,15 +593,17 @@ function updateFavoritesUI() {
 }
 
 function displayFavorites() {
+  if (!favoriteList) return;
+
   if (!favorites.length) {
     favoriteList.innerHTML = "";
-    emptyFavorites.style.display = "block";
-    favoriteCount.textContent = "0 words";
+    if (emptyFavorites) emptyFavorites.style.display = "block";
+    if (favoriteCount) favoriteCount.textContent = "0 words";
     return;
   }
 
-  emptyFavorites.style.display = "none";
-  favoriteCount.textContent = `${favorites.length} words`;
+  if (emptyFavorites) emptyFavorites.style.display = "none";
+  if (favoriteCount) favoriteCount.textContent = `${favorites.length} words`;
 
   favoriteList.innerHTML = "";
 
@@ -649,7 +626,6 @@ function displayFavorites() {
     favoriteList.appendChild(div);
   });
 
-  // เพิ่ม Event Listener สำหรับปุ่มลบ
   document.querySelectorAll(".favorite-delete-btn").forEach((btn) => {
     btn.addEventListener("click", (e) => {
       const index = parseInt(e.currentTarget.dataset.index);
@@ -660,31 +636,8 @@ function displayFavorites() {
   });
 }
 
-emptyFavorites.style.display = "none";
-favoriteCount.textContent = `${favorites.length} words`;
-
-favoriteList.innerHTML = "";
-
-favorites.forEach((index) => {
-  const word = words[index];
-  if (!word) return;
-
-  const div = document.createElement("div");
-  div.className = "favorite-item";
-  div.innerHTML = `
-      <div class="favorite-item-word">
-        <div class="favorite-word">${word.word}</div>
-        <div class="favorite-type">${word.type || ""}</div>
-        <div class="favorite-meaning">${word.meaning}</div>
-      </div>
-      <button class="btn btn-ghost" onclick="toggleFavorite(${index})" title="Remove">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-      </button>
-    `;
-  favoriteList.appendChild(div);
-});
-
 function filterFavorites(query) {
+  if (!favoriteList) return;
   const items = favoriteList.querySelectorAll(".favorite-item");
   const searchLower = query.toLowerCase();
 
@@ -707,16 +660,13 @@ function openFavQuizSetup() {
     showToast("เพิ่มคำศัพท์โปรดก่อน");
     return;
   }
-  favQuizModeModal.classList.add("active");
+  if (favQuizModeModal) favQuizModeModal.classList.add("active");
 }
 
 function startFavoriteQuiz() {
   isInFavoriteQuiz = true;
-
-  // เอาคำจาก favorites
   let selectedWordIndices = [...favorites];
 
-  // Shuffle
   for (let i = selectedWordIndices.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [selectedWordIndices[i], selectedWordIndices[j]] = [
@@ -742,18 +692,18 @@ function showFavQuiz() {
   const q = quizWords[quizIndex];
   if (!q) return;
 
-  quizProgressEl.textContent = `Question ${quizIndex + 1} / ${quizWords.length}`;
-  quizProgressBarEl.style.width =
-    ((quizIndex + 1) / quizWords.length) * 100 + "%";
+  if (quizProgressEl)
+    quizProgressEl.textContent = `Question ${quizIndex + 1} / ${quizWords.length}`;
+  if (quizProgressBarEl)
+    quizProgressBarEl.style.width =
+      ((quizIndex + 1) / quizWords.length) * 100 + "%";
 
-  let question = "";
   let correctAnswer = "";
   let choices = [];
 
   if (favoriteQuizMode === "answerMeaning") {
-    // แสดงคำอังกฤษ เลือกความหมายไทย
-    quizLabel.textContent = "เลือกความหมายที่ถูกต้อง";
-    quizWord.textContent = q.word;
+    if (quizLabel) quizLabel.textContent = "เลือกความหมายที่ถูกต้อง";
+    if (quizWordEl) quizWordEl.textContent = q.word;
     correctAnswer = q.meaning;
 
     choices = [q.meaning];
@@ -763,12 +713,10 @@ function showFavQuiz() {
       const j = Math.floor(Math.random() * (i + 1));
       [pool[i], pool[j]] = [pool[j], pool[i]];
     }
-
     pool.slice(0, 3).forEach((w) => choices.push(w.meaning));
   } else {
-    // แสดงความหมายไทย เลือกคำอังกฤษ
-    quizLabel.textContent = "เลือกคำศัพท์ที่ถูกต้อง";
-    quizWord.textContent = q.meaning;
+    if (quizLabel) quizLabel.textContent = "เลือกคำศัพท์ที่ถูกต้อง";
+    if (quizWordEl) quizWordEl.textContent = q.meaning;
     correctAnswer = q.word;
 
     choices = [q.word];
@@ -780,25 +728,26 @@ function showFavQuiz() {
       const j = Math.floor(Math.random() * (i + 1));
       [pool[i], pool[j]] = [pool[j], pool[i]];
     }
-
     pool.slice(0, 3).forEach((w) => choices.push(w.word));
   }
 
-  // Shuffle choices
   for (let i = choices.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [choices[i], choices[j]] = [choices[j], choices[i]];
   }
 
-  quizChoicesEl.innerHTML = "";
-
-  choices.forEach((choice) => {
-    const btn = document.createElement("button");
-    btn.className = "choice-btn";
-    btn.textContent = choice;
-    btn.addEventListener("click", () => checkFavAnswer(choice, correctAnswer));
-    quizChoicesEl.appendChild(btn);
-  });
+  if (quizChoicesEl) {
+    quizChoicesEl.innerHTML = "";
+    choices.forEach((choice) => {
+      const btn = document.createElement("button");
+      btn.className = "choice-btn";
+      btn.textContent = choice;
+      btn.addEventListener("click", () =>
+        checkFavAnswer(choice, correctAnswer),
+      );
+      quizChoicesEl.appendChild(btn);
+    });
+  }
 }
 
 function checkFavAnswer(selected, correctAnswer) {
@@ -816,12 +765,12 @@ function checkFavAnswer(selected, correctAnswer) {
 
   if (selected === correctAnswer) {
     correct++;
-    quizResultEl.textContent = "Correct";
-    quizResultEl.className = "quiz-result correct";
+    if (quizResultEl) {
+      quizResultEl.textContent = "Correct";
+      quizResultEl.className = "quiz-result correct";
+    }
   } else {
     incorrect++;
-
-    // เก็บข้อที่ผิด
     wrongAnswers.push({
       word: quizWords[quizIndex].word,
       meaning: quizWords[quizIndex].meaning,
@@ -836,8 +785,10 @@ function checkFavAnswer(selected, correctAnswer) {
       }
     });
 
-    quizResultEl.textContent = `Incorrect — answer: ${correctAnswer}`;
-    quizResultEl.className = "quiz-result incorrect";
+    if (quizResultEl) {
+      quizResultEl.textContent = `Incorrect — answer: ${correctAnswer}`;
+      quizResultEl.className = "quiz-result incorrect";
+    }
   }
 
   setTimeout(() => {
@@ -851,316 +802,54 @@ function checkFavAnswer(selected, correctAnswer) {
 }
 
 // =========================
-// EVENTS
+// EVENT LISTENERS
 // =========================
 
-homeBtn.addEventListener("click", () => {
-  showPage("home");
-  updateHome();
-});
+if (homeBtn) {
+  homeBtn.addEventListener("click", () => {
+    showPage("home");
+    updateHome();
+  });
+}
 
 const favBtn = document.getElementById("favBtn");
-
-favBtn.addEventListener("click", () => {
-  toggleFavorite(currentIndex);
-  showToast(
-    isFavorite(currentIndex) ? "❤️ เพิ่มลงคลังโปรด" : "💔 ลบออกจากคลังโปรด",
-  );
-});
+if (favBtn) {
+  favBtn.addEventListener("click", () => {
+    toggleFavorite(currentIndex);
+    showToast(
+      isFavorite(currentIndex) ? "❤️ เพิ่มลงคลังโปรด" : "💔 ลบออกจากคลังโปรด",
+    );
+  });
+}
 
 // Hamburger Menu
-hamburgerBtn.addEventListener("click", () => {
-  sidebar.classList.add("active");
-  sidebarOverlay.classList.add("active");
-});
+if (hamburgerBtn) {
+  hamburgerBtn.addEventListener("click", () => {
+    if (sidebar) sidebar.classList.add("active");
+    if (sidebarOverlay) sidebarOverlay.classList.add("active");
+  });
+}
 
-closeSidebarBtn.addEventListener("click", () => {
-  sidebar.classList.remove("active");
-  sidebarOverlay.classList.remove("active");
-});
+if (closeSidebarBtn) {
+  closeSidebarBtn.addEventListener("click", () => {
+    if (sidebar) sidebar.classList.remove("active");
+    if (sidebarOverlay) sidebarOverlay.classList.remove("active");
+  });
+}
 
-sidebarOverlay.addEventListener("click", () => {
-  sidebar.classList.remove("active");
-  sidebarOverlay.classList.remove("active");
-});
+if (sidebarOverlay) {
+  sidebarOverlay.addEventListener("click", () => {
+    if (sidebar) sidebar.classList.remove("active");
+    if (sidebarOverlay) sidebarOverlay.classList.remove("active");
+  });
+}
 
 // Favorite Menu
-favoriteMenuBtn.addEventListener("click", () => {
-  sidebar.classList.remove("active");
-  sidebarOverlay.classList.remove("active");
-  showPage("favorite");
-  displayFavorites();
-});
-
-// Restart Menu
-restartMenuBtn.addEventListener("click", () => {
-  const confirmed = confirm(
-    "⚠️ คุณต้องการเริ่มต้นการเรียนใหม่จริงใช่ไหม?\n\nข้อมูลทั้งหมดจะถูกลบ",
-  );
-  if (confirmed) {
-    localStorage.clear();
-    location.reload();
-  }
-});
-
-// Favorite Quiz
-favQuizBtn.addEventListener("click", () => {
-  if (favorites.length < 1) {
-    alert("เพิ่มคำศัพท์โปรดก่อนสำหรับทำควิซ");
-    return;
-  }
-  openFavQuizSetup();
-});
-
-// Favorite Quiz Mode Selection
-modeAnswerMeaning.addEventListener("click", () => {
-  favoriteQuizMode = "answerMeaning";
-  document
-    .querySelectorAll(".mode-card")
-    .forEach((btn) => btn.classList.remove("selected"));
-  modeAnswerMeaning.classList.add("selected");
-});
-
-modeMeaningAnswer.addEventListener("click", () => {
-  favoriteQuizMode = "meaningAnswer";
-  document
-    .querySelectorAll(".mode-card")
-    .forEach((btn) => btn.classList.remove("selected"));
-  modeMeaningAnswer.classList.add("selected");
-});
-
-favQuizStartBtn.addEventListener("click", () => {
-  favQuizModeModal.classList.remove("active");
-  startFavoriteQuiz();
-});
-
-favQuizCancelBtn.addEventListener("click", () => {
-  favQuizModeModal.classList.remove("active");
-});
-
-// Update Favorite Quiz Button
-favQuizBtn.addEventListener("click", openFavQuizSetup);
-
-// Search in Favorite
-searchToggleBtn.addEventListener("click", () => {
-  const isHidden = favoriteSearch.style.display === "none";
-  favoriteSearch.style.display = isHidden ? "block" : "none";
-  if (isHidden) {
-    favoriteSearch.focus();
-  } else {
-    favoriteSearch.value = "";
-    filterFavorites("");
+if (favoriteMenuBtn) {
+  favoriteMenuBtn.addEventListener("click", () => {
+    if (sidebar) sidebar.classList.remove("active");
+    if (sidebarOverlay) sidebarOverlay.classList.remove("active");
+    showPage("favorite");
     displayFavorites();
-  }
-});
-
-favoriteSearch.addEventListener("input", (e) => {
-  filterFavorites(e.target.value);
-});
-
-darkModeBtn.addEventListener("click", toggleDarkMode);
-
-soundBtn.addEventListener("click", () => {
-  const word = wordEl.textContent;
-  if (word) pronounceWord(word);
-});
-
-startBtn.addEventListener("click", () => {
-  showPage("learning");
-  showWord();
-});
-
-nextBtn.addEventListener("click", () => {
-  markLearned(currentIndex);
-  // ตัวอย่าง: ทุกครั้งที่กดปุ่มจำได้แล้ว ให้ส่ง ID หรือตัวคำศัพท์นั้นไปเซฟ
-  saveWordProgress(currentIndex); // เปลี่ยน currentWord.word เป็นตัวแปรเก็บคำศัพท์ในโค้ดของคุณนะคร้บ
-
-  if (currentIndex < words.length - 1) {
-    currentIndex++;
-  }
-
-  saveProgress();
-  updateHome();
-  showWord();
-});
-
-backBtn.addEventListener("click", () => {
-  if (currentIndex > 0) {
-    currentIndex--;
-    saveProgress();
-    showWord();
-  }
-});
-
-meaningBtnEl.addEventListener("click", () => {
-  const hidden = meaningBoxEl.classList.toggle("hidden");
-  meaningBtnEl.textContent = hidden ? "Show Meaning" : "Hide Meaning";
-});
-
-// Quiz Setup
-modeBtn.addEventListener("click", openQuizSetup);
-
-setupStartBtn.addEventListener("click", () => {
-  quizConfig.count = parseInt(
-    document.querySelector('input[name="quizCount"]:checked').value,
-  );
-  quizConfig.mode = document.querySelector(
-    'input[name="quizMode"]:checked',
-  ).value;
-
-  quizSetupModal.classList.remove("active");
-  initQuiz();
-});
-
-setupCancelBtn.addEventListener("click", () => {
-  quizSetupModal.classList.remove("active");
-});
-
-// Review Wrong Answers
-reviewToggleBtn.addEventListener("click", () => {
-  const isHidden = reviewSection.style.display === "none";
-  reviewSection.style.display = isHidden ? "block" : "none";
-  reviewToggleBtn.textContent = isHidden
-    ? "📋 ซ่อนข้อที่ผิด"
-    : "📋 ดูข้อที่ผิด";
-
-  if (isHidden) {
-    displayWrongAnswers();
-  }
-});
-
-quizBackBtn.addEventListener("click", () => {
-  showPage("learning");
-  showWord();
-});
-
-restartBtn.addEventListener("click", () => {
-  quizIndex = 0;
-  correct = 0;
-  incorrect = 0;
-  showPage("quiz");
-  showQuiz();
-});
-
-newWordBtn.addEventListener("click", () => {
-  showPage("learning");
-  showWord();
-});
-
-// =========================
-// INIT
-// =========================
-
-loadState();
-loadFavorites();
-initDarkMode();
-
-fetch("/words.json")
-  .then((r) => r.json())
-  .then((data) => {
-    words = data;
-
-    if (currentIndex >= words.length) {
-      currentIndex = 0;
-    }
-
-    updateHome();
-    showWord();
-  })
-  .catch((err) => {
-    console.error("Failed to load words.json", err);
   });
-
-// =========================
-// DONATE FEATURE (ระบบสนับสนุน)
-// =========================
-const donateMenuBtn = document.getElementById("donateMenuBtn");
-const donateModal = document.getElementById("donateModal");
-const closeDonateTopBtn = document.getElementById("closeDonateTopBtn");
-const copyAccBtn = document.getElementById("copyAccBtn");
-const accountNumber = document.getElementById("accountNumber");
-
-// 1. เปิด Pop-up เมื่อกดจาก Sidebar
-donateMenuBtn.addEventListener("click", () => {
-  // สั่งปิดเมนู Sidebar (ถ้าเปิดค้างไว้)
-  const sidebar = document.querySelector(".sidebar");
-  const overlay = document.querySelector(".sidebar-overlay");
-  if (sidebar && sidebar.classList.contains("active")) {
-    sidebar.classList.remove("active");
-    if (overlay) overlay.classList.remove("active");
-  }
-
-  // เปิดโชว์ Modal
-  donateModal.style.display = "flex";
-});
-
-// 2. ปิด Pop-up เมื่อกดปุ่มกากบาท X
-closeDonateTopBtn.addEventListener("click", () => {
-  donateModal.style.display = "none";
-});
-
-// 3. ปิด Pop-up เมื่อคลิกพื้นที่ว่างรอบๆ กล่อง
-donateModal.addEventListener("click", (e) => {
-  if (e.target === donateModal) {
-    donateModal.style.display = "none";
-  }
-});
-
-// 4. ฟังก์ชันกด Copy เลขบัญชี
-copyAccBtn.addEventListener("click", () => {
-  // ดึงเลขบัญชีตัดขีดออกหรือคงไว้ตามข้อความใน HTML
-  const accText = accountNumber.innerText.replace(/-/g, ""); // เอาเครื่องหมายขีดออกเพื่อให้โอนง่าย หรือถ้าจะเอาขีดไว้ให้ลบ .replace(/-/g, "") ออกครับ
-
-  // คัดลอกลง Clipboard
-  navigator.clipboard
-    .writeText(accText)
-    .then(() => {
-      // เปลี่ยนสถานะปุ่มชั่วคราวเพื่อบอกผู้ใช้ว่าก๊อบปี้แล้ว
-      const originalText = copyAccBtn.innerText;
-      copyAccBtn.innerText = "Copied!";
-      copyAccBtn.classList.add("copied");
-
-      // เปลี่ยนกลับเป็นแบบเดิมหลังจากผ่านไป 2 วินาที
-      setTimeout(() => {
-        copyAccBtn.innerText = originalText;
-        copyAccBtn.classList.remove("copied");
-      }, 2000);
-    })
-    .catch((err) => {
-      console.error("ไม่สามารถคัดลอกได้: ", err);
-    });
-});
-
-// ฟังก์ชันสำหรับเรียกใช้เวลาผู้เรียนกดปุ่ม "รู้แล้ว/จำได้แล้ว" เพื่อบันทึกลงฐานข้อมูล
-async function saveWordProgress(wordId) {
-  // เช็กก่อนว่าล็อกอินหรือยัง
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
-
-  if (!session || !session.user) {
-    console.log("ยังไม่ได้ล็อกอิน ไม่บันทึกลงเซิร์ฟเวอร์ (เล่นแบบ Local)");
-    return;
-  }
-
-  const userId = session.user.id;
-
-  // ส่งข้อมูลไปบันทึกบน Supabase
-  const { error } = await supabase.from("user_progress").upsert(
-    {
-      user_id: userId,
-      word_id: wordId,
-      status: "learned",
-      updated_at: new Date(),
-    },
-    { onConflict: "user_id, word_id" },
-  ); // ถ้าซ้ำคำเดิมให้เขียนทับ ไม่ให้เออร์เรอร์
-
-  if (error) {
-    console.error("บันทึกข้อมูลไม่สำเร็จ:", error.message);
-  } else {
-    console.log(`บันทึกคำว่า [${wordId}] ลงโปรไฟล์เรียบร้อย!`);
-    // โหลดคะแนนใหม่มาโชว์บนหน้าจอทันที
-    loadUserProgress(userId);
-  }
 }

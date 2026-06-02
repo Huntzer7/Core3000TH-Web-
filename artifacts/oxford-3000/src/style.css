@@ -44,15 +44,7 @@ body {
 .page {
   display: none;
   min-height: 100vh;
-  padding: 80px 20px 24px 20px;  /* เปลี่ยนจาก 24px 20px เป็น 80px 20px 24px 20px */
-  align-items: center;
-  justify-content: center;
-}
-
-.page {
-  display: none;
-  min-height: 100vh;
-  padding: 24px 20px;
+  padding: 80px 20px 24px 20px; /* เลือกใช้ระยะที่ต้องการหลบ Header */
   align-items: center;
   justify-content: center;
 }
@@ -1116,10 +1108,6 @@ body.dark-mode .header-top {
   border-top: 1px solid var(--border);
   display: none !important;  /* ซ่อนไป */
 }
-#favBtn.active {
-  color: var(--incorrect) !important;
-  fill: var(--incorrect);
-}
 
 .word-card {
   position: relative;  /* เพิ่มบรรทัดนี้ */
@@ -1274,7 +1262,7 @@ body.dark-mode .header-top {
 }
 
 /* ถ้าอยู่ใน Dark Mode ให้เปลี่ยนสีพื้นหลังบล็อกเลขบัญชี */
-[data-theme="dark"] .account-container {
+body.dark-mode .account-container {
   background: rgba(255, 255, 255, 0.08);
 }
 
