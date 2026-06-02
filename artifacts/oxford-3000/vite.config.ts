@@ -1,13 +1,11 @@
 import { defineConfig } from "vite";
 import path from "path";
 
-const rawPort = process.env.PORT;
-if (!rawPort) throw new Error("PORT environment variable is required.");
+// ปรับให้มีค่าเริ่มต้น (Fallback) หากรันบน Vercel แล้วไม่มีค่า PORT หรือ BASE_PATH ส่งมา
+const rawPort = process.env.PORT || "3000";
 const port = Number(rawPort);
-if (Number.isNaN(port) || port <= 0) throw new Error(`Invalid PORT: "${rawPort}"`);
 
-const basePath = process.env.BASE_PATH;
-if (!basePath) throw new Error("BASE_PATH environment variable is required.");
+const basePath = process.env.BASE_PATH || "/";
 
 export default defineConfig({
   base: basePath,
