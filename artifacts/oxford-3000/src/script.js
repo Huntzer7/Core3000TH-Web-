@@ -55,8 +55,54 @@ document.addEventListener("DOMContentLoaded", () => {
   checkUserStatus();
 });
 
+// ตัวแปรส่วนกลางสำหรับจำว่า User คนนี้เรียนคำไหนไปแล้วบ้าง (เอาไว้ใช้กับโค้ดเก่าของคุณ)
+let learnedWordsList = [];
+
 async function loadUserProgress(userId) {
   console.log("กำลังโหลดข้อมูลผู้เรียน ID:", userId);
+
+  // 1. ดึงข้อมูลจากตาราง user_progress เฉพาะของ User คนนี้
+  const { data, error } = await supabase
+    .from("user_progress")
+    .select("word_id")
+    .eq("status", "learned");
+
+  if (error) {
+    console.error("โหลดข้อมูลผิดพลาด:", error.message);
+    return;
+  }
+
+  // 2. เอาเฉพาะรายชื่อ word_id มาเก็บไว้ใน Array
+  learnedWordsList = data.map((item) => item.word_id);
+
+  // 3. คำนวณตัวเลขเพื่อเอาไปแปะบนหน้าจอ
+  const learnedCount = learnedWordsList.length;
+  const remainingCount = 3000 - learnedCount; // สมมติว่าศัพท์ทั้งหมดมี 3000 คำ
+
+  // 4. อัปเดตตัวเลขบนหน้าเว็บจริง (อิงตาม ID กล่องคะแนนในเว็บของคุณ)
+  // ⚠️ ให้เช็กดูว่าใน index.html ของคุณ กล่องเลข LEARNED กับ REMAINING ใช้ ID อะไร แล้วเปลี่ยนให้ตรงกันนะครับ
+  const learnedEl = document.getElementById("learned-count") ||
+    document.querySelector(".learned-box h2") || { textContent: "" };
+  const remainingEl = document.getElementById("remaining-count") ||
+    document.querySelector(".remaining-box h2") || { textContent: "" };
+
+  // โค้ดตัวอย่างการเปลี่ยนเลขบนหน้าจอ (ปรับตามคลาส/ไอดีจริงในเว็บของคุณได้เลย)
+  // สมมติตามรูปแอปของคุณที่มีตัวเลขโชว์
+  const textNodes = document.querySelectorAll("div"); // หรือระบุคลาสที่หุ้มตัวเลขไว้
+
+  // ตัวอย่างการอัปเดตแบบระบุเจาะจง (ถ้าคุณใส่ id="learned-count" ไว้ที่ HTML จะง่ายที่สุดครับ)
+  if (document.getElementById("learned-count")) {
+    document.getElementById("learned-count").textContent = learnedCount;
+    document.getElementById("remaining-count").textContent = remainingCount;
+  } else {
+    // โค้ดสำรองพิมพ์บอกใน Console ก่อนถ้ายังไม่ได้ผูก ID ตัวเลข
+    console.log(
+      `ผู้เรียนเรียนไปแล้ว: ${learnedCount} คำ, เหลืออีก: ${remainingCount} คำ`,
+    );
+  }
+
+  // 💡 ตรงนี้: คุณสามารถเอาตัวแปร learnedWordsList ไปสั่งให้โค้ดระบบสุ่มศัพท์เดิมของคุณ
+  // "ข้าม" คำศัพท์ที่เรียนไปแล้วได้เลยครับ! เช่น if (learnedWordsList.includes(currentWord)) { สุ่มใหม่ }
 }
 
 // =========================
@@ -926,6 +972,8 @@ startBtn.addEventListener("click", () => {
 
 nextBtn.addEventListener("click", () => {
   markLearned(currentIndex);
+  // ตัวอย่าง: ทุกครั้งที่กดปุ่มจำได้แล้ว ให้ส่ง ID หรือตัวคำศัพท์นั้นไปเซฟ
+  saveWordProgress(currentIndex); // เปลี่ยน currentWord.word เป็นตัวแปรเก็บคำศัพท์ในโค้ดของคุณนะคร้บ
 
   if (currentIndex < words.length - 1) {
     currentIndex++;
@@ -1082,3 +1130,37 @@ copyAccBtn.addEventListener("click", () => {
       console.error("ไม่สามารถคัดลอกได้: ", err);
     });
 });
+
+// ฟังก์ชันสำหรับเรียกใช้เวลาผู้เรียนกดปุ่ม "รู้แล้ว/จำได้แล้ว" เพื่อบันทึกลงฐานข้อมูล
+async function saveWordProgress(wordId) {
+  // เช็กก่อนว่าล็อกอินหรือยัง
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (!session || !session.user) {
+    console.log("ยังไม่ได้ล็อกอิน ไม่บันทึกลงเซิร์ฟเวอร์ (เล่นแบบ Local)");
+    return;
+  }
+
+  const userId = session.user.id;
+
+  // ส่งข้อมูลไปบันทึกบน Supabase
+  const { error } = await supabase.from("user_progress").upsert(
+    {
+      user_id: userId,
+      word_id: wordId,
+      status: "learned",
+      updated_at: new Date(),
+    },
+    { onConflict: "user_id, word_id" },
+  ); // ถ้าซ้ำคำเดิมให้เขียนทับ ไม่ให้เออร์เรอร์
+
+  if (error) {
+    console.error("บันทึกข้อมูลไม่สำเร็จ:", error.message);
+  } else {
+    console.log(`บันทึกคำว่า [${wordId}] ลงโปรไฟล์เรียบร้อย!`);
+    // โหลดคะแนนใหม่มาโชว์บนหน้าจอทันที
+    loadUserProgress(userId);
+  }
+}
