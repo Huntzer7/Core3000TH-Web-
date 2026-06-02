@@ -45,16 +45,26 @@ document.addEventListener("DOMContentLoaded", () => {
   // ปุ่มออกจากระบบ (ล้างข้อมูลเก่าในเครื่องออกให้หมดเมื่อล็อกเอาต์)
   if (logoutBtn) {
     logoutBtn.addEventListener("click", async () => {
+      // 1. ล้างข้อมูลประวัติการเรียนเก่าในเครื่องออกให้หมด
+      localStorage.removeItem("currentIndex");
+      localStorage.removeItem("learnedWords");
+      localStorage.removeItem("favorites");
+
+      // 2. รีเซ็ตตัวแปรในระบบให้เป็นค่าว่างทั้งหมด
+      learnedWords = [];
+      currentIndex = 0;
+      favorites = [];
+
+      // 3. บังคับให้หน้าจอวาด UI ใหม่ทันที (แก้บั๊กตัวเลขค้างหน้าจอ)
+      updateHome();
+      showWord();
+
+      // 4. สั่ง Logout จากระบบ
       const { error } = await supabase.auth.signOut();
       if (error) {
         console.error("Error logging out:", error.message);
       } else {
-        // ล้างข้อมูลประวัติการเรียนเก่าในเครื่องออกให้หมด
-        localStorage.removeItem("currentIndex");
-        localStorage.removeItem("learnedWords");
-        localStorage.removeItem("favorites");
-
-        window.location.reload(); // รีเฟรชหน้าเว็บกลับเป็นตัวเลข 0 สำหรับ Guest
+        window.location.reload(); // รีเฟรชหน้าเว็บให้เป็น Guest โดยสมบูรณ์
       }
     });
   }
@@ -89,10 +99,35 @@ async function loadUserProgress(userId) {
   showWord();
 }
 
-// ฟังก์ชันจำลองสำหรับส่งข้อมูลไปบันทึกบน Supabase (ใส่ไว้กัน Code พังตอนกด Next)
+// ฟังก์ชันสำหรับส่งข้อมูลไปบันทึกบน Supabase อย่างสมบูรณ์
 async function saveWordProgress(index) {
   console.log("บันทึกความคืบหน้าคำที่ index:", index);
-  // คุณสามารถเขียนดึงคำศัพท์จริงส่งไปเซฟที่ตาราง user_progress ของ Supabase ตรงนี้ได้เลยครับ
+
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  // ถ้ายังไม่ได้ล็อกอิน ให้ทำงานแค่ Local Storage อย่างเดียว (ไม่ต้องส่งขึ้นเซิร์ฟเวอร์)
+  if (!session || !session.user) {
+    return;
+  }
+
+  const userId = session.user.id;
+
+  // ส่งข้อมูลไปบันทึกลงตาราง user_progress ของ Supabase
+  const { error } = await supabase.from("user_progress").upsert(
+    {
+      user_id: userId,
+      word_id: index.toString(), // แปลงเป็น String ให้ตรงกับชนิดข้อมูล
+      status: "learned",
+      updated_at: new Date(),
+    },
+    { onConflict: "user_id, word_id" },
+  );
+
+  if (error) {
+    console.error("บันทึกข้อมูลขึ้นระบบไม่สำเร็จ:", error.message);
+  }
 }
 
 // =========================
@@ -294,12 +329,17 @@ function markLearned(index) {
 // =========================
 
 function updateHome() {
-  if (!words.length) return;
+  // 💡 สร้างค่า Fallback เป็น 3000 ไว้เสมอ (แก้บั๊ก 0/0 ตอนข้อมูลไฟล์ยังโหลดไม่เสร็จ หรือตอนยังไม่ล็อกอิน)
+  const totalWords = words.length > 0 ? words.length : 3000;
 
-  const learned = learnedWords.length;
-  const remaining = Math.max(words.length - learned, 0);
-  const pct = Math.round((learned / words.length) * 100);
+  // เช็กว่ามีข้อมูลในอาร์เรย์หรือไม่ ถ้าไม่มีให้เป็น 0
+  const learned = learnedWords ? learnedWords.length : 0;
+  const remaining = Math.max(totalWords - learned, 0);
 
+  // คำนวณเปอร์เซ็นต์
+  const pct = totalWords > 0 ? Math.round((learned / totalWords) * 100) : 0;
+
+  // วาดผลลัพธ์ลงหน้าจอ
   if (learnedCountEl) learnedCountEl.textContent = learned;
   if (remainingCountEl) remainingCountEl.textContent = remaining;
   if (homeProgressEl) homeProgressEl.style.width = pct + "%";
@@ -853,3 +893,271 @@ if (favoriteMenuBtn) {
     displayFavorites();
   });
 }
+
+// Restart Menu
+if (restartMenuBtn) {
+  restartMenuBtn.addEventListener("click", () => {
+    const confirmed = confirm(
+      "⚠️ คุณต้องการเริ่มต้นการเรียนใหม่จริงใช่ไหม?\n\nข้อมูลทั้งหมดจะถูกลบ",
+    );
+    if (confirmed) {
+      localStorage.clear();
+      location.reload();
+    }
+  });
+}
+
+// Favorite Quiz
+if (favQuizBtn) {
+  favQuizBtn.addEventListener("click", () => {
+    if (favorites.length < 1) {
+      alert("เพิ่มคำศัพท์โปรดก่อนสำหรับทำควิซ");
+      return;
+    }
+    openFavQuizSetup();
+  });
+}
+
+// Favorite Quiz Mode Selection
+if (modeAnswerMeaning) {
+  modeAnswerMeaning.addEventListener("click", () => {
+    favoriteQuizMode = "answerMeaning";
+    document
+      .querySelectorAll(".mode-card")
+      .forEach((btn) => btn.classList.remove("selected"));
+    modeAnswerMeaning.classList.add("selected");
+  });
+}
+
+if (modeMeaningAnswer) {
+  modeMeaningAnswer.addEventListener("click", () => {
+    favoriteQuizMode = "meaningAnswer";
+    document
+      .querySelectorAll(".mode-card")
+      .forEach((btn) => btn.classList.remove("selected"));
+    modeMeaningAnswer.classList.add("selected");
+  });
+}
+
+if (favQuizStartBtn) {
+  favQuizStartBtn.addEventListener("click", () => {
+    if (favQuizModeModal) favQuizModeModal.classList.remove("active");
+    startFavoriteQuiz();
+  });
+}
+
+if (favQuizCancelBtn) {
+  favQuizCancelBtn.addEventListener("click", () => {
+    if (favQuizModeModal) favQuizModeModal.classList.remove("active");
+  });
+}
+
+// Search in Favorite
+if (searchToggleBtn) {
+  searchToggleBtn.addEventListener("click", () => {
+    if (!favoriteSearch) return;
+    const isHidden = favoriteSearch.style.display === "none";
+    favoriteSearch.style.display = isHidden ? "block" : "none";
+    if (isHidden) {
+      favoriteSearch.focus();
+    } else {
+      favoriteSearch.value = "";
+      filterFavorites("");
+      displayFavorites();
+    }
+  });
+}
+
+if (favoriteSearch) {
+  favoriteSearch.addEventListener("input", (e) => {
+    filterFavorites(e.target.value);
+  });
+}
+
+if (darkModeBtn) darkModeBtn.addEventListener("click", toggleDarkMode);
+
+if (soundBtn) {
+  soundBtn.addEventListener("click", () => {
+    const word = wordEl ? wordEl.textContent : "";
+    if (word) pronounceWord(word);
+  });
+}
+
+if (startBtn) {
+  startBtn.addEventListener("click", () => {
+    showPage("learning");
+    showWord();
+  });
+}
+
+if (nextBtn) {
+  nextBtn.addEventListener("click", () => {
+    markLearned(currentIndex);
+    saveWordProgress(currentIndex);
+
+    if (currentIndex < words.length - 1) {
+      currentIndex++;
+    }
+
+    saveProgress();
+    updateHome();
+    showWord();
+  });
+}
+
+if (backBtn) {
+  backBtn.addEventListener("click", () => {
+    if (currentIndex > 0) {
+      currentIndex--;
+      saveProgress();
+      showWord();
+    }
+  });
+}
+
+if (meaningBtnEl) {
+  meaningBtnEl.addEventListener("click", () => {
+    if (!meaningBoxEl) return;
+    const hidden = meaningBoxEl.classList.toggle("hidden");
+    meaningBtnEl.textContent = hidden ? "Show Meaning" : "Hide Meaning";
+  });
+}
+
+// Quiz Setup
+if (modeBtn) modeBtn.addEventListener("click", openQuizSetup);
+
+if (setupStartBtn) {
+  setupStartBtn.addEventListener("click", () => {
+    const checkedCount = document.querySelector(
+      'input[name="quizCount"]:checked',
+    );
+    const checkedMode = document.querySelector(
+      'input[name="quizMode"]:checked',
+    );
+
+    if (checkedCount) quizConfig.count = parseInt(checkedCount.value);
+    if (checkedMode) quizConfig.mode = checkedMode.value;
+
+    if (quizSetupModal) quizSetupModal.classList.remove("active");
+    initQuiz();
+  });
+}
+
+if (setupCancelBtn) {
+  setupCancelBtn.addEventListener("click", () => {
+    if (quizSetupModal) quizSetupModal.classList.remove("active");
+  });
+}
+
+// Review Wrong Answers
+if (reviewToggleBtn) {
+  reviewToggleBtn.addEventListener("click", () => {
+    if (!reviewSection) return;
+    const isHidden = reviewSection.style.display === "none";
+    reviewSection.style.display = isHidden ? "block" : "none";
+    reviewToggleBtn.textContent = isHidden
+      ? "📋 ซ่อนข้อที่ผิด"
+      : "📋 ดูข้อที่ผิด";
+
+    if (isHidden) {
+      displayWrongAnswers();
+    }
+  });
+}
+
+if (quizBackBtn) {
+  quizBackBtn.addEventListener("click", () => {
+    showPage("learning");
+    showWord();
+  });
+}
+
+if (restartBtn) {
+  restartBtn.addEventListener("click", () => {
+    quizIndex = 0;
+    correct = 0;
+    incorrect = 0;
+    showPage("quiz");
+    showQuiz();
+  });
+}
+
+if (newWordBtn) {
+  newWordBtn.addEventListener("click", () => {
+    showPage("learning");
+    showWord();
+  });
+}
+
+// =========================
+// DONATE FEATURE
+// =========================
+const donateMenuBtn = document.getElementById("donateMenuBtn");
+const donateModal = document.getElementById("donateModal");
+const closeDonateTopBtn = document.getElementById("closeDonateTopBtn");
+const copyAccBtn = document.getElementById("copyAccBtn");
+const accountNumber = document.getElementById("accountNumber");
+
+if (donateMenuBtn) {
+  donateMenuBtn.addEventListener("click", () => {
+    if (sidebar) sidebar.classList.remove("active");
+    if (sidebarOverlay) sidebarOverlay.classList.remove("active");
+    if (donateModal) donateModal.style.display = "flex";
+  });
+}
+
+if (closeDonateTopBtn) {
+  closeDonateTopBtn.addEventListener("click", () => {
+    if (donateModal) donateModal.style.display = "none";
+  });
+}
+
+if (donateModal) {
+  donateModal.addEventListener("click", (e) => {
+    if (e.target === donateModal) {
+      donateModal.style.display = "none";
+    }
+  });
+}
+
+if (copyAccBtn && accountNumber) {
+  copyAccBtn.addEventListener("click", () => {
+    const accText = accountNumber.innerText.replace(/-/g, "");
+    navigator.clipboard
+      .writeText(accText)
+      .then(() => {
+        showToast("📋 คัดลอกเลขบัญชีสำเร็จ!");
+      })
+      .catch((err) => {
+        console.error("ไม่สามารถคัดลอกได้:", err);
+      });
+  });
+}
+
+// =========================
+// INIT SYSTEM
+// =========================
+
+loadState();
+loadFavorites();
+initDarkMode();
+
+// 💡 สั่งวาดหน้าจอด้วยค่า 0 / 3000 ไว้พลางๆ ก่อนไฟล์จะโหลดเสร็จ
+updateHome();
+
+fetch("/words.json")
+  .then((r) => r.json())
+  .then((data) => {
+    words = data;
+
+    if (currentIndex >= words.length) {
+      currentIndex = 0;
+    }
+
+    // วาดหน้าจอด้วยข้อมูลจริงที่โหลดมาสมบูรณ์
+    updateHome();
+    showWord();
+  })
+  .catch((err) => {
+    console.error("Failed to load words.json", err);
+  });
