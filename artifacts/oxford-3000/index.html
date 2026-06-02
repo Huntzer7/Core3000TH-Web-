@@ -194,7 +194,28 @@
           </svg>
           <span>Restart Learning</span>
         </button>
-        <!-- ⬇️ วางโค้ดส่วนนี้ต่อท้ายได้เลยครับ ⬇️ -->
+
+        <!-- ⬇️ โค้ดปุ่ม Donate ⬇️ -->
+        <button id="donateMenuBtn" class="sidebar-item">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"
+            />
+          </svg>
+          <span>Donate สนับสนุน</span>
+        </button>
+
+        <!-- ⬇️ โค้ดปุ่มรายงานปัญหา/เสนอแนะ ⬇️ -->
         <a
           href="https://forms.gle/8a8KG5Mc4tYHuMZW6"
           target="_blank"
@@ -673,6 +694,117 @@
         </div>
       </div>
     </section>
+    <!-- Pop-up โหมด Donate -->
+    <div id="donateModal" class="modal" style="display: none">
+      <div
+        class="modal-content"
+        style="
+          max-width: 360px;
+          width: 90%;
+          text-align: center;
+          position: relative;
+        "
+      >
+        <button
+          id="closeDonateTopBtn"
+          style="
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: var(--text-secondary);
+          "
+        >
+          &times;
+        </button>
+
+        <h3 style="margin-bottom: 16px">สนับสนุนค่าขนม</h3>
+
+        <div
+          style="
+            background: white;
+            padding: 12px;
+            border-radius: 12px;
+            display: inline-block;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          "
+        >
+          <img
+            src="donate-qr.png"
+            alt="PromptPay QR Code"
+            style="
+              width: 200px;
+              height: 200px;
+              display: block;
+              object-fit: contain;
+            "
+          />
+        </div>
+
+        <div
+          style="
+            font-size: 15px;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+          "
+        >
+          ธนาคาร : กสิกรไทย
+        </div>
+        <div
+          style="
+            font-size: 15px;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+          "
+        >
+          ชื่อบัญชี : นายครองภพ ธีระเสาวภากร
+        </div>
+
+        <div
+          class="account-container"
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 16px;
+          "
+        >
+          <span
+            id="accountNumber"
+            style="font-weight: bold; font-size: 16px; letter-spacing: 0.5px"
+            >195-2-94384-3</span
+          >
+          <button
+            id="copyAccBtn"
+            class="btn btn-outline"
+            style="padding: 4px 8px; font-size: 12px"
+          >
+            Copy
+          </button>
+        </div>
+
+        <p
+          class="highlight-text"
+          style="
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 16px;
+            color: var(--accent);
+          "
+        >
+          สามารถใช้แอปธนาคารสแกน QR CODE ได้เลย!
+        </p>
+
+        <div style="font-size: 15px; color: var(--text-muted); margin-top: 8px">
+          Thank for support 🙏
+        </div>
+      </div>
+    </div>
 
     <script type="module" src="/src/script.js"></script>
   </body>

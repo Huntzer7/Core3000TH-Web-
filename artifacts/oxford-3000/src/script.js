@@ -961,3 +961,63 @@ fetch("/words.json")
   .catch((err) => {
     console.error("Failed to load words.json", err);
   });
+
+// =========================
+// DONATE FEATURE (ระบบสนับสนุน)
+// =========================
+const donateMenuBtn = document.getElementById("donateMenuBtn");
+const donateModal = document.getElementById("donateModal");
+const closeDonateTopBtn = document.getElementById("closeDonateTopBtn");
+const copyAccBtn = document.getElementById("copyAccBtn");
+const accountNumber = document.getElementById("accountNumber");
+
+// 1. เปิด Pop-up เมื่อกดจาก Sidebar
+donateMenuBtn.addEventListener("click", () => {
+  // สั่งปิดเมนู Sidebar (ถ้าเปิดค้างไว้)
+  const sidebar = document.querySelector(".sidebar");
+  const overlay = document.querySelector(".sidebar-overlay");
+  if (sidebar && sidebar.classList.contains("active")) {
+    sidebar.classList.remove("active");
+    if (overlay) overlay.classList.remove("active");
+  }
+
+  // เปิดโชว์ Modal
+  donateModal.style.display = "flex";
+});
+
+// 2. ปิด Pop-up เมื่อกดปุ่มกากบาท X
+closeDonateTopBtn.addEventListener("click", () => {
+  donateModal.style.display = "none";
+});
+
+// 3. ปิด Pop-up เมื่อคลิกพื้นที่ว่างรอบๆ กล่อง
+donateModal.addEventListener("click", (e) => {
+  if (e.target === donateModal) {
+    donateModal.style.display = "none";
+  }
+});
+
+// 4. ฟังก์ชันกด Copy เลขบัญชี
+copyAccBtn.addEventListener("click", () => {
+  // ดึงเลขบัญชีตัดขีดออกหรือคงไว้ตามข้อความใน HTML
+  const accText = accountNumber.innerText.replace(/-/g, ""); // เอาเครื่องหมายขีดออกเพื่อให้โอนง่าย หรือถ้าจะเอาขีดไว้ให้ลบ .replace(/-/g, "") ออกครับ
+
+  // คัดลอกลง Clipboard
+  navigator.clipboard
+    .writeText(accText)
+    .then(() => {
+      // เปลี่ยนสถานะปุ่มชั่วคราวเพื่อบอกผู้ใช้ว่าก๊อบปี้แล้ว
+      const originalText = copyAccBtn.innerText;
+      copyAccBtn.innerText = "Copied!";
+      copyAccBtn.classList.add("copied");
+
+      // เปลี่ยนกลับเป็นแบบเดิมหลังจากผ่านไป 2 วินาที
+      setTimeout(() => {
+        copyAccBtn.innerText = originalText;
+        copyAccBtn.classList.remove("copied");
+      }, 2000);
+    })
+    .catch((err) => {
+      console.error("ไม่สามารถคัดลอกได้: ", err);
+    });
+});
