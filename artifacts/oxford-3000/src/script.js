@@ -1,3 +1,64 @@
+import { supabase } from "./supabase.js";
+
+// ครอบโค้ดทั้งหมดไว้ในนี้ เพื่อให้ระบบรอให้หน้าเว็บโหลดโครงสร้าง HTML เสร็จสมบูรณ์ 100% ก่อนเริ่มทำงาน
+document.addEventListener("DOMContentLoaded", () => {
+  const loginBtn = document.getElementById("login-btn");
+  const logoutBtn = document.getElementById("logout-btn");
+  const userInfo = document.getElementById("user-info");
+
+  // ตรวจสอบเช็กสถานะการล็อกอิน
+  async function checkUserStatus() {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
+    if (session && session.user) {
+      if (loginBtn) loginBtn.style.display = "none";
+      if (userInfo) {
+        userInfo.style.display = "inline";
+        userInfo.textContent = `สวัสดี, ${session.user.user_metadata.full_name || "ผู้เรียน"}`;
+      }
+      if (logoutBtn) logoutBtn.style.display = "inline";
+
+      loadUserProgress(session.user.id);
+    } else {
+      if (loginBtn) loginBtn.style.display = "inline-flex"; // เปิดแสดงผลปุ่มล็อกอิน
+      if (userInfo) userInfo.style.display = "none";
+      if (logoutBtn) logoutBtn.style.display = "none";
+    }
+  }
+
+  // ผูกตัวแปรปุ่มกดเข้ากับระบบ Google Login
+  if (loginBtn) {
+    loginBtn.addEventListener("click", async () => {
+      console.log("กำลังเชื่อมต่อไปยัง Google...");
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: {
+          redirectTo: window.location.origin,
+        },
+      });
+      if (error) alert("เกิดข้อผิดพลาดในการล็อกอิน: " + error.message);
+    });
+  }
+
+  // ปุ่มออกจากระบบ
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", async () => {
+      const { error } = await supabase.auth.signOut();
+      if (error) console.error("Error logging out:", error.message);
+      else window.location.reload();
+    });
+  }
+
+  // เรียกใช้ฟังก์ชันเช็กสถานะทันทีเมื่อหน้าเว็บพร้อม
+  checkUserStatus();
+});
+
+async function loadUserProgress(userId) {
+  console.log("กำลังโหลดข้อมูลผู้เรียน ID:", userId);
+}
+
 // =========================
 // STATE
 // =========================

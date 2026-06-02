@@ -11,5 +11,8 @@
   "devDependencies": {
     "@types/node": "catalog:",
     "vite": "catalog:"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.106.2"
   }
 }
