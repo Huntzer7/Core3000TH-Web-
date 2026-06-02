@@ -1248,6 +1248,21 @@ body.dark-mode .header-top {
 }
 
 /* ==================
+   REPORT LINK (GOOGLE FORM)
+================== */
+.sidebar-item.report-link {
+  text-decoration: none; /* ลบเส้นใต้ของลิงก์ออก */
+  display: flex;
+  align-items: center;
+}
+
+/* ตั้งค่าสีไอคอนให้กลืนไปกับตัวหนังสือ */
+.sidebar-item.report-link svg {
+  stroke: currentColor;
+  fill: none;
+}
+
+/* ==================
    RESPONSIVE
 ================== */
 
