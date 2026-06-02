@@ -13,6 +13,8 @@ let incorrect = 0;
 let quizAnswered = false;
 let wrongAnswers = []; // เก็บข้อที่ผิด
 let favorites = []; // เก็บ index ของคำศัพท์โปรด
+let favoriteQuizMode = "answerMeaning"; // "answerMeaning" หรือ "meaningAnswer"
+let isInFavoriteQuiz = false; // เพื่อรู้ว่าอยู่ใน Favorite Quiz
 let quizConfig = {
   // ตั้งค่า Quiz
   count: 10,
@@ -172,10 +174,15 @@ const restartMenuBtn = document.getElementById("restartMenuBtn");
 const favoritePage = document.getElementById("favoritePage");
 const favoriteList = document.getElementById("favoriteList");
 const emptyFavorites = document.getElementById("emptyFavorites");
-const favoriteFab = document.getElementById("favoriteFab");
 const favQuizBtn = document.getElementById("favQuizBtn");
 const searchToggleBtn = document.getElementById("searchToggleBtn");
 const favoriteSearch = document.getElementById("favoriteSearch");
+const favQuizModeModal = document.getElementById("favQuizModeModal");
+const modeAnswerMeaning = document.getElementById("modeAnswerMeaning");
+const modeMeaningAnswer = document.getElementById("modeMeaningAnswer");
+const favQuizStartBtn = document.getElementById("favQuizStartBtn");
+const favQuizCancelBtn = document.getElementById("favQuizCancelBtn");
+const quizLabel = document.getElementById("quizLabel");
 const favoriteCount = document.getElementById("favoriteCount");
 
 // =========================
@@ -412,6 +419,8 @@ function showResult() {
     reviewToggleBtn.style.display = "none";
     reviewSection.style.display = "none";
   }
+
+  isInFavoriteQuiz = false;
 }
 
 function displayWrongAnswers() {
@@ -420,11 +429,21 @@ function displayWrongAnswers() {
   wrongAnswers.forEach((item, index) => {
     const div = document.createElement("div");
     div.className = "wrong-answer-item";
-    div.innerHTML = `
-      <div class="question">ข้อที่ ${index + 1}: ${item.word}</div>
-      <div class="your-answer">❌ คำตอบของคุณ: ${item.yourAnswer}</div>
-      <div class="correct-answer">✅ คำตอบที่ถูกต้อง: ${item.correctAnswer}</div>
-    `;
+
+    if (item.mode === "answerMeaning") {
+      div.innerHTML = `
+        <div class="question">ข้อที่ ${index + 1}: ${item.word}</div>
+        <div class="your-answer">❌ คำตอบของคุณ: ${item.yourAnswer}</div>
+        <div class="correct-answer">✅ คำตอบที่ถูกต้อง: ${item.correctAnswer}</div>
+      `;
+    } else {
+      div.innerHTML = `
+        <div class="question">ข้อที่ ${index + 1}: ${item.meaning}</div>
+        <div class="your-answer">❌ คำตอบของคุณ: ${item.yourAnswer}</div>
+        <div class="correct-answer">✅ คำตอบที่ถูกต้อง: ${item.correctAnswer}</div>
+      `;
+    }
+
     wrongAnswersListEl.appendChild(div);
   });
 }
@@ -495,13 +514,11 @@ function displayFavorites() {
   if (!favorites.length) {
     favoriteList.innerHTML = "";
     emptyFavorites.style.display = "block";
-    favoriteFab.style.display = "none";
     favoriteCount.textContent = "0 words";
     return;
   }
 
   emptyFavorites.style.display = "none";
-  favoriteFab.style.display = "block";
   favoriteCount.textContent = `${favorites.length} words`;
 
   favoriteList.innerHTML = "";
@@ -579,6 +596,154 @@ function filterFavorites(query) {
   });
 }
 
+function openFavQuizSetup() {
+  if (favorites.length < 1) {
+    showToast("เพิ่มคำศัพท์โปรดก่อน");
+    return;
+  }
+  favQuizModeModal.classList.add("active");
+}
+
+function startFavoriteQuiz() {
+  isInFavoriteQuiz = true;
+
+  // เอาคำจาก favorites
+  let selectedWordIndices = [...favorites];
+
+  // Shuffle
+  for (let i = selectedWordIndices.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [selectedWordIndices[i], selectedWordIndices[j]] = [
+      selectedWordIndices[j],
+      selectedWordIndices[i],
+    ];
+  }
+
+  quizWords = selectedWordIndices.map((i) => words[i]).filter(Boolean);
+
+  quizIndex = 0;
+  correct = 0;
+  incorrect = 0;
+  wrongAnswers = [];
+
+  showPage("quiz");
+  showFavQuiz();
+}
+
+function showFavQuiz() {
+  quizAnswered = false;
+
+  const q = quizWords[quizIndex];
+  if (!q) return;
+
+  quizProgressEl.textContent = `Question ${quizIndex + 1} / ${quizWords.length}`;
+  quizProgressBarEl.style.width =
+    ((quizIndex + 1) / quizWords.length) * 100 + "%";
+
+  let question = "";
+  let correctAnswer = "";
+  let choices = [];
+
+  if (favoriteQuizMode === "answerMeaning") {
+    // แสดงคำอังกฤษ เลือกความหมายไทย
+    quizLabel.textContent = "เลือกความหมายที่ถูกต้อง";
+    quizWord.textContent = q.word;
+    correctAnswer = q.meaning;
+
+    choices = [q.meaning];
+    const pool = words.filter((w) => w.meaning && w.meaning !== q.meaning);
+
+    for (let i = pool.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [pool[i], pool[j]] = [pool[j], pool[i]];
+    }
+
+    pool.slice(0, 3).forEach((w) => choices.push(w.meaning));
+  } else {
+    // แสดงความหมายไทย เลือกคำอังกฤษ
+    quizLabel.textContent = "เลือกคำศัพท์ที่ถูกต้อง";
+    quizWord.textContent = q.meaning;
+    correctAnswer = q.word;
+
+    choices = [q.word];
+    const pool = favorites
+      .map((i) => words[i])
+      .filter((w) => w && w.word !== q.word);
+
+    for (let i = pool.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [pool[i], pool[j]] = [pool[j], pool[i]];
+    }
+
+    pool.slice(0, 3).forEach((w) => choices.push(w.word));
+  }
+
+  // Shuffle choices
+  for (let i = choices.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [choices[i], choices[j]] = [choices[j], choices[i]];
+  }
+
+  quizChoicesEl.innerHTML = "";
+
+  choices.forEach((choice) => {
+    const btn = document.createElement("button");
+    btn.className = "choice-btn";
+    btn.textContent = choice;
+    btn.addEventListener("click", () => checkFavAnswer(choice, correctAnswer));
+    quizChoicesEl.appendChild(btn);
+  });
+}
+
+function checkFavAnswer(selected, correctAnswer) {
+  if (quizAnswered) return;
+  quizAnswered = true;
+
+  const buttons = quizChoicesEl.querySelectorAll(".choice-btn");
+
+  buttons.forEach((btn) => {
+    btn.disabled = true;
+    if (btn.textContent === correctAnswer) {
+      btn.classList.add("correct");
+    }
+  });
+
+  if (selected === correctAnswer) {
+    correct++;
+    quizResultEl.textContent = "Correct";
+    quizResultEl.className = "quiz-result correct";
+  } else {
+    incorrect++;
+
+    // เก็บข้อที่ผิด
+    wrongAnswers.push({
+      word: quizWords[quizIndex].word,
+      meaning: quizWords[quizIndex].meaning,
+      yourAnswer: selected,
+      correctAnswer: correctAnswer,
+      mode: favoriteQuizMode,
+    });
+
+    buttons.forEach((btn) => {
+      if (btn.textContent === selected) {
+        btn.classList.add("incorrect");
+      }
+    });
+
+    quizResultEl.textContent = `Incorrect — answer: ${correctAnswer}`;
+    quizResultEl.className = "quiz-result incorrect";
+  }
+
+  setTimeout(() => {
+    quizIndex++;
+    if (quizIndex >= quizWords.length) {
+      showResult();
+    } else {
+      showFavQuiz();
+    }
+  }, 1200);
+}
+
 // =========================
 // EVENTS
 // =========================
@@ -640,6 +805,35 @@ favQuizBtn.addEventListener("click", () => {
   }
   openFavQuizSetup();
 });
+
+// Favorite Quiz Mode Selection
+modeAnswerMeaning.addEventListener("click", () => {
+  favoriteQuizMode = "answerMeaning";
+  document
+    .querySelectorAll(".mode-card")
+    .forEach((btn) => btn.classList.remove("selected"));
+  modeAnswerMeaning.classList.add("selected");
+});
+
+modeMeaningAnswer.addEventListener("click", () => {
+  favoriteQuizMode = "meaningAnswer";
+  document
+    .querySelectorAll(".mode-card")
+    .forEach((btn) => btn.classList.remove("selected"));
+  modeMeaningAnswer.classList.add("selected");
+});
+
+favQuizStartBtn.addEventListener("click", () => {
+  favQuizModeModal.classList.remove("active");
+  startFavoriteQuiz();
+});
+
+favQuizCancelBtn.addEventListener("click", () => {
+  favQuizModeModal.classList.remove("active");
+});
+
+// Update Favorite Quiz Button
+favQuizBtn.addEventListener("click", openFavQuizSetup);
 
 // Search in Favorite
 searchToggleBtn.addEventListener("click", () => {

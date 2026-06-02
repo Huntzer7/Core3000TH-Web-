@@ -1114,8 +1114,8 @@ body.dark-mode .header-top {
 .favorite-fab {
   padding: 16px 0;
   border-top: 1px solid var(--border);
+  display: none !important;  /* ซ่อนไป */
 }
-
 #favBtn.active {
   color: var(--incorrect) !important;
   fill: var(--incorrect);
@@ -1149,11 +1149,18 @@ body.dark-mode .header-top {
    FAVORITE SEARCH
 ================== */
 
-.header-top-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  .header-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .header-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
 }
 
 .search-btn {
@@ -1186,6 +1193,58 @@ body.dark-mode .header-top {
 
 .favorite-item.hidden {
   display: none;
+}
+
+/* ==================
+   FAVORITE QUIZ MODE MODAL
+================== */
+
+.mode-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.mode-card {
+  padding: 16px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  font-family: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mode-card:hover {
+  border-color: var(--accent);
+  background: var(--surface-subtle);
+}
+
+.mode-card.selected {
+  background: var(--surface-subtle);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(45, 63, 107, 0.1);
+}
+
+.mode-icon {
+  font-size: 24px;
+}
+
+.mode-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.mode-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.4;
 }
 
 /* ==================
