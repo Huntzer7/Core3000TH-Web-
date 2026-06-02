@@ -554,7 +554,6 @@ function displayFavorites() {
 }
 
 emptyFavorites.style.display = "none";
-favoriteFab.style.display = "block";
 favoriteCount.textContent = `${favorites.length} words`;
 
 favoriteList.innerHTML = "";
