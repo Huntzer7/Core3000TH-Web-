@@ -6,28 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const logoutBtn = document.getElementById("logout-btn");
   const userInfo = document.getElementById("user-info");
 
-  // ตรวจสอบเช็กสถานะการล็อกอิน
-  async function checkUserStatus() {
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
-
-    if (session && session.user) {
-      if (loginBtn) loginBtn.style.display = "none";
-      if (userInfo) {
-        userInfo.style.display = "inline";
-        userInfo.textContent = session.user.user_metadata.full_name || "";
-      } // ← เพิ่ม } ที่หายไป
-      if (logoutBtn) logoutBtn.style.display = "inline";
-
-      loadUserProgress(session.user.id);
-    } else {
-      if (loginBtn) loginBtn.style.display = "inline-flex";
-      if (userInfo) userInfo.style.display = "none";
-      if (logoutBtn) logoutBtn.style.display = "none";
-    }
-  }
-
   // ผูกตัวแปรปุ่มกดเข้ากับระบบ Google Login
   if (loginBtn) {
     loginBtn.addEventListener("click", async () => {
@@ -65,29 +43,31 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // เรียกใช้ฟังก์ชันเช็กสถานะทันทีเมื่อหน้าเว็บพร้อม
-  checkUserStatus();
-
-  // ดัก event เมื่อ login/logout สำเร็จ
+  // ดัก event สถานะการล็อกอิน (ครอบคลุมทั้งเปิดหน้าแรก และหลังล็อกอิน/ล็อกเอาท์เสร็จสิ้น)
   supabase.auth.onAuthStateChange((event, session) => {
-    if (event === "SIGNED_IN" && session) {
+    console.log("Auth Event:", event);
+
+    if ((event === "SIGNED_IN" || event === "INITIAL_SESSION") && session) {
       if (loginBtn) loginBtn.style.display = "none";
       if (userInfo) {
         userInfo.style.display = "inline";
         userInfo.textContent = session.user.user_metadata.full_name || "";
       }
       if (logoutBtn) logoutBtn.style.display = "inline";
+
       loadUserProgress(session.user.id);
-      document.getElementById("sidebar")?.classList.remove("active");
-      document.getElementById("sidebarOverlay")?.classList.remove("active");
-      showPage("home");
-      updateHome();
+
+      if (event === "SIGNED_IN") {
+        document.getElementById("sidebar")?.classList.remove("active");
+        document.getElementById("sidebarOverlay")?.classList.remove("active");
+        showPage("home");
+        updateHome();
+      }
     } else if (event === "SIGNED_OUT") {
       if (loginBtn) loginBtn.style.display = "inline-flex";
       if (userInfo) userInfo.style.display = "none";
       if (logoutBtn) logoutBtn.style.display = "none";
 
-      // ✅ เพิ่มเติม: เมื่อสั่ง Sign Out ให้เคลียร์ตัวแปร และรีเซ็ตหน้าจอหลักเป็น 0 ทันที
       learnedWords = [];
       currentIndex = 0;
       favorites = [];
@@ -106,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
 async function loadUserProgress(userId) {
   console.log("กำลังโหลดข้อมูลผู้เรียน ID:", userId);
 
-  // 1. โหลดข้อมูลคำศัพท์ที่เรียนแล้ว (โค้ดเดิมของคุณ)
+  // 1. โหลดข้อมูลคำศัพท์ที่เรียนแล้ว
   const { data, error } = await supabase
     .from("user_progress")
     .select("word_id")
@@ -129,7 +109,7 @@ async function loadUserProgress(userId) {
     saveProgress();
   }
 
-  // 2. ✅ เพิ่มส่วนนี้: โหลดข้อมูลคำศัพท์โปรด (Favorites) จาก Supabase
+  // 2. โหลดข้อมูลคำศัพท์โปรด (Favorites) จาก Supabase
   const { data: favData, error: favError } = await supabase
     .from("user_favorites")
     .select("word_id")
@@ -138,15 +118,29 @@ async function loadUserProgress(userId) {
   if (favError) {
     console.error("โหลดข้อมูลรายการโปรดผิดพลาด:", favError.message);
   } else if (favData) {
-    // แปลงข้อมูลกลับเป็น Array ของตัวเลข index และเซฟลงเครื่อง
-    favorites = favData.map((item) => Number(item.word_id));
+    const dbFavorites = favData.map((item) => Number(item.word_id));
+
+    // 🔥 ป้องกันปัญหาข้อมูลโดนล้าง: ถ้ายูสเซอร์กดคำศัพท์โปรดค้างไว้ในเครื่องก่อนที่จะทำการล็อกอินสำเร็จ
+    // ระบบจะนำคำศัพท์เหล่านั้นไปซิงค์ขึ้นตาราง user_favorites บน Cloud ให้ทันที ไม่ให้โดนค่าว่างในฐานข้อมูลทับ
+    if (favorites.length > 0) {
+      for (const localId of favorites) {
+        if (!dbFavorites.includes(localId)) {
+          dbFavorites.push(localId);
+          await supabase.from("user_favorites").insert({
+            user_id: userId,
+            word_id: localId.toString(),
+          });
+        }
+      }
+    }
+
+    favorites = dbFavorites;
     saveFavorites();
   }
 
   updateHome();
   showWord();
 
-  // รีเฟรชหน้าคลังโปรดด้วย (ในกรณีที่ยูสเซอร์เปิดหน้าคลังโปรดค้างไว้ตอนล็อกอิน)
   if (pages.favorite && pages.favorite.classList.contains("active")) {
     displayFavorites();
   }
@@ -1006,25 +1000,28 @@ if (restartMenuBtn) {
     );
     if (!confirmed) return;
 
-    // ✅ แก้ไขลำดับ: ดึง Session และลบข้อมูลใน Supabase ออกก่อนเป็นอันดับแรก
+    // ดึง Session และลบข้อมูลใน Supabase ทั้งสองตารางออกก่อน
     const {
       data: { session },
     } = await supabase.auth.getSession();
 
     if (session && session.user) {
-      await supabase
+      const { error: err1 } = await supabase
         .from("user_progress")
         .delete()
         .eq("user_id", session.user.id);
 
-      await supabase
+      const { error: err2 } = await supabase
         .from("user_favorites")
         .delete()
         .eq("user_id", session.user.id);
 
-      if (error) {
-        console.error("ลบข้อมูล Supabase ไม่สำเร็จ:", error.message);
-        showToast("❌ รีเซ็ตไม่สำเร็จ: " + error.message);
+      if (err1 || err2) {
+        console.error(
+          "ลบข้อมูล Supabase ไม่สำเร็จ:",
+          err1?.message || err2?.message,
+        );
+        showToast("❌ รีเซ็ตไม่สำเร็จ");
         return;
       }
     }
@@ -1034,7 +1031,6 @@ if (restartMenuBtn) {
     currentIndex = 0;
     favorites = [];
 
-    // ✅ แก้ไข: เปลี่ยนจาก localStorage.clear() เป็นลบทีละ key เพื่อไม่ให้กระทบกับ Session Login ของ Supabase
     localStorage.removeItem("currentIndex");
     localStorage.removeItem("learnedWords");
     localStorage.removeItem("favorites");
