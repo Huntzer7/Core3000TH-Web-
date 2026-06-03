@@ -222,9 +222,20 @@ function pronounceWord(word) {
   window.speechSynthesis.cancel();
   const utterance = new SpeechSynthesisUtterance(word);
   utterance.lang = "en-US";
-  utterance.rate = 0.9;
-  utterance.pitch = 0.9;
+  utterance.rate = 0.8;
+  utterance.pitch = 1.0;
   utterance.volume = 1.0;
+
+  // Boost เสียงผ่าน AudioContext
+  try {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    const audioCtx = new AudioContext();
+    const gainNode = audioCtx.createGain();
+    gainNode.gain.value = 4.0; // เพิ่มเสียง 3x (ปรับตัวเลขนี้ได้)
+    gainNode.connect(audioCtx.destination);
+  } catch (e) {
+    // ถ้า browser ไม่รองรับ ก็ใช้เสียงปกติ
+  }
 
   const voices = window.speechSynthesis.getVoices();
   let selectedVoice = voices.find(
@@ -233,12 +244,12 @@ function pronounceWord(word) {
 
   if (!selectedVoice) {
     selectedVoice = voices.find(
-      (voice) => voice.lang === "en-US" && voice.name.length > 10,
+      (voice) => voice.lang === "en-US" && !voice.name.includes("compact"),
     );
   }
 
   if (!selectedVoice) {
-    selectedVoice = voices.find((voice) => voice.lang === "en-US");
+    selectedVoice = voices.find((voice) => voice.lang.startsWith("en"));
   }
 
   if (selectedVoice) {
