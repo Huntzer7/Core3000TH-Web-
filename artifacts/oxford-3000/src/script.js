@@ -1083,10 +1083,26 @@ if (startBtn) {
     const {
       data: { session },
     } = await supabase.auth.getSession();
+
     if (!session) {
       showLoginToast();
+
+      // ✅ เพิ่มเติม: แก้บัคสถานะค้าง โดยบังคับอัปเดตเมนูให้กลับเป็น "ยังไม่ล็อกอิน" ทันที
+      const loginBtnEl = document.getElementById("login-btn");
+      const userInfoEl = document.getElementById("user-info");
+      const logoutBtnEl = document.getElementById("logout-btn");
+
+      if (loginBtnEl) loginBtnEl.style.display = "inline-flex";
+      if (userInfoEl) userInfoEl.style.display = "none";
+      if (logoutBtnEl) logoutBtnEl.style.display = "none";
+
+      // 💡 ทริคแนะนำ: ผมคอมเมนต์บรรทัด return; ทิ้งไป
+      // เพื่อให้ผู้ใช้ที่ "ยังไม่ล็อกอิน" สามารถกด Continue Learning เข้าไปเล่นได้ (ระบบของคุณรองรับการเซฟลงเครื่องอยู่แล้ว)
+      // การทำแบบนี้จะได้ UX ที่ดีกว่า Toast จะโชว์เตือนเฉยๆ แต่ไม่ขัดจังหวะการเรียนครับ
+      // แต่ถ้าคุณอยากบังคับว่า "ต้องล็อกอินเท่านั้นถึงเรียนได้" ให้เอา // หน้า return; ออกครับ
       return;
     }
+
     showPage("learning");
     showWord();
   });
