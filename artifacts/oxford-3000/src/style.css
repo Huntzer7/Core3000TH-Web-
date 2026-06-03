@@ -1350,22 +1350,24 @@ body.dark-mode .account-container {
 }
 
 .sidebar-login-btn {
-  background: #ffffff;
-  color: #222222;
-  border: 1px solid #e2e8f0;
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-weight: 600;
-  font-size: 14px;
+  background: none;
+  color: var(--text-primary);
+  border: none;
+  padding: 0;
+  font-weight: 500;
+  font-size: 15px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 16px;
   font-family: inherit;
+  transition: color 0.2s ease;
+  width: 100%;
+  text-align: left;
 }
 
 .sidebar-login-btn:hover {
-  background: #f8f8f8;
+  color: var(--accent);
 }
 
 .sidebar-logout-btn {

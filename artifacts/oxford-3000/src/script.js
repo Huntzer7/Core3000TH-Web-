@@ -16,8 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (loginBtn) loginBtn.style.display = "none";
       if (userInfo) {
         userInfo.style.display = "inline";
-        userInfo.textContent = `, ${session.user.user_metadata.full_name || ""}`;
-      }
+        userInfo.textContent = session.user.user_metadata.full_name || "";
       if (logoutBtn) logoutBtn.style.display = "inline";
 
       loadUserProgress(session.user.id);
@@ -79,8 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (loginBtn) loginBtn.style.display = "none";
       if (userInfo) {
         userInfo.style.display = "inline";
-        userInfo.textContent = `, ${session.user.user_metadata.full_name || ""}`;
-      }
+        userInfo.textContent = session.user.user_metadata.full_name || "";
       if (logoutBtn) logoutBtn.style.display = "inline";
       loadUserProgress(session.user.id);
       document.getElementById("sidebar")?.classList.remove("active");
@@ -92,8 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (userInfo) userInfo.style.display = "none";
       if (logoutBtn) logoutBtn.style.display = "none";
     }
-  });
-});
+
 
 // =========================
 // SUPABASE DATABASE SYNC
