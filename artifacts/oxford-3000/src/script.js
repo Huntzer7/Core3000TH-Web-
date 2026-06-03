@@ -17,11 +17,12 @@ document.addEventListener("DOMContentLoaded", () => {
       if (userInfo) {
         userInfo.style.display = "inline";
         userInfo.textContent = session.user.user_metadata.full_name || "";
+      } // ← เพิ่ม } ที่หายไป
       if (logoutBtn) logoutBtn.style.display = "inline";
 
       loadUserProgress(session.user.id);
     } else {
-      if (loginBtn) loginBtn.style.display = "inline-flex"; // เปิดแสดงผลปุ่มล็อกอิน
+      if (loginBtn) loginBtn.style.display = "inline-flex";
       if (userInfo) userInfo.style.display = "none";
       if (logoutBtn) logoutBtn.style.display = "none";
     }
@@ -34,7 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          // 💡 แก้ไขตรงนี้: ให้เด้งกลับมาที่หน้าเว็บปัจจุบันแบบเป๊ะๆ ไม่ให้มี Path ผิดเพี้ยน
           redirectTo: window.location.origin + window.location.pathname,
         },
       });
@@ -42,29 +42,25 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ปุ่มออกจากระบบ (ล้างข้อมูลเก่าในเครื่องออกให้หมดเมื่อล็อกเอาต์)
+  // ปุ่มออกจากระบบ
   if (logoutBtn) {
     logoutBtn.addEventListener("click", async () => {
-      // 1. ล้างข้อมูลประวัติการเรียนเก่าในเครื่องออกให้หมด
       localStorage.removeItem("currentIndex");
       localStorage.removeItem("learnedWords");
       localStorage.removeItem("favorites");
 
-      // 2. รีเซ็ตตัวแปรในระบบให้เป็นค่าว่างทั้งหมด
       learnedWords = [];
       currentIndex = 0;
       favorites = [];
 
-      // 3. บังคับให้หน้าจอวาด UI ใหม่ทันที (แก้บั๊กตัวเลขค้างหน้าจอ)
       updateHome();
       showWord();
 
-      // 4. สั่ง Logout จากระบบ
       const { error } = await supabase.auth.signOut();
       if (error) {
         console.error("Error logging out:", error.message);
       } else {
-        window.location.reload(); // รีเฟรชหน้าเว็บให้เป็น Guest โดยสมบูรณ์
+        window.location.reload();
       }
     });
   }
@@ -72,13 +68,14 @@ document.addEventListener("DOMContentLoaded", () => {
   // เรียกใช้ฟังก์ชันเช็กสถานะทันทีเมื่อหน้าเว็บพร้อม
   checkUserStatus();
 
-  // ดัก event เมื่อ login/logout สำเร็จ (ครอบคลุม OAuth redirect กลับมา)
+  // ดัก event เมื่อ login/logout สำเร็จ
   supabase.auth.onAuthStateChange((event, session) => {
     if (event === "SIGNED_IN" && session) {
       if (loginBtn) loginBtn.style.display = "none";
       if (userInfo) {
         userInfo.style.display = "inline";
         userInfo.textContent = session.user.user_metadata.full_name || "";
+      } // ← เพิ่ม } ที่หายไป
       if (logoutBtn) logoutBtn.style.display = "inline";
       loadUserProgress(session.user.id);
       document.getElementById("sidebar")?.classList.remove("active");
@@ -90,7 +87,8 @@ document.addEventListener("DOMContentLoaded", () => {
       if (userInfo) userInfo.style.display = "none";
       if (logoutBtn) logoutBtn.style.display = "none";
     }
-
+  }); // ← เพิ่ม }); ปิด onAuthStateChange
+}); // ← ปิด DOMContentLoaded
 
 // =========================
 // SUPABASE DATABASE SYNC
@@ -99,7 +97,6 @@ document.addEventListener("DOMContentLoaded", () => {
 async function loadUserProgress(userId) {
   console.log("กำลังโหลดข้อมูลผู้เรียน ID:", userId);
 
-  // 1. ดึงข้อมูลจากตาราง user_progress เฉพาะของ User คนนี้
   const { data, error } = await supabase
     .from("user_progress")
     .select("word_id")
@@ -110,15 +107,12 @@ async function loadUserProgress(userId) {
     return;
   }
 
-  // 2. ซิงค์ข้อมูลจากฐานข้อมูลเข้าสู่ตัวแปรหลักของระบบ (แปลงเป็นตัวเลข)
   learnedWords = data.map((item) => Number(item.word_id));
 
-  // 3. เรียกฟังก์ชันเดิมของเว็บคุณทำงานเพื่ออัปเดตตัวเลขหน้าแรกและคำศัพท์ทันที
   updateHome();
   showWord();
 }
 
-// ฟังก์ชันสำหรับส่งข้อมูลไปบันทึกบน Supabase อย่างสมบูรณ์
 async function saveWordProgress(index) {
   console.log("บันทึกความคืบหน้าคำที่ index:", index);
 
@@ -126,18 +120,16 @@ async function saveWordProgress(index) {
     data: { session },
   } = await supabase.auth.getSession();
 
-  // ถ้ายังไม่ได้ล็อกอิน ให้ทำงานแค่ Local Storage อย่างเดียว (ไม่ต้องส่งขึ้นเซิร์ฟเวอร์)
   if (!session || !session.user) {
     return;
   }
 
   const userId = session.user.id;
 
-  // ส่งข้อมูลไปบันทึกลงตาราง user_progress ของ Supabase
   const { error } = await supabase.from("user_progress").upsert(
     {
       user_id: userId,
-      word_id: index.toString(), // แปลงเป็น String ให้ตรงกับชนิดข้อมูล
+      word_id: index.toString(),
       status: "learned",
       updated_at: new Date(),
     },
@@ -162,10 +154,10 @@ let quizIndex = 0;
 let correct = 0;
 let incorrect = 0;
 let quizAnswered = false;
-let wrongAnswers = []; // เก็บข้อที่ผิด
-let favorites = []; // เก็บ index ของคำศัพท์โปรด
-let favoriteQuizMode = "answerMeaning"; // "answerMeaning" หรือ "meaningAnswer"
-let isInFavoriteQuiz = false; // เพื่อรู้ว่าอยู่ใน Favorite Quiz
+let wrongAnswers = [];
+let favorites = [];
+let favoriteQuizMode = "answerMeaning";
+let isInFavoriteQuiz = false;
 let quizConfig = {
   count: 10,
   mode: "latest",
@@ -196,7 +188,6 @@ function saveProgress() {
 // ELEMENTS
 // =========================
 
-// Dark Mode
 const homeBtn = document.getElementById("homeBtn");
 const darkModeBtn = document.getElementById("darkModeBtn");
 const sunIcon = document.getElementById("sunIcon");
@@ -227,7 +218,6 @@ function toggleDarkMode() {
   updateDarkModeIcon();
 }
 
-// Pronunciation
 function pronounceWord(word) {
   window.speechSynthesis.cancel();
   const utterance = new SpeechSynthesisUtterance(word);
@@ -305,7 +295,6 @@ const reviewSection = document.getElementById("reviewSection");
 const wrongAnswersListEl = document.getElementById("wrongAnswersList");
 const unlockMessage = document.getElementById("unlockMessage");
 
-// Hamburger & Sidebar
 const hamburgerBtn = document.getElementById("hamburgerBtn");
 const sidebar = document.getElementById("sidebar");
 const sidebarOverlay = document.getElementById("sidebarOverlay");
@@ -313,7 +302,6 @@ const closeSidebarBtn = document.getElementById("closeSidebarBtn");
 const favoriteMenuBtn = document.getElementById("favoriteMenuBtn");
 const restartMenuBtn = document.getElementById("restartMenuBtn");
 
-// Favorite
 const favoritePage = document.getElementById("favoritePage");
 const favoriteList = document.getElementById("favoriteList");
 const emptyFavorites = document.getElementById("emptyFavorites");
@@ -350,17 +338,11 @@ function markLearned(index) {
 // =========================
 
 function updateHome() {
-  // 💡 สร้างค่า Fallback เป็น 3000 ไว้เสมอ (แก้บั๊ก 0/0 ตอนข้อมูลไฟล์ยังโหลดไม่เสร็จ หรือตอนยังไม่ล็อกอิน)
   const totalWords = words.length > 0 ? words.length : 3000;
-
-  // เช็กว่ามีข้อมูลในอาร์เรย์หรือไม่ ถ้าไม่มีให้เป็น 0
   const learned = learnedWords ? learnedWords.length : 0;
   const remaining = Math.max(totalWords - learned, 0);
-
-  // คำนวณเปอร์เซ็นต์
   const pct = totalWords > 0 ? Math.round((learned / totalWords) * 100) : 0;
 
-  // วาดผลลัพธ์ลงหน้าจอ
   if (learnedCountEl) learnedCountEl.textContent = learned;
   if (remainingCountEl) remainingCountEl.textContent = remaining;
   if (homeProgressEl) homeProgressEl.style.width = pct + "%";
@@ -885,7 +867,6 @@ if (favBtn) {
   });
 }
 
-// Hamburger Menu
 if (hamburgerBtn) {
   hamburgerBtn.addEventListener("click", () => {
     if (sidebar) sidebar.classList.add("active");
@@ -907,7 +888,6 @@ if (sidebarOverlay) {
   });
 }
 
-// Favorite Menu
 if (favoriteMenuBtn) {
   favoriteMenuBtn.addEventListener("click", () => {
     if (sidebar) sidebar.classList.remove("active");
@@ -917,7 +897,6 @@ if (favoriteMenuBtn) {
   });
 }
 
-// Restart Menu
 if (restartMenuBtn) {
   restartMenuBtn.addEventListener("click", () => {
     const confirmed = confirm(
@@ -930,7 +909,6 @@ if (restartMenuBtn) {
   });
 }
 
-// Favorite Quiz
 if (favQuizBtn) {
   favQuizBtn.addEventListener("click", () => {
     if (favorites.length < 1) {
@@ -941,7 +919,6 @@ if (favQuizBtn) {
   });
 }
 
-// Favorite Quiz Mode Selection
 if (modeAnswerMeaning) {
   modeAnswerMeaning.addEventListener("click", () => {
     favoriteQuizMode = "answerMeaning";
@@ -975,7 +952,6 @@ if (favQuizCancelBtn) {
   });
 }
 
-// Search in Favorite
 if (searchToggleBtn) {
   searchToggleBtn.addEventListener("click", () => {
     if (!favoriteSearch) return;
@@ -1046,7 +1022,6 @@ if (meaningBtnEl) {
   });
 }
 
-// Quiz Setup
 if (modeBtn) modeBtn.addEventListener("click", openQuizSetup);
 
 if (setupStartBtn) {
@@ -1072,7 +1047,6 @@ if (setupCancelBtn) {
   });
 }
 
-// Review Wrong Answers
 if (reviewToggleBtn) {
   reviewToggleBtn.addEventListener("click", () => {
     if (!reviewSection) return;
@@ -1135,19 +1109,15 @@ if (closeDonateTopBtn) {
   });
 }
 
-// ฟังก์ชันกด Copy เลขบัญชี (ปรับแต่งเป็นปุ่มสีเขียว Copied!)
 if (copyAccBtn && accountNumber) {
   copyAccBtn.addEventListener("click", () => {
     const accText = accountNumber.innerText.replace(/-/g, "");
     navigator.clipboard
       .writeText(accText)
       .then(() => {
-        // 1. นำเอา showToast ออก แล้วเปลี่ยนข้อความปุ่มแทน
         copyAccBtn.textContent = "Copied!";
-        // 2. ใส่คลาส .copied เพื่อเปลี่ยนสีปุ่มเป็นสีเขียว
         copyAccBtn.classList.add("copied");
 
-        // 3. หน่วงเวลา 2 วินาที (2000 ms) เพื่อให้ปุ่มเด้งกลับเป็นคำว่า Copy เหมือนเดิม
         setTimeout(() => {
           copyAccBtn.textContent = "Copy";
           copyAccBtn.classList.remove("copied");
@@ -1175,7 +1145,6 @@ loadState();
 loadFavorites();
 initDarkMode();
 
-// 💡 สั่งวาดหน้าจอด้วยค่า 0 / 3000 ไว้พลางๆ ก่อนไฟล์จะโหลดเสร็จ
 updateHome();
 
 fetch("/words.json")
@@ -1187,7 +1156,6 @@ fetch("/words.json")
       currentIndex = 0;
     }
 
-    // วาดหน้าจอด้วยข้อมูลจริงที่โหลดมาสมบูรณ์
     updateHome();
     showWord();
   })
