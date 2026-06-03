@@ -587,6 +587,36 @@ function displayWrongAnswers() {
   });
 }
 
+function showLoginToast() {
+  const existing = document.querySelector(".login-toast");
+  if (existing) existing.remove();
+
+  const toast = document.createElement("div");
+  toast.className = "login-toast";
+  toast.innerHTML = `
+    <div class="login-toast-icon">👤</div>
+    <div class="login-toast-body">
+      <div class="login-toast-title">กรุณาเข้าสู่ระบบก่อน</div>
+      <div class="login-toast-sub">เพื่อบันทึกความคืบหน้าของคุณ</div>
+    </div>
+    <button class="login-toast-btn" id="toastLoginBtn">เข้าสู่ระบบ</button>
+  `;
+  document.body.appendChild(toast);
+
+  document.getElementById("toastLoginBtn")?.addEventListener("click", () => {
+    toast.remove();
+    if (hamburgerBtn) {
+      sidebar?.classList.add("active");
+      sidebarOverlay?.classList.add("active");
+    }
+  });
+
+  setTimeout(() => {
+    toast.classList.add("hide");
+    setTimeout(() => toast.remove(), 400);
+  }, 4000);
+}
+
 function showToast(message, duration = 5000) {
   let toast = document.querySelector(".toast");
   if (toast) {
@@ -909,14 +939,44 @@ if (favoriteMenuBtn) {
 }
 
 if (restartMenuBtn) {
-  restartMenuBtn.addEventListener("click", () => {
+  restartMenuBtn.addEventListener("click", async () => {
     const confirmed = confirm(
       "⚠️ คุณต้องการเริ่มต้นการเรียนใหม่จริงใช่ไหม?\n\nข้อมูลทั้งหมดจะถูกลบ",
     );
-    if (confirmed) {
-      localStorage.clear();
-      location.reload();
+    if (!confirmed) return;
+
+    // 1. รีเซ็ตตัวแปรทันที
+    learnedWords = [];
+    currentIndex = 0;
+    favorites = [];
+
+    // 2. ลบ Local Storage
+    localStorage.clear();
+
+    // 3. ถ้า login อยู่ → ลบข้อมูลใน Supabase
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+    if (session && session.user) {
+      const { error } = await supabase
+        .from("user_progress")
+        .delete()
+        .eq("user_id", session.user.id);
+
+      if (error) {
+        console.error("ลบข้อมูล Supabase ไม่สำเร็จ:", error.message);
+        showToast("❌ รีเซ็ตไม่สำเร็จ: " + error.message);
+        return;
+      }
     }
+
+    // 4. อัปเดต UI โดยไม่ reload
+    if (sidebar) sidebar.classList.remove("active");
+    if (sidebarOverlay) sidebarOverlay.classList.remove("active");
+    updateHome();
+    showWord();
+    showPage("home");
+    showToast("✅ รีเซ็ตข้อมูลเรียบร้อยแล้ว");
   });
 }
 
@@ -994,7 +1054,14 @@ if (soundBtn) {
 }
 
 if (startBtn) {
-  startBtn.addEventListener("click", () => {
+  startBtn.addEventListener("click", async () => {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+    if (!session) {
+      showLoginToast();
+      return;
+    }
     showPage("learning");
     showWord();
   });
