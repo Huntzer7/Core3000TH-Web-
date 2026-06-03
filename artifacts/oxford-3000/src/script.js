@@ -83,8 +83,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       if (logoutBtn) logoutBtn.style.display = "inline";
       loadUserProgress(session.user.id);
-      if (sidebar) sidebar.classList.remove("active");
-      if (sidebarOverlay) sidebarOverlay.classList.remove("active");
+      document.getElementById("sidebar")?.classList.remove("active");
+      document.getElementById("sidebarOverlay")?.classList.remove("active");
       showPage("home");
       updateHome();
     } else if (event === "SIGNED_OUT") {
