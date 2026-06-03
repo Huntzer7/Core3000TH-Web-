@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
 async function loadUserProgress(userId) {
   console.log("กำลังโหลดข้อมูลผู้เรียน ID:", userId);
 
-  // ✅ แก้ไข: เพิ่ม .eq("user_id", userId) เพื่อดึงเฉพาะข้อมูลของยูสเซอร์นี้เท่านั้น
+  // 1. โหลดข้อมูลคำศัพท์ที่เรียนแล้ว (โค้ดเดิมของคุณ)
   const { data, error } = await supabase
     .from("user_progress")
     .select("word_id")
@@ -115,24 +115,41 @@ async function loadUserProgress(userId) {
 
   if (error) {
     console.error("โหลดข้อมูลผิดพลาด:", error.message);
-    return;
-  }
+  } else if (data) {
+    learnedWords = data.map((item) => Number(item.word_id));
 
-  learnedWords = data.map((item) => Number(item.word_id));
-
-  // ✅ แก้ไขปัญหา "ข้อมูลหาย": ให้เรียนต่อเนื่องจากคำล่าสุดที่กดค้างไว้
-  if (learnedWords.length > 0) {
-    currentIndex = Math.max(...learnedWords) + 1;
-    if (words.length > 0 && currentIndex >= words.length) {
-      currentIndex = words.length - 1;
+    if (learnedWords.length > 0) {
+      currentIndex = Math.max(...learnedWords) + 1;
+      if (words.length > 0 && currentIndex >= words.length) {
+        currentIndex = words.length - 1;
+      }
+    } else {
+      currentIndex = 0;
     }
-  } else {
-    currentIndex = 0;
+    saveProgress();
   }
-  saveProgress(); // บันทึกสถานะล่าสุดลง LocalStorage
+
+  // 2. ✅ เพิ่มส่วนนี้: โหลดข้อมูลคำศัพท์โปรด (Favorites) จาก Supabase
+  const { data: favData, error: favError } = await supabase
+    .from("user_favorites")
+    .select("word_id")
+    .eq("user_id", userId);
+
+  if (favError) {
+    console.error("โหลดข้อมูลรายการโปรดผิดพลาด:", favError.message);
+  } else if (favData) {
+    // แปลงข้อมูลกลับเป็น Array ของตัวเลข index และเซฟลงเครื่อง
+    favorites = favData.map((item) => Number(item.word_id));
+    saveFavorites();
+  }
 
   updateHome();
   showWord();
+
+  // รีเฟรชหน้าคลังโปรดด้วย (ในกรณีที่ยูสเซอร์เปิดหน้าคลังโปรดค้างไว้ตอนล็อกอิน)
+  if (pages.favorite && pages.favorite.classList.contains("active")) {
+    displayFavorites();
+  }
 }
 
 async function saveWordProgress(index) {
@@ -673,11 +690,33 @@ function saveFavorites() {
   localStorage.setItem("favorites", JSON.stringify(favorites));
 }
 
-function toggleFavorite(index) {
+async function toggleFavorite(index) {
+  // เช็กสถานะการล็อกอินก่อน เพื่อเอาไว้ตรวจสอบสิทธิ์ส่งข้อมูลขึ้น Cloud
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
   if (favorites.includes(index)) {
     favorites = favorites.filter((i) => i !== index);
+
+    // ✅ เพิ่มส่วนนี้: ถ้าผู้ใช้ล็อกอินอยู่ ให้ลบออกจากตาราง user_favorites บน Supabase ด้วย
+    if (session && session.user) {
+      await supabase
+        .from("user_favorites")
+        .delete()
+        .eq("user_id", session.user.id)
+        .eq("word_id", index.toString());
+    }
   } else {
     favorites.push(index);
+
+    // ✅ เพิ่มส่วนนี้: ถ้าผู้ใช้ล็อกอินอยู่ ให้เพิ่มเข้าตาราง user_favorites บน Supabase ด้วย
+    if (session && session.user) {
+      await supabase.from("user_favorites").insert({
+        user_id: session.user.id,
+        word_id: index.toString(),
+      });
+    }
   }
   saveFavorites();
   updateFavoritesUI();
@@ -973,8 +1012,13 @@ if (restartMenuBtn) {
     } = await supabase.auth.getSession();
 
     if (session && session.user) {
-      const { error } = await supabase
+      await supabase
         .from("user_progress")
+        .delete()
+        .eq("user_id", session.user.id);
+
+      await supabase
+        .from("user_favorites")
         .delete()
         .eq("user_id", session.user.id);
 
