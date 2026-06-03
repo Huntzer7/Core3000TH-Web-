@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (loginBtn) loginBtn.style.display = "none";
       if (userInfo) {
         userInfo.style.display = "inline";
-        userInfo.textContent = `สวัสดี, ${session.user.user_metadata.full_name || "ผู้เรียน"}`;
+        userInfo.textContent = `, ${session.user.user_metadata.full_name || ""}`;
       }
       if (logoutBtn) logoutBtn.style.display = "inline";
 
@@ -35,7 +35,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: window.location.origin,
+          // 💡 แก้ไขตรงนี้: ให้เด้งกลับมาที่หน้าเว็บปัจจุบันแบบเป๊ะๆ ไม่ให้มี Path ผิดเพี้ยน
+          redirectTo: window.location.origin + window.location.pathname,
         },
       });
       if (error) alert("เกิดข้อผิดพลาดในการล็อกอิน: " + error.message);
@@ -1112,25 +1113,35 @@ if (closeDonateTopBtn) {
   });
 }
 
-if (donateModal) {
-  donateModal.addEventListener("click", (e) => {
-    if (e.target === donateModal) {
-      donateModal.style.display = "none";
-    }
-  });
-}
-
+// ฟังก์ชันกด Copy เลขบัญชี (ปรับแต่งเป็นปุ่มสีเขียว Copied!)
 if (copyAccBtn && accountNumber) {
   copyAccBtn.addEventListener("click", () => {
     const accText = accountNumber.innerText.replace(/-/g, "");
     navigator.clipboard
       .writeText(accText)
       .then(() => {
-        showToast("📋 คัดลอกเลขบัญชีสำเร็จ!");
+        // 1. นำเอา showToast ออก แล้วเปลี่ยนข้อความปุ่มแทน
+        copyAccBtn.textContent = "Copied!";
+        // 2. ใส่คลาส .copied เพื่อเปลี่ยนสีปุ่มเป็นสีเขียว
+        copyAccBtn.classList.add("copied");
+
+        // 3. หน่วงเวลา 2 วินาที (2000 ms) เพื่อให้ปุ่มเด้งกลับเป็นคำว่า Copy เหมือนเดิม
+        setTimeout(() => {
+          copyAccBtn.textContent = "Copy";
+          copyAccBtn.classList.remove("copied");
+        }, 2000);
       })
       .catch((err) => {
         console.error("ไม่สามารถคัดลอกได้:", err);
       });
+  });
+}
+
+if (donateModal) {
+  donateModal.addEventListener("click", (e) => {
+    if (e.target === donateModal) {
+      donateModal.style.display = "none";
+    }
   });
 }
 
