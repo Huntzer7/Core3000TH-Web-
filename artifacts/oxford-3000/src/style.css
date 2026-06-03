@@ -882,7 +882,7 @@ body.dark-mode .header-top {
 
 .header-title {
   flex: 1;
-  text-align: center;
+  text-align: right;
   font-family: 'Montserrat', sans-serif;
   font-size: 32px;
   font-weight: 800;
@@ -1329,4 +1329,55 @@ body.dark-mode .account-container {
   .stat-value {
     font-size: 28px;
   }
+}
+
+/* ==================
+   SIDEBAR AUTH ITEM
+================== */
+
+.sidebar-auth-item {
+  cursor: default;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.sidebar-auth-item:hover {
+  background: none;
+  color: inherit;
+}
+
+.sidebar-auth-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sidebar-login-btn {
+  background: #ffffff;
+  color: #222222;
+  border: 1px solid #e2e8f0;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: inherit;
+}
+
+.sidebar-login-btn:hover {
+  background: #f8f8f8;
+}
+
+.sidebar-logout-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: inherit;
 }

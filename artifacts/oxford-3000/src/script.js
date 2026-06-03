@@ -198,6 +198,8 @@ function updateDarkModeIcon() {
   const isDark = document.body.classList.contains("dark-mode");
   sunIcon.style.display = isDark ? "block" : "none";
   moonIcon.style.display = isDark ? "none" : "block";
+  const label = document.getElementById("darkModeLabel");
+  if (label) label.textContent = isDark ? "Light Mode" : "Dark Mode";
 }
 
 function toggleDarkMode() {
@@ -848,6 +850,8 @@ function checkFavAnswer(selected, correctAnswer) {
 
 if (homeBtn) {
   homeBtn.addEventListener("click", () => {
+    if (sidebar) sidebar.classList.remove("active");
+    if (sidebarOverlay) sidebarOverlay.classList.remove("active");
     showPage("home");
     updateHome();
   });
