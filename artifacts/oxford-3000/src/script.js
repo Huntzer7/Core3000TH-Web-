@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (userInfo) {
         userInfo.style.display = "inline";
         userInfo.textContent = session.user.user_metadata.full_name || "";
-      } // ← เพิ่ม } ที่หายไป
+      }
       if (logoutBtn) logoutBtn.style.display = "inline";
       loadUserProgress(session.user.id);
       document.getElementById("sidebar")?.classList.remove("active");
@@ -86,10 +86,19 @@ document.addEventListener("DOMContentLoaded", () => {
       if (loginBtn) loginBtn.style.display = "inline-flex";
       if (userInfo) userInfo.style.display = "none";
       if (logoutBtn) logoutBtn.style.display = "none";
-    }
-  }); // ← เพิ่ม }); ปิด onAuthStateChange
-}); // ← ปิด DOMContentLoaded
 
+      // ✅ เพิ่มเติม: เมื่อสั่ง Sign Out ให้เคลียร์ตัวแปร และรีเซ็ตหน้าจอหลักเป็น 0 ทันที
+      learnedWords = [];
+      currentIndex = 0;
+      favorites = [];
+      localStorage.removeItem("currentIndex");
+      localStorage.removeItem("learnedWords");
+      localStorage.removeItem("favorites");
+      updateHome();
+      showWord();
+    }
+  });
+});
 // =========================
 // SUPABASE DATABASE SYNC
 // =========================
@@ -97,9 +106,11 @@ document.addEventListener("DOMContentLoaded", () => {
 async function loadUserProgress(userId) {
   console.log("กำลังโหลดข้อมูลผู้เรียน ID:", userId);
 
+  // ✅ แก้ไข: เพิ่ม .eq("user_id", userId) เพื่อดึงเฉพาะข้อมูลของยูสเซอร์นี้เท่านั้น
   const { data, error } = await supabase
     .from("user_progress")
     .select("word_id")
+    .eq("user_id", userId)
     .eq("status", "learned");
 
   if (error) {
@@ -108,6 +119,17 @@ async function loadUserProgress(userId) {
   }
 
   learnedWords = data.map((item) => Number(item.word_id));
+
+  // ✅ แก้ไขปัญหา "ข้อมูลหาย": ให้เรียนต่อเนื่องจากคำล่าสุดที่กดค้างไว้
+  if (learnedWords.length > 0) {
+    currentIndex = Math.max(...learnedWords) + 1;
+    if (words.length > 0 && currentIndex >= words.length) {
+      currentIndex = words.length - 1;
+    }
+  } else {
+    currentIndex = 0;
+  }
+  saveProgress(); // บันทึกสถานะล่าสุดลง LocalStorage
 
   updateHome();
   showWord();
@@ -945,18 +967,11 @@ if (restartMenuBtn) {
     );
     if (!confirmed) return;
 
-    // 1. รีเซ็ตตัวแปรทันที
-    learnedWords = [];
-    currentIndex = 0;
-    favorites = [];
-
-    // 2. ลบ Local Storage
-    localStorage.clear();
-
-    // 3. ถ้า login อยู่ → ลบข้อมูลใน Supabase
+    // ✅ แก้ไขลำดับ: ดึง Session และลบข้อมูลใน Supabase ออกก่อนเป็นอันดับแรก
     const {
       data: { session },
     } = await supabase.auth.getSession();
+
     if (session && session.user) {
       const { error } = await supabase
         .from("user_progress")
@@ -970,7 +985,17 @@ if (restartMenuBtn) {
       }
     }
 
-    // 4. อัปเดต UI โดยไม่ reload
+    // รีเซ็ตตัวแปรฝั่ง Client ทันที
+    learnedWords = [];
+    currentIndex = 0;
+    favorites = [];
+
+    // ✅ แก้ไข: เปลี่ยนจาก localStorage.clear() เป็นลบทีละ key เพื่อไม่ให้กระทบกับ Session Login ของ Supabase
+    localStorage.removeItem("currentIndex");
+    localStorage.removeItem("learnedWords");
+    localStorage.removeItem("favorites");
+
+    // อัปเดต UI หน้าเว็บ
     if (sidebar) sidebar.classList.remove("active");
     if (sidebarOverlay) sidebarOverlay.classList.remove("active");
     updateHome();
