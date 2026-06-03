@@ -993,6 +993,7 @@ if (favoriteMenuBtn) {
   });
 }
 
+// ✅ โค้ดชุดใหม่ที่แก้ไขแล้ว (นำไปวางทับอันเดิมได้เลย)
 if (restartMenuBtn) {
   restartMenuBtn.addEventListener("click", async () => {
     const confirmed = confirm(
@@ -1000,48 +1001,59 @@ if (restartMenuBtn) {
     );
     if (!confirmed) return;
 
-    // ดึง Session และลบข้อมูลใน Supabase ทั้งสองตารางออกก่อน
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
+    try {
+      // 1. ตรวจสอบ Session และลบข้อมูลบน Supabase Cloud (ถ้ามีการล็อกอินอยู่)
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
 
-    if (session && session.user) {
-      const { error: err1 } = await supabase
-        .from("user_progress")
-        .delete()
-        .eq("user_id", session.user.id);
+      if (session && session.user) {
+        // ลบข้อมูลคลังความคืบหน้า
+        const { error: err1 } = await supabase
+          .from("user_progress")
+          .delete()
+          .eq("user_id", session.user.id);
 
-      const { error: err2 } = await supabase
-        .from("user_favorites")
-        .delete()
-        .eq("user_id", session.user.id);
+        // ลบข้อมูลรายการโปรด
+        const { error: err2 } = await supabase
+          .from("user_favorites")
+          .delete()
+          .eq("user_id", session.user.id);
 
-      if (err1 || err2) {
-        console.error(
-          "ลบข้อมูล Supabase ไม่สำเร็จ:",
-          err1?.message || err2?.message,
-        );
-        showToast("❌ รีเซ็ตไม่สำเร็จ");
-        return;
+        if (err1 || err2) {
+          console.error(
+            "ลบข้อมูลจาก Cloud ไม่สำเร็จ:",
+            err1?.message || err2?.message,
+          );
+          showToast("❌ เกิดข้อผิดพลาดบนระบบ Cloud");
+          return;
+        }
       }
+
+      // 2. ล้างค่าตัวแปรในเครื่องคอมพิวเตอร์/มือถือของผู้ใช้ทันที
+      learnedWords = [];
+      currentIndex = 0;
+      favorites = [];
+
+      localStorage.removeItem("currentIndex");
+      localStorage.removeItem("learnedWords");
+      localStorage.removeItem("favorites");
+
+      // 3. ปิดแถบเมนูด้านข้าง (Sidebar) ให้เรียบร้อย
+      if (sidebar) sidebar.classList.remove("active");
+      if (sidebarOverlay) sidebarOverlay.classList.remove("active");
+
+      // 4. สั่งให้หน้าจออัปเดตการแสดงผลทันทีโดยไม่ต้องกดรีเฟรชหน้าเว็บ
+      updateHome(); // รีเซ็ตตัวเลขความคืบหน้าหน้าแรกเป็น 0%
+      showWord(); // เปลี่ยนการ์ดคำศัพท์กลับไปที่คำแรกสุด
+      showPage("home"); // เด้งผู้ใช้กลับมาที่หน้าหลัก
+
+      // 5. แสดง Toast แจ้งเตือนสถานะสำเร็จ
+      showToast("✅ รีเซ็ตข้อมูลเรียบร้อยแล้ว");
+    } catch (err) {
+      console.error("เกิดข้อผิดพลาดรุนแรงในการรีเซ็ต:", err);
+      showToast("❌ ระบบขัดข้อง กรุณาลองใหม่อีกครั้ง");
     }
-
-    // รีเซ็ตตัวแปรฝั่ง Client ทันที
-    learnedWords = [];
-    currentIndex = 0;
-    favorites = [];
-
-    localStorage.removeItem("currentIndex");
-    localStorage.removeItem("learnedWords");
-    localStorage.removeItem("favorites");
-
-    // อัปเดต UI หน้าเว็บ
-    if (sidebar) sidebar.classList.remove("active");
-    if (sidebarOverlay) sidebarOverlay.classList.remove("active");
-    updateHome();
-    showWord();
-    showPage("home");
-    showToast("✅ รีเซ็ตข้อมูลเรียบร้อยแล้ว");
   });
 }
 
