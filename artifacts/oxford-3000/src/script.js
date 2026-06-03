@@ -72,6 +72,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // เรียกใช้ฟังก์ชันเช็กสถานะทันทีเมื่อหน้าเว็บพร้อม
   checkUserStatus();
+
+  // ดัก event เมื่อ login/logout สำเร็จ (ครอบคลุม OAuth redirect กลับมา)
+  supabase.auth.onAuthStateChange((event, session) => {
+    if (event === "SIGNED_IN" && session) {
+      if (loginBtn) loginBtn.style.display = "none";
+      if (userInfo) {
+        userInfo.style.display = "inline";
+        userInfo.textContent = `, ${session.user.user_metadata.full_name || ""}`;
+      }
+      if (logoutBtn) logoutBtn.style.display = "inline";
+      loadUserProgress(session.user.id);
+      if (sidebar) sidebar.classList.remove("active");
+      if (sidebarOverlay) sidebarOverlay.classList.remove("active");
+      showPage("home");
+      updateHome();
+    } else if (event === "SIGNED_OUT") {
+      if (loginBtn) loginBtn.style.display = "inline-flex";
+      if (userInfo) userInfo.style.display = "none";
+      if (logoutBtn) logoutBtn.style.display = "none";
+    }
+  });
 });
 
 // =========================
