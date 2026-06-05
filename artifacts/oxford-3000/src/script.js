@@ -1,5 +1,9 @@
+//  แก้ไขเป็นแบบนี้สำหรับเว็บ Vanilla JS
+import { inject } from "@vercel/analytics";
 import { supabase } from "./supabase.js";
 
+// เรียกใช้งานทันทีเพื่อให้ Vercel เริ่มดักจับสถิติและ Analytics บนหน้าเว็บ
+inject();
 // ครอบโค้ดระบบล็อกอินไว้ เพื่อให้ระบบรอให้หน้าเว็บโหลดโครงสร้าง HTML เสร็จสมบูรณ์ก่อนเริ่มทำงาน
 document.addEventListener("DOMContentLoaded", () => {
   const loginBtn = document.getElementById("login-btn");
