@@ -447,9 +447,9 @@ function showWord() {
 function openQuizSetup() {
   const learnedCount = learnedWords.length;
 
-  if (learnedCount < 50) {
+  if (learnedCount < 10) {
     showToast(
-      `🔒 สะสมคำศัพท์ให้ครบ 50 คำ เพื่อปลดล็อค Quiz ขั้นสูง (ปัจจุบัน: ${learnedCount}/50)`,
+      `🔒 สะสมคำศัพท์ให้ครบ 10 คำ เพื่อปลดล็อค Quiz ขั้นสูง (ปัจจุบัน: ${learnedCount}/50)`,
     );
     startQuizNormal();
   } else {
@@ -470,12 +470,13 @@ function startQuizNormal() {
 
 function initQuiz() {
   let selectedWordIndices = [];
+  const sourceWords = isInFavoriteQuiz ? favorites : learnedWords;
 
   if (quizConfig.mode === "latest") {
-    const startIdx = Math.max(0, learnedWords.length - 50);
-    selectedWordIndices = learnedWords.slice(startIdx);
+    const startIdx = Math.max(0, sourceWords.length - 50);
+    selectedWordIndices = sourceWords.slice(startIdx);
   } else {
-    selectedWordIndices = [...learnedWords];
+    selectedWordIndices = [...sourceWords];
   }
 
   for (let i = selectedWordIndices.length - 1; i > 0; i--) {
@@ -495,7 +496,7 @@ function initQuiz() {
   wrongAnswers = [];
 
   showPage("quiz");
-  showQuiz();
+  showFavQuiz();
 }
 
 function showQuiz() {
@@ -967,23 +968,25 @@ function checkFavAnswer(selected, correctAnswer) {
 function openAdvancedQuizSetup() {
   if (favorites.length < 10) {
     showToast(
-      `⚡ Advanced Quiz ต้องมีอย่างน้อย 10 คำโปรด (ปัจจุบัน: ${favorites.length}/10)`,
+      `🔒 สะสมคำศัพท์โปรดให้ครบ 10 คำ เพื่อปลดล็อค Advanced Quiz Mode (ปัจจุบัน: ${favorites.length}/10)`,
     );
     return;
   }
+  if (quizSetupModal) quizSetupModal.classList.add("active");
+}
 
-  // สร้าง modal เลือกจำนวนคำ
-  const existing = document.getElementById("advQuizSetupModal");
-  if (existing) existing.remove();
+// สร้าง modal เลือกจำนวนคำ
+const existing = document.getElementById("advQuizSetupModal");
+if (existing) existing.remove();
 
-  const maxAvail = Math.min(favorites.length, 50);
-  const options = [];
-  for (let n = 10; n <= maxAvail; n += 10) options.push(n);
+const maxAvail = Math.min(favorites.length, 50);
+const options = [];
+for (let n = 10; n <= maxAvail; n += 10) options.push(n);
 
-  const modal = document.createElement("div");
-  modal.id = "advQuizSetupModal";
-  modal.className = "modal active";
-  modal.innerHTML = `
+const modal = document.createElement("div");
+modal.id = "advQuizSetupModal";
+modal.className = "modal active";
+modal.innerHTML = `
     <div class="modal-content">
       <h2>⚡ Advanced Quiz Mode</h2>
       <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;">เลือกจำนวนคำที่ต้องการทดสอบ</p>
@@ -1015,39 +1018,38 @@ function openAdvancedQuizSetup() {
       </div>
     </div>
   `;
-  document.body.appendChild(modal);
+document.body.appendChild(modal);
 
-  advQuizCount = 10;
-  advQuizMode = "answerMeaning";
+advQuizCount = 10;
+advQuizMode = "answerMeaning";
 
-  modal.querySelectorAll(".adv-count-btn").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      modal
-        .querySelectorAll(".adv-count-btn")
-        .forEach((b) => b.classList.remove("selected"));
-      btn.classList.add("selected");
-      advQuizCount = parseInt(btn.dataset.count);
-    });
+modal.querySelectorAll(".adv-count-btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    modal
+      .querySelectorAll(".adv-count-btn")
+      .forEach((b) => b.classList.remove("selected"));
+    btn.classList.add("selected");
+    advQuizCount = parseInt(btn.dataset.count);
   });
+});
 
-  modal.querySelectorAll(".adv-mode-btn").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      modal
-        .querySelectorAll(".adv-mode-btn")
-        .forEach((b) => b.classList.remove("selected"));
-      btn.classList.add("selected");
-      advQuizMode = btn.dataset.mode;
-    });
+modal.querySelectorAll(".adv-mode-btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    modal
+      .querySelectorAll(".adv-mode-btn")
+      .forEach((b) => b.classList.remove("selected"));
+    btn.classList.add("selected");
+    advQuizMode = btn.dataset.mode;
   });
+});
 
-  document
-    .getElementById("advCancelBtn")
-    .addEventListener("click", () => modal.remove());
-  document.getElementById("advStartBtn").addEventListener("click", () => {
-    modal.remove();
-    startAdvancedFavQuiz();
-  });
-}
+document
+  .getElementById("advCancelBtn")
+  .addEventListener("click", () => modal.remove());
+document.getElementById("advStartBtn").addEventListener("click", () => {
+  modal.remove();
+  startAdvancedFavQuiz();
+});
 
 function startAdvancedFavQuiz() {
   isInFavoriteQuiz = true;
@@ -1223,14 +1225,15 @@ if (modeMeaningAnswer) {
 if (favQuizStartBtn) {
   favQuizStartBtn.addEventListener("click", () => {
     if (favQuizModeModal) favQuizModeModal.classList.remove("active");
-
     if (favoriteQuizMode === "advanced") {
-      openAdvancedQuizSetup(); // เปิด modal เลือกจำนวนคำ
+      isInFavoriteQuiz = true;
+      openAdvancedQuizSetup();
     } else {
       startFavoriteQuiz();
     }
   });
 }
+
 if (favQuizCancelBtn) {
   favQuizCancelBtn.addEventListener("click", () => {
     if (favQuizModeModal) favQuizModeModal.classList.remove("active");
@@ -1345,7 +1348,13 @@ if (setupStartBtn) {
     if (checkedMode) quizConfig.mode = checkedMode.value;
 
     if (quizSetupModal) quizSetupModal.classList.remove("active");
-    initQuiz();
+
+    if (isInFavoriteQuiz) {
+      showPage("quiz");
+      showFavQuiz();
+    } else {
+      initQuiz();
+    }
   });
 }
 
