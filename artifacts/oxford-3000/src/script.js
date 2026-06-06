@@ -972,84 +972,83 @@ function openAdvancedQuizSetup() {
     );
     return;
   }
-  if (quizSetupModal) quizSetupModal.classList.add("active");
-}
 
-// สร้าง modal เลือกจำนวนคำ
-const existing = document.getElementById("advQuizSetupModal");
-if (existing) existing.remove();
+  // สร้าง modal เลือกจำนวนคำ (ย้ายเข้ามาไว้ในฟังก์ชัน เพื่อไม่ให้เด้งตอนโหลดเว็บ)
+  const existing = document.getElementById("advQuizSetupModal");
+  if (existing) existing.remove();
 
-const maxAvail = Math.min(favorites.length, 50);
-const options = [];
-for (let n = 10; n <= maxAvail; n += 10) options.push(n);
+  const maxAvail = Math.min(favorites.length, 50);
+  const options = [];
+  for (let n = 10; n <= maxAvail; n += 10) options.push(n);
 
-const modal = document.createElement("div");
-modal.id = "advQuizSetupModal";
-modal.className = "modal active";
-modal.innerHTML = `
-    <div class="modal-content">
-      <h2>⚡ Advanced Quiz Mode</h2>
-      <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;">เลือกจำนวนคำที่ต้องการทดสอบ</p>
-      <div class="mode-options" id="advCountOptions">
-        ${options
-          .map(
-            (n) => `
-          <button class="mode-card adv-count-btn ${n === 10 ? "selected" : ""}" data-count="${n}">
-            <div class="mode-title">${n} คำ</div>
+  const modal = document.createElement("div");
+  modal.id = "advQuizSetupModal";
+  modal.className = "modal active"; // ใส่ active ได้ เพราะมันจะทำงานตอนกดปุ่มเรียกแล้วเท่านั้น
+  modal.innerHTML = `
+      <div class="modal-content">
+        <h2>⚡ Advanced Quiz Mode</h2>
+        <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;">เลือกจำนวนคำที่ต้องการทดสอบ</p>
+        <div class="mode-options" id="advCountOptions">
+          ${options
+            .map(
+              (n) => `
+            <button class="mode-card adv-count-btn ${n === 10 ? "selected" : ""}" data-count="${n}">
+              <div class="mode-title">${n} คำ</div>
+            </button>
+          `,
+            )
+            .join("")}
+        </div>
+        <p style="font-size:13px;color:var(--text-muted);margin:16px 0 8px;">เลือกรูปแบบ</p>
+        <div class="mode-options">
+          <button class="mode-card adv-mode-btn selected" data-mode="answerMeaning">
+            <div class="mode-icon">🔤</div>
+            <div class="mode-title">Answer → Meaning</div>
           </button>
-        `,
-          )
-          .join("")}
+          <button class="mode-card adv-mode-btn" data-mode="meaningAnswer">
+            <div class="mode-icon">📝</div>
+            <div class="mode-title">Meaning → Answer</div>
+          </button>
+        </div>
+        <div class="setup-buttons">
+          <button id="advCancelBtn" class="btn btn-outline">ยกเลิก</button>
+          <button id="advStartBtn" class="btn btn-primary">เริ่มทำควิซ</button>
+        </div>
       </div>
-      <p style="font-size:13px;color:var(--text-muted);margin:16px 0 8px;">เลือกรูปแบบ</p>
-      <div class="mode-options">
-        <button class="mode-card adv-mode-btn selected" data-mode="answerMeaning">
-          <div class="mode-icon">🔤</div>
-          <div class="mode-title">Answer → Meaning</div>
-        </button>
-        <button class="mode-card adv-mode-btn" data-mode="meaningAnswer">
-          <div class="mode-icon">📝</div>
-          <div class="mode-title">Meaning → Answer</div>
-        </button>
-      </div>
-      <div class="modal-actions">
-        <button id="advCancelBtn" class="btn btn-outline">ยกเลิก</button>
-        <button id="advStartBtn" class="btn btn-primary">เริ่มทำควิซ</button>
-      </div>
-    </div>
-  `;
-document.body.appendChild(modal);
+    `;
+  document.body.appendChild(modal);
 
-advQuizCount = 10;
-advQuizMode = "answerMeaning";
+  advQuizCount = 10;
+  advQuizMode = "answerMeaning";
 
-modal.querySelectorAll(".adv-count-btn").forEach((btn) => {
-  btn.addEventListener("click", () => {
-    modal
-      .querySelectorAll(".adv-count-btn")
-      .forEach((b) => b.classList.remove("selected"));
-    btn.classList.add("selected");
-    advQuizCount = parseInt(btn.dataset.count);
+  modal.querySelectorAll(".adv-count-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      modal
+        .querySelectorAll(".adv-count-btn")
+        .forEach((b) => b.classList.remove("selected"));
+      btn.classList.add("selected");
+      advQuizCount = parseInt(btn.dataset.count);
+    });
   });
-});
 
-modal.querySelectorAll(".adv-mode-btn").forEach((btn) => {
-  btn.addEventListener("click", () => {
-    modal
-      .querySelectorAll(".adv-mode-btn")
-      .forEach((b) => b.classList.remove("selected"));
-    btn.classList.add("selected");
-    advQuizMode = btn.dataset.mode;
+  modal.querySelectorAll(".adv-mode-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      modal
+        .querySelectorAll(".adv-mode-btn")
+        .forEach((b) => b.classList.remove("selected"));
+      btn.classList.add("selected");
+      advQuizMode = btn.dataset.mode;
+    });
   });
-});
 
-document
-  .getElementById("advCancelBtn")
-  .addEventListener("click", () => modal.remove());
-document.getElementById("advStartBtn").addEventListener("click", () => {
-  modal.remove();
-  startAdvancedFavQuiz();
-});
+  document
+    .getElementById("advCancelBtn")
+    .addEventListener("click", () => modal.remove());
+  document.getElementById("advStartBtn").addEventListener("click", () => {
+    modal.remove();
+    startAdvancedFavQuiz();
+  });
+}
 
 function startAdvancedFavQuiz() {
   isInFavoriteQuiz = true;
