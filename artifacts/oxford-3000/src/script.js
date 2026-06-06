@@ -449,7 +449,7 @@ function openQuizSetup() {
 
   if (learnedCount < 10) {
     showToast(
-      `🔒 สะสมคำศัพท์ให้ครบ 10 คำ เพื่อปลดล็อค Quiz ขั้นสูง (ปัจจุบัน: ${learnedCount}/50)`,
+      `🔒 สะสมคำศัพท์ให้ครบ 10 คำ เพื่อปลดล็อค Quiz ขั้นสูง (ปัจจุบัน: ${learnedCount}/10)`,
     );
     startQuizNormal();
   } else {
