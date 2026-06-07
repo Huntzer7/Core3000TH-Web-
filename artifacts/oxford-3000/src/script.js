@@ -195,7 +195,9 @@ let favorites = [];
 let favoriteQuizMode = "answerMeaning";
 let advQuizCount = 10;
 let advQuizMode = "answerMeaning";
+let advQuizSource = "latest";
 let isInFavoriteQuiz = false;
+let lastQuizWasFavorite = false;
 let quizConfig = {
   count: 10,
   mode: "latest",
@@ -598,6 +600,7 @@ function showResult() {
     if (reviewSection) reviewSection.style.display = "none";
   }
 
+  lastQuizWasFavorite = isInFavoriteQuiz;
   isInFavoriteQuiz = false;
 }
 
@@ -1010,6 +1013,17 @@ function openAdvancedQuizSetup() {
       <div class="setup-section">
         <label>เลือกโหมด:</label>
         <div class="radio-group">
+          <input type="radio" id="advModeLatest" name="advSourceMode" value="latest" checked>
+          <label for="advModeLatest">📌 คำล่าสุด (Latest 50)</label>
+
+          <input type="radio" id="advModeRandom" name="advSourceMode" value="random">
+          <label for="advModeRandom">🎲 สุ่มจากทั้งหมด (Random)</label>
+        </div>
+      </div>
+
+      <div class="setup-section">
+        <label>เลือกรูปแบบ:</label>
+        <div class="radio-group">
           <input type="radio" id="advModeAM" name="advQuizMode" value="answerMeaning" checked>
           <label for="advModeAM">🔤 Answer → Meaning</label>
 
@@ -1034,8 +1048,12 @@ function openAdvancedQuizSetup() {
     const checkedMode = modal.querySelector(
       'input[name="advQuizMode"]:checked',
     );
+    const checkedSource = modal.querySelector(
+      'input[name="advSourceMode"]:checked',
+    );
     advQuizCount = checkedCount ? parseInt(checkedCount.value) : 10;
     advQuizMode = checkedMode ? checkedMode.value : "answerMeaning";
+    advQuizSource = checkedSource ? checkedSource.value : "latest";
     modal.remove();
     startAdvancedFavQuiz();
   });
@@ -1046,6 +1064,12 @@ function startAdvancedFavQuiz() {
   favoriteQuizMode = advQuizMode;
 
   let selectedIndices = [...favorites];
+
+  if (advQuizSource === "latest") {
+    const startIdx = Math.max(0, selectedIndices.length - 50);
+    selectedIndices = selectedIndices.slice(startIdx);
+  }
+
   for (let i = selectedIndices.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [selectedIndices[i], selectedIndices[j]] = [
@@ -1053,8 +1077,8 @@ function startAdvancedFavQuiz() {
       selectedIndices[i],
     ];
   }
-  selectedIndices = selectedIndices.slice(0, advQuizCount);
 
+  selectedIndices = selectedIndices.slice(0, advQuizCount);
   quizWords = selectedIndices.map((i) => words[i]).filter(Boolean);
   quizIndex = 0;
   correct = 0;
@@ -1062,7 +1086,7 @@ function startAdvancedFavQuiz() {
   wrongAnswers = [];
 
   showPage("quiz");
-  showFavQuiz(); // ใช้ showFavQuiz() เดิมได้เลย เพราะอ่านค่า favoriteQuizMode อยู่แล้ว
+  showFavQuiz();
 }
 
 // =========================
@@ -1185,10 +1209,10 @@ if (restartMenuBtn) {
 if (favQuizBtn) {
   favQuizBtn.addEventListener("click", () => {
     if (favorites.length < 1) {
-      alert("เพิ่มคำศัพท์โปรดก่อนสำหรับทำควิซ");
+      showToast("เพิ่มคำศัพท์โปรดก่อน");
       return;
     }
-    openFavQuizSetup();
+    openAdvancedQuizSetup();
   });
 }
 
@@ -1394,7 +1418,8 @@ if (restartBtn) {
     incorrect = 0;
     wrongAnswers = [];
     showPage("quiz");
-    if (isInFavoriteQuiz) {
+    if (lastQuizWasFavorite) {
+      isInFavoriteQuiz = true;
       showFavQuiz();
     } else {
       showQuiz();

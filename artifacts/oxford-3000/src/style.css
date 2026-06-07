@@ -787,14 +787,20 @@ body.dark-mode .header-top {
 }
 
 .unlock-message {
-  text-align: center;
-  padding: 16px;
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
   background: var(--correct-bg);
   border: 1px solid var(--correct-border);
   border-radius: var(--radius-sm);
   color: var(--correct);
   font-weight: 600;
-  margin-bottom: 16px;
+  font-size: 15px;
+  padding: 14px 24px;
+  z-index: 9999;
+  white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
   animation: slideUp 0.3s ease;
 }
 
