@@ -104,8 +104,10 @@ async function loadUserProgress(userId) {
 
     if (learnedWords.length > 0) {
       currentIndex = Math.max(...learnedWords) + 1;
-      if (words.length > 0 && currentIndex >= words.length) {
+      if (currentIndex >= words.length && words.length > 0) {
         currentIndex = words.length - 1;
+      } else if (words.length === 0) {
+        currentIndex = Math.min(currentIndex, 2999);
       }
     } else {
       currentIndex = 0;
@@ -123,18 +125,15 @@ async function loadUserProgress(userId) {
     console.error("โหลดข้อมูลรายการโปรดผิดพลาด:", favError.message);
   } else if (favData) {
     const dbFavorites = favData.map((item) => Number(item.word_id));
+    const localSnapshot = [...favorites];
 
-    // 🔥 ป้องกันปัญหาข้อมูลโดนล้าง: ถ้ายูสเซอร์กดคำศัพท์โปรดค้างไว้ในเครื่องก่อนที่จะทำการล็อกอินสำเร็จ
-    // ระบบจะนำคำศัพท์เหล่านั้นไปซิงค์ขึ้นตาราง user_favorites บน Cloud ให้ทันที ไม่ให้โดนค่าว่างในฐานข้อมูลทับ
-    if (favorites.length > 0) {
-      for (const localId of favorites) {
-        if (!dbFavorites.includes(localId)) {
-          dbFavorites.push(localId);
-          await supabase.from("user_favorites").insert({
-            user_id: userId,
-            word_id: localId.toString(),
-          });
-        }
+    for (const localId of localSnapshot) {
+      if (!dbFavorites.includes(localId)) {
+        dbFavorites.push(localId);
+        await supabase.from("user_favorites").insert({
+          user_id: userId,
+          word_id: localId.toString(),
+        });
       }
     }
 
@@ -265,32 +264,18 @@ function pronounceWord(word) {
   utterance.pitch = 1.0;
   utterance.volume = 1.0;
 
-  // Boost เสียงผ่าน AudioContext
-  try {
-    const AudioContext = window.AudioContext || window.webkitAudioContext;
-    const audioCtx = new AudioContext();
-    const gainNode = audioCtx.createGain();
-    gainNode.gain.value = 4.0; // เพิ่มเสียง 3x (ปรับตัวเลขนี้ได้)
-    gainNode.connect(audioCtx.destination);
-  } catch (e) {
-    // ถ้า browser ไม่รองรับ ก็ใช้เสียงปกติ
-  }
-
   const voices = window.speechSynthesis.getVoices();
   let selectedVoice = voices.find(
     (voice) => voice.lang === "en-US" && voice.name.includes("Google"),
   );
-
   if (!selectedVoice) {
     selectedVoice = voices.find(
       (voice) => voice.lang === "en-US" && !voice.name.includes("compact"),
     );
   }
-
   if (!selectedVoice) {
     selectedVoice = voices.find((voice) => voice.lang.startsWith("en"));
   }
-
   if (selectedVoice) {
     utterance.voice = selectedVoice;
   }
@@ -440,7 +425,6 @@ function showWord() {
   if (backBtn) backBtn.disabled = currentIndex === 0;
 }
 
-
 // =========================
 // QUIZ
 // =========================
@@ -470,6 +454,10 @@ function startQuizNormal() {
 }
 
 function initQuiz() {
+  if (!words.length) {
+    showToast("⏳ กำลังโหลดข้อมูล กรุณารอสักครู่");
+    return;
+  }
   let selectedWordIndices = [];
   const sourceWords = isInFavoriteQuiz ? favorites : learnedWords;
 
@@ -817,7 +805,7 @@ function openFavQuizSetup() {
     showToast("เพิ่มคำศัพท์โปรดก่อน");
     return;
   }
-  // รีเซ็ต selection กลับ default ทุกครั้งที่เปิด modal
+
   favoriteQuizMode = "answerMeaning";
   document
     .querySelectorAll(".mode-card")
@@ -825,10 +813,27 @@ function openFavQuizSetup() {
   const defaultMode = document.getElementById("modeAnswerMeaning");
   if (defaultMode) defaultMode.classList.add("selected");
 
+  const advBtn = document.getElementById("modeAdvanced");
+  if (advBtn) {
+    if (favorites.length < 10) {
+      advBtn.style.opacity = "0.4";
+      advBtn.style.pointerEvents = "none";
+      advBtn.querySelector(".mode-desc").textContent =
+        `ต้องมีคำโปรดอย่างน้อย 10 คำ (ปัจจุบัน: ${favorites.length}/10)`;
+    } else {
+      advBtn.style.opacity = "1";
+      advBtn.style.pointerEvents = "auto";
+    }
+  }
+
   if (favQuizModeModal) favQuizModeModal.classList.add("active");
 }
 
 function startFavoriteQuiz() {
+  if (!words.length) {
+    showToast("⏳ กำลังโหลดข้อมูล กรุณารอสักครู่");
+    return;
+  }
   isInFavoriteQuiz = true;
   let selectedWordIndices = [...favorites];
 
@@ -974,7 +979,6 @@ function openAdvancedQuizSetup() {
     return;
   }
 
-  // สร้าง modal เลือกจำนวนคำ (ย้ายเข้ามาไว้ในฟังก์ชัน เพื่อไม่ให้เด้งตอนโหลดเว็บ)
   const existing = document.getElementById("advQuizSetupModal");
   if (existing) existing.remove();
 
@@ -984,68 +988,54 @@ function openAdvancedQuizSetup() {
 
   const modal = document.createElement("div");
   modal.id = "advQuizSetupModal";
-  modal.className = "modal active"; // ใส่ active ได้ เพราะมันจะทำงานตอนกดปุ่มเรียกแล้วเท่านั้น
+  modal.className = "modal active";
   modal.innerHTML = `
-      <div class="modal-content">
-        <h2>⚡ Advanced Quiz Mode</h2>
-        <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;">เลือกจำนวนคำที่ต้องการทดสอบ</p>
-        <div class="mode-options" id="advCountOptions">
+    <div class="modal-content">
+      <h2>⚡ Advanced Quiz Mode</h2>
+
+      <div class="setup-section">
+        <label>จำนวนข้อ:</label>
+        <div class="radio-group">
           ${options
             .map(
-              (n) => `
-            <button class="mode-card adv-count-btn ${n === 10 ? "selected" : ""}" data-count="${n}">
-              <div class="mode-title">${n} คำ</div>
-            </button>
+              (n, i) => `
+            <input type="radio" id="adv${n}" name="advCount" value="${n}" ${i === 0 ? "checked" : ""}>
+            <label for="adv${n}">${n} ข้อ</label>
           `,
             )
             .join("")}
         </div>
-        <p style="font-size:13px;color:var(--text-muted);margin:16px 0 8px;">เลือกรูปแบบ</p>
-        <div class="mode-options">
-          <button class="mode-card adv-mode-btn selected" data-mode="answerMeaning">
-            <div class="mode-icon">🔤</div>
-            <div class="mode-title">Answer → Meaning</div>
-          </button>
-          <button class="mode-card adv-mode-btn" data-mode="meaningAnswer">
-            <div class="mode-icon">📝</div>
-            <div class="mode-title">Meaning → Answer</div>
-          </button>
-        </div>
-        <div class="setup-buttons">
-          <button id="advCancelBtn" class="btn btn-outline">ยกเลิก</button>
-          <button id="advStartBtn" class="btn btn-primary">เริ่มทำควิซ</button>
+      </div>
+
+      <div class="setup-section">
+        <label>เลือกโหมด:</label>
+        <div class="radio-group">
+          <input type="radio" id="advModeAM" name="advQuizMode" value="answerMeaning" checked>
+          <label for="advModeAM">🔤 Answer → Meaning</label>
+
+          <input type="radio" id="advModeMA" name="advQuizMode" value="meaningAnswer">
+          <label for="advModeMA">📝 Meaning → Answer</label>
         </div>
       </div>
-    `;
+
+      <div class="setup-buttons">
+        <button id="advCancelBtn" class="btn btn-outline">ยกเลิก</button>
+        <button id="advStartBtn" class="btn btn-primary">เริ่มทำควิซ</button>
+      </div>
+    </div>
+  `;
   document.body.appendChild(modal);
-
-  advQuizCount = 10;
-  advQuizMode = "answerMeaning";
-
-  modal.querySelectorAll(".adv-count-btn").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      modal
-        .querySelectorAll(".adv-count-btn")
-        .forEach((b) => b.classList.remove("selected"));
-      btn.classList.add("selected");
-      advQuizCount = parseInt(btn.dataset.count);
-    });
-  });
-
-  modal.querySelectorAll(".adv-mode-btn").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      modal
-        .querySelectorAll(".adv-mode-btn")
-        .forEach((b) => b.classList.remove("selected"));
-      btn.classList.add("selected");
-      advQuizMode = btn.dataset.mode;
-    });
-  });
 
   document
     .getElementById("advCancelBtn")
     .addEventListener("click", () => modal.remove());
   document.getElementById("advStartBtn").addEventListener("click", () => {
+    const checkedCount = modal.querySelector('input[name="advCount"]:checked');
+    const checkedMode = modal.querySelector(
+      'input[name="advQuizMode"]:checked',
+    );
+    advQuizCount = checkedCount ? parseInt(checkedCount.value) : 10;
+    advQuizMode = checkedMode ? checkedMode.value : "answerMeaning";
     modal.remove();
     startAdvancedFavQuiz();
   });
@@ -1090,8 +1080,8 @@ if (homeBtn) {
 
 const favBtn = document.getElementById("favBtn");
 if (favBtn) {
-  favBtn.addEventListener("click", () => {
-    toggleFavorite(currentIndex);
+  favBtn.addEventListener("click", async () => {
+    await toggleFavorite(currentIndex);
     showToast(
       isFavorite(currentIndex) ? "❤️ เพิ่มลงคลังโปรด" : "💔 ลบออกจากคลังโปรด",
     );
@@ -1302,6 +1292,8 @@ if (startBtn) {
 
 if (nextBtn) {
   nextBtn.addEventListener("click", () => {
+    const wasLocked = learnedWords.length < 10;
+
     markLearned(currentIndex);
     saveWordProgress(currentIndex);
 
@@ -1312,6 +1304,15 @@ if (nextBtn) {
     saveProgress();
     updateHome();
     showWord();
+
+    if (wasLocked && learnedWords.length >= 10) {
+      if (unlockMessage) {
+        unlockMessage.style.display = "block";
+        setTimeout(() => {
+          unlockMessage.style.display = "none";
+        }, 3000);
+      }
+    }
   });
 }
 
@@ -1391,8 +1392,13 @@ if (restartBtn) {
     quizIndex = 0;
     correct = 0;
     incorrect = 0;
+    wrongAnswers = [];
     showPage("quiz");
-    showQuiz();
+    if (isInFavoriteQuiz) {
+      showFavQuiz();
+    } else {
+      showQuiz();
+    }
   });
 }
 
@@ -1464,18 +1470,43 @@ initDarkMode();
 
 updateHome();
 
-fetch("/words.json")
-  .then((r) => r.json())
-  .then((data) => {
-    words = data;
+let wordsLoadRetries = 0;
+const MAX_RETRIES = 2;
 
-    if (currentIndex >= words.length) {
-      currentIndex = 0;
-    }
+function loadWords() {
+  fetch("/words.json")
+    .then((r) => {
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.json();
+    })
+    .then((data) => {
+      if (!Array.isArray(data) || data.length === 0)
+        throw new Error("Invalid data");
+      words = data;
+      if (currentIndex >= words.length) currentIndex = 0;
+      updateHome();
+      showWord();
+      hideWordsError();
+    })
+    .catch((err) => {
+      console.error("Failed to load words.json", err);
+      if (wordsLoadRetries < MAX_RETRIES) {
+        wordsLoadRetries++;
+        setTimeout(loadWords, 2000);
+      } else {
+        showWordsError();
+      }
+    });
+}
 
-    updateHome();
-    showWord();
-  })
-  .catch((err) => {
-    console.error("Failed to load words.json", err);
-  });
+function showWordsError() {
+  const el = document.getElementById("wordsErrorBanner");
+  if (el) el.style.display = "flex";
+}
+
+function hideWordsError() {
+  const el = document.getElementById("wordsErrorBanner");
+  if (el) el.style.display = "none";
+}
+
+loadWords();

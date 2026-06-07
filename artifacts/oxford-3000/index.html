@@ -44,8 +44,45 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/src/style.css?v=17" />
+    <link rel="stylesheet" href="/src/style.css?v=20" />
   </head>
+  <div
+    id="wordsErrorBanner"
+    style="
+      display: none;
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fcebeb;
+      border: 1px solid #f0b0b0;
+      border-radius: 12px;
+      padding: 14px 20px;
+      align-items: center;
+      gap: 12px;
+      z-index: 9999;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+      max-width: 90%;
+    "
+  >
+    <span style="color: #a32d2d; font-size: 14px; font-weight: 600"
+      >⚠️ โหลดข้อมูลไม่สำเร็จ กรุณาตรวจสอบอินเทอร์เน็ต</span
+    >
+    <button
+      onclick="wordsLoadRetries=0; hideWordsError(); loadWords();"
+      style="
+        background: #a32d2d;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 6px 14px;
+        font-size: 13px;
+        cursor: pointer;
+      "
+    >
+      ลองใหม่
+    </button>
+  </div>
   <body>
     <div style="display: none">
       <h1>CORE 3000 TH</h1>
@@ -731,7 +768,6 @@
           </svg>
         </div>
         <h1>Quiz Complete</h1>
-        
 
         <div class="result-stats">
           <div class="result-stat correct">
