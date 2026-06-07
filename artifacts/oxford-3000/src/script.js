@@ -440,6 +440,7 @@ function showWord() {
   if (backBtn) backBtn.disabled = currentIndex === 0;
 }
 
+
 // =========================
 // QUIZ
 // =========================
