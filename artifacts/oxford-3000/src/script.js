@@ -66,6 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("sidebarOverlay")?.classList.remove("active");
         showPage("home");
         updateHome();
+        showSoundToast();
       }
     } else if (event === "SIGNED_OUT") {
       if (loginBtn) loginBtn.style.display = "inline-flex";
@@ -283,6 +284,13 @@ function pronounceWord(word) {
   }
 
   window.speechSynthesis.speak(utterance);
+}
+
+function showSoundToast() {
+  const toast = document.getElementById("soundToast");
+  if (!toast) return;
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 3500);
 }
 
 const pages = {
@@ -963,7 +971,6 @@ function checkFavAnswer(selected, correctAnswer) {
       quizResultEl.className = "quiz-result incorrect";
     }
   }
-  
 
   setTimeout(() => {
     quizIndex++;
@@ -1309,7 +1316,7 @@ if (startBtn) {
       // แต่ถ้าคุณอยากบังคับว่า "ต้องล็อกอินเท่านั้นถึงเรียนได้" ให้เอา // หน้า return; ออกครับ
       return;
     }
-
+    showSoundToast();
     showPage("learning");
     showWord();
   });
