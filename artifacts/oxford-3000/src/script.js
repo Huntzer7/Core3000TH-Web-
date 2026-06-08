@@ -963,6 +963,7 @@ function checkFavAnswer(selected, correctAnswer) {
       quizResultEl.className = "quiz-result incorrect";
     }
   }
+  
 
   setTimeout(() => {
     quizIndex++;
